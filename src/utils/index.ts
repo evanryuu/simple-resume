@@ -1,3 +1,5 @@
+export { default as initTemplateData } from './initTemplateData'
+
 export function generateRandomId(length: number): string {
   const characters = '0123456789'
   const charactersLength = characters.length

@@ -2,7 +2,7 @@ import React from 'react'
 
 import classNames from 'classnames'
 
-import { useResumeStyleStore } from '@/store/style'
+import { useResumeStore } from '@/store'
 
 import type { IResumeBlockData } from '@/store/resume'
 
@@ -12,7 +12,7 @@ export type BlockTemplateProps = IResumeBlockData
 
 const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
   const { title, items } = props
-  const { resumeStyle } = useResumeStyleStore()
+  const { resumeStyle } = useResumeStore()
 
   const titleIsBanner = resumeStyle.titleStyle === 'banner'
 

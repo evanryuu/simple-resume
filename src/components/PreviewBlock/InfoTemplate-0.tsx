@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useResumeStyleStore } from '@/store/style'
+import { useResumeStore } from '@/store'
 
 import type { IResumeInfoData } from '@/store/resume'
 
@@ -12,7 +12,7 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
   const {
     name, avatar, items,
   } = props
-  const { resumeStyle } = useResumeStyleStore()
+  const { resumeStyle } = useResumeStore()
 
   return (
     <div>

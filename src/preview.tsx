@@ -8,38 +8,36 @@ import { useAppStore } from '@/store'
 import PreviewTemplate from './components/PreviewBlock/Template'
 import useDarkMode from './hooks/useDarkMode'
 import { useResumeStore } from './store/resume'
-import { useResumeStyleStore } from './store/style'
 import { downloadJSON } from './utils'
 
-import type { UploadProps } from 'antd'
+import type { IResumeStorage } from './utils/initTemplateData'
 
 const Preview = () => {
   const {
     previewMode, setPreviewMode, setShowEdit, setShowEditStyle,
   } = useAppStore()
   const [darkMode, setDarkMode] = useDarkMode()
-  const { resumeData } = useResumeStore()
-  const { resumeStyle } = useResumeStyleStore()
+  const {
+    resumeStyle, resumeData, setResumeData, setResumeStyle,
+  } = useResumeStore()
   const previewEl = useRef<HTMLDivElement>(null)
+  const fileInputEl = useRef<HTMLInputElement>(null)
 
-  const uploadProps: UploadProps = {
-    name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info: any) {
-      // URL.createObjectURL(info.file)
-      console.log(info)
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList)
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          const fileContent = e.target.result as string
+          const jsonData = JSON.parse(fileContent) as IResumeStorage
+          setResumeData(jsonData.state.resumeData)
+          setResumeStyle(jsonData.state.resumeStyle)
+        }
       }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`)
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`)
-      }
-    },
+      reader.readAsText(file)
+    }
   }
 
   // const exportPdf = () => {
@@ -104,6 +102,7 @@ const Preview = () => {
         style={{
           padding: resumeStyle.blockPadding,
           boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
+          marginBottom: previewMode ? 0 : 20,
         }}
       >
         {!previewMode
@@ -115,23 +114,27 @@ const Preview = () => {
                 size="small"
                 className="mt-4"
                 onClick={() => downloadJSON('resume-setting.json', {
-                  resumeData,
-                  resumeStyle,
+                  state: {
+                    resumeData,
+                    resumeStyle,
+                  },
                 })}
               >导出配置
               </Button>
-              <Upload {...uploadProps}>
-                <Button
-                  size="small"
-                  className="mt-4"
-                  onClick={() => downloadJSON('resume-setting.json', {
-                    resumeData,
-                    resumeStyle,
-                  })}
-                >
-                  导入配置
-                </Button>
-              </Upload>
+              <Button
+                size="small"
+                className="mt-4"
+                onClick={() => fileInputEl.current?.click()}
+              >
+                导入配置
+                <input
+                  ref={fileInputEl}
+                  className="hidden"
+                  type="file"
+                  accept=".json"
+                  onChange={handleFileChange}
+                />
+              </Button>
               <Button size="small" type="primary" className="mt-4" onClick={exportPdf}>导出PDF</Button>
             </div>
           )

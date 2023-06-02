@@ -3,7 +3,7 @@ import React from 'react'
 import { Drawer } from 'antd'
 
 import BaseInput from './components/Input/BaseInput'
-import { useResumeStyleStore } from './store'
+import { useResumeStore } from './store'
 
 import type { IResumeStyle } from './store'
 import type { DrawerProps } from 'antd'
@@ -17,7 +17,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
     open, onClose, children, ...rest
   } = props
 
-  const { resumeStyle, setResumeStyle } = useResumeStyleStore()
+  const { resumeStyle, setResumeStyle } = useResumeStore()
 
   const handleChange = <T extends keyof IResumeStyle>(key: T, value: IResumeStyle[T]) => {
     setResumeStyle({

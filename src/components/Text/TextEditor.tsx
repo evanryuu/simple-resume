@@ -5,7 +5,7 @@ import {
   ColorPicker, Input, InputNumber, Switch,
 } from 'antd'
 
-import { useResumeStyleStore } from '@/store'
+import { useResumeStore } from '@/store'
 
 import type { Color, TextProps } from '@/types'
 import type { InputNumberProps } from 'antd'
@@ -51,7 +51,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   const [iconColor, setIconColor] = useState(props.iconColor)
   const [md, setMd] = useState(props.md)
 
-  const { resumeStyle } = useResumeStyleStore()
+  const { resumeStyle } = useResumeStore()
 
   // const [styles, setStyles] = useState(props.style || {})
   useEffect(() => {
