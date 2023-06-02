@@ -4,7 +4,10 @@ import { generateRandomId } from '@/utils'
 
 import type { TextProps } from '@/types'
 
-export interface IResumeSpecifics {
+import TemplateData from '../data/template.json'
+
+export interface IResumeBlockItem {
+  id: string
   title: TextProps
   subtitle?: TextProps
   note?: TextProps
@@ -16,17 +19,17 @@ export interface IResumeBlockData {
   title: TextProps & {
     value: string
   }
-  specifics: IResumeSpecifics[]
+  items: IResumeBlockItem[]
 }
+
+export type IResumeInfoItem = (TextProps & { id: string })
 
 export interface IResumeInfoData {
   title: { value: string }
   name: string
   avatar: string
-  info: {
-    column: number
-    items: TextProps[]
-  }
+  column: number
+  items: IResumeInfoItem[]
 }
 
 export type TemplateType = 0
@@ -50,105 +53,23 @@ export type IResumeBlock = IResumeBlockSetting | IResumeInfoSetting
 interface IResumeState {
   resumeData: IResumeBlock[]
   setResumeData: (resumes: IResumeBlock[]) => void
+
   setResumeInfoData: (resumeInfo: IResumeInfoData) => void
   setResumeBlockData: (id: string, blockData: IResumeBlockData) => void
   updateResumeBlockData: (id: string, blockData: Partial<IResumeBlockData>) => void
+  addResumeBlockItem: (blockId: string, item?: IResumeBlockItem) => void
+  deleteResumeBlockItem: (blockId: string, itemId: string) => void
+  updateResumeBlockItem: (blockId: string, itemId: string, item?: Partial<IResumeBlockItem>) => void
+
   addResumeBlock: (template: TemplateType) => void
   deleteResumeBlock: (id: string) => void
+  updateResumeInfoItem: (itemId: string, item?: Partial<IResumeInfoItem>) => void
   addResumeInfoItem: (item: TextProps) => void
   deleteResumeInfoItem: (index: number) => void
 }
 
 export const useResumeStore = create<IResumeState>()((set) => ({
-  resumeData: [
-    {
-      type: 'info',
-      id: generateRandomId(8),
-      template: 0,
-      data: {
-        title: {
-          value: '个人信息',
-        },
-        name: '名字',
-        avatar: 'https://www.nihao.com',
-        info: {
-          column: 1,
-          items: [
-            {
-              value: 'evanakihito@outlook.com',
-              icon: 'eva:email-outline',
-            },
-            {
-              value: '13726270953',
-              icon: 'eva:phone-outline',
-            },
-            {
-              value: 'https://github.com/evankwolf',
-              icon: 'eva:github-outline',
-            },
-          ],
-        },
-      },
-    },
-    {
-      type: 'block',
-      id: generateRandomId(8),
-      template: 0,
-      data: {
-        title: {
-          value: 'Title',
-        },
-        specifics: [
-          {
-            title: {
-              value: 'Jingli1',
-            },
-            subtitle: {
-              value: 'SubTitle1',
-            },
-            note: {
-              value: 'Note1',
-            },
-            description: {
-              value: 'description1',
-            },
-            detail: {
-              value: 'detail1',
-            },
-          },
-        ],
-      },
-    },
-    {
-      type: 'block',
-      id: generateRandomId(8),
-      template: 0,
-      data: {
-        title: {
-          value: 'hi',
-        },
-        specifics: [
-          {
-            title: {
-              value: 'Jingli2',
-            },
-            subtitle: {
-              value: 'SubTitle2',
-            },
-            note: {
-              value: 'Note2',
-            },
-            description: {
-              value: 'description2',
-            },
-            detail: {
-              value: 'detail2',
-            },
-          },
-        ],
-      },
-    },
-  ],
+  resumeData: TemplateData as IResumeBlock[],
   /** Set whole resume data, including ResumeInfo and ResumeBlock */
   setResumeData: (resumes) => set(() => ({ resumeData: resumes })),
   setResumeInfoData: (resume) => set((state) => {
@@ -174,10 +95,61 @@ export const useResumeStore = create<IResumeState>()((set) => ({
   }),
   updateResumeBlockData: (id, blockData) => set((state) => {
     const targetBlock = state.resumeData.find((r) => r.id === id)
-    targetBlock!.data = {
-      ...targetBlock!.data,
-      ...blockData,
+    if (targetBlock?.type === 'block') {
+      targetBlock!.data = {
+        ...targetBlock!.data,
+        ...blockData,
+      }
     }
+    return { ...state }
+  }),
+  updateResumeBlockItem: (blockId, itemId, item) => set((state) => {
+    const block = state.resumeData.find((b) => b.id === blockId) as IResumeBlockSetting
+    const targetIndex = block.data.items.findIndex((i) => i.id === itemId)!
+
+    if (targetIndex !== -1) {
+      console.log('updata', targetIndex, block.data.items[targetIndex], item)
+
+      if (item === undefined) {
+        block.data.items.splice(targetIndex, 1)
+      } else {
+        block.data.items.splice(targetIndex, 1, {
+          ...block.data.items[targetIndex],
+          ...item,
+        })
+      }
+    }
+    return { ...state }
+  }),
+  addResumeBlockItem: (blockId, specific) => set((state) => {
+    const targetBlock = state.resumeData.find((b) => b.id === blockId) as IResumeBlockSetting
+    const id = generateRandomId(10)
+    if (specific) {
+      targetBlock.data.items.push({
+        ...specific,
+        id,
+      })
+    } else {
+      targetBlock.data.items.push({
+        id,
+        title: {
+          value: `Jingli-${id}`,
+        },
+        subtitle: {
+          value: `SubTitle-${id}`,
+        },
+        note: {
+          value: `Note-${id}`,
+        },
+        description: {
+          value: `description-${id}`,
+        },
+        detail: {
+          value: `detail-${id}`,
+        },
+      })
+    }
+
     return { ...state }
   }),
   addResumeBlock: (template: TemplateType) => set((state) => {
@@ -190,8 +162,9 @@ export const useResumeStore = create<IResumeState>()((set) => ({
         title: {
           value: `Item-${id}`,
         },
-        specifics: [
+        items: [
           {
+            id: generateRandomId(10),
             title: {
               value: `Jingli-${id}`,
             },
@@ -220,6 +193,29 @@ export const useResumeStore = create<IResumeState>()((set) => ({
       ],
     }
   }),
+  updateResumeInfoItem: (itemId, item) => set((state) => {
+    const { resumeData } = state
+    const info = resumeData.find((r) => r.type === 'info') as IResumeInfoSetting
+
+    const targetIndex = info.data.items.findIndex((i) => i.id === itemId)
+    const target = info.data.items[targetIndex]
+
+    if (targetIndex !== -1) {
+      info.data.items.splice(targetIndex, 1, {
+        ...target,
+        ...item,
+      })
+    }
+
+    return { ...state }
+  }),
+  deleteResumeBlockItem: (blockId, itemId) => set((state) => {
+    const { resumeData } = state
+    const block = resumeData.find((b) => b.id === blockId)!
+    const targetIndex = block.data.items.findIndex((i) => i.id === itemId)!
+    block.data.items.splice(targetIndex, 1)
+    return { ...state }
+  }),
   deleteResumeBlock: (id) => set((state) => {
     console.log(id, state.resumeData)
 
@@ -233,14 +229,17 @@ export const useResumeStore = create<IResumeState>()((set) => ({
   addResumeInfoItem: (item: TextProps) => set((state) => {
     const info = state.resumeData.find((resume) => resume.type === 'info')!
     if (info.type === 'info') {
-      info.data.info.items.push(item)
+      info.data.items.push({
+        ...item,
+        id: generateRandomId(9),
+      })
     }
     return { ...state }
   }),
   deleteResumeInfoItem: (index: number) => set((state) => {
     const info = state.resumeData.find((resume) => resume.type === 'info')!
     if (info.type === 'info') {
-      info.data.info.items.splice(index, 1)
+      info.data.items.splice(index, 1)
     }
     return { ...state }
   }),

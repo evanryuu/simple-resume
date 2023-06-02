@@ -11,28 +11,38 @@ import Text from '../Text/Text'
 export type BlockTemplateProps = IResumeBlockData
 
 const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
-  const { title, specifics } = props
+  const { title, items } = props
   const { resumeStyle } = useResumeStyleStore()
 
-  const titleClasses = classNames('block-title', {
-    'is-banner': resumeStyle.titleStyle === 'banner',
+  const titleIsBanner = resumeStyle.titleStyle === 'banner'
+
+  const titleClasses = classNames('block-title text-left p-1', {
+    'is-banner': titleIsBanner,
   })
 
   return (
-    <div>
-      <div className={titleClasses}>{title.value}</div>
+    <div className="mt-4">
+      <div
+        className={titleClasses}
+        style={{
+          color: titleIsBanner ? '#fff' : resumeStyle.themeColor,
+          background: titleIsBanner ? resumeStyle.themeColor : '#fff',
+        }}
+      >
+        {title.value}
+      </div>
       {
-        specifics.map((specific, i) => (
+        items.map((item, i) => (
           <div className="specific-container" key={i}>
             <div className="flex items-center justify-between">
-              <div className="specific-title">
-                {specific.title && <Text {...specific.title} />}
-                {specific.subtitle && <Text {...specific.subtitle} />}
+              <div className="specific-title flex">
+                <Text {...item.title} />
+                <Text classes="ml-2 text-xs" {...item.subtitle!} />
               </div>
-              {specific.note && <Text className="specific-title-note" {...specific.note} />}
+              {item.note && <Text classes="specific-title-note text-sm" {...item.note} />}
             </div>
-            {specific.description && <Text {...specific.description} />}
-            {specific.detail && <Text {...specific.detail} />}
+            {item.description && <Text classes="text-sm" {...item.description} />}
+            {item.detail && <Text {...item.detail} />}
           </div>
         ))
       }

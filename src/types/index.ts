@@ -12,6 +12,10 @@ export interface TextProps {
   icon?: string
   iconColor?: Color
   style?: React.CSSProperties
-  className?: string
+  /** className not working, change to classes */
+  classes?: string
   md?: boolean
+  /** className not working */
+  // className?: string
+
 }

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
-import { Button, Collapse } from 'antd'
+import { Icon } from '@iconify/react'
+import { Button, Collapse, Modal } from 'antd'
 
 import { useResumeStore } from '@/store/resume'
 
-import type { IResumeBlockSetting } from '@/store/resume'
+import type { IResumeBlockSetting, IResumeBlockItem } from '@/store/resume'
+import type { TextProps } from '@/types'
 
 import TextEditor from '../Text/TextEditor'
 
@@ -12,56 +14,95 @@ export interface BlockEditorProps extends IResumeBlockSetting { }
 
 const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [currentItem, setCurrentItem] = useState<IResumeBlockItem>({} as IResumeBlockItem)
 
-  const { updateResumeBlockData } = useResumeStore()
+  const { addResumeBlockItem, updateResumeBlockItem, deleteResumeBlockItem } = useResumeStore()
 
   const handleAddItem = () => {
+    addResumeBlockItem(resume.id)
+  }
+
+  const handleDelete = () => {
+    deleteResumeBlockItem(resume.id, currentItem.id)
+    setShowDeleteConfirm(false)
+  }
+
+  const updateItem = (
+    newValue: TextProps,
+    type: keyof Omit<IResumeBlockItem, 'id'>,
+    item: IResumeBlockItem,
+  ) => {
+    console.log(newValue, type, item)
+    updateResumeBlockItem(resume.id, item.id, {
+      ...item,
+      [type]: {
+        ...newValue,
+      },
+    })
+  }
+
+  const renderHeader = (item: IResumeBlockItem) => {
+    const handleDeleteIconClick = (e: React.MouseEvent) => {
+      e.stopPropagation()
+      setCurrentItem(item)
+      setShowDeleteConfirm(true)
+    }
+
+    return (
+      <div className="flex items-center justify-between">
+        <span>{item.title.value}</span>
+        <span><Icon icon="mdi:delete" onClick={handleDeleteIconClick} /></span>
+      </div>
+    )
   }
 
   return (
     <div>
-      <Button className="mb-4" onClick={handleAddItem}>Add Item</Button>
+      <Modal
+        open={showDeleteConfirm}
+        onCancel={() => setShowDeleteConfirm(false)}
+        onOk={handleDelete}
+      >
+        Are you sure you want to delete this item?
+      </Modal>
       <Collapse>
         {
-          resume.data.specifics.map((specific, i) => (
-
-            <Collapse.Panel header={specific.title.value} key={i}>
-              <div key={`Specific-${i}`}>
+          resume.data.items.map((item, i) => (
+            <Collapse.Panel header={renderHeader(item)} key={i}>
+              <div key={`Item-${i}`}>
                 <TextEditor
-                  key={`Title-${i}`}
                   label="Title"
-                  onChange={(e: any) => console.log(e.target.value)}
-                  {...specific.title}
+                  onChangeAll={(e: any) => updateItem(e, 'title', item)}
+                  {...item.title}
                 />
-                {specific.subtitle && <TextEditor
-                  key={`SubTitle-${i}`}
+                <TextEditor
                   label="SubTitle"
-                  onChange={(e: any) => console.log(e.target.value)}
-                  {...specific.subtitle}
-                />}
-                {specific.note && <TextEditor
-                  key={`Note-${i}`}
+                  onChangeAll={(e: any) => updateItem(e, 'subtitle', item)}
+                  {...item.subtitle!}
+                />
+                {item.note && <TextEditor
                   label="Note"
-                  onChange={(e: any) => console.log(e.target.value)}
-                  {...specific.note}
+                  onChangeAll={(e: any) => updateItem(e, 'note', item)}
+                  {...item.note}
                 />}
-                {specific.description && <TextEditor
-                  key={`Description-${i}`}
+                {item.description && <TextEditor
                   label="Description"
-                  onChange={(e: any) => console.log(e.target.value)}
-                  {...specific.description}
+                  onChangeAll={(e: any) => updateItem(e, 'description', item)}
+                  {...item.description}
                 />}
-                {specific.detail && <TextEditor
-                  key={`Detail-${i}`}
+                {item.detail && <TextEditor
                   label="Detail"
-                  onChange={(e: any) => console.log(e.target.value)}
-                  {...specific.detail}
+                  onChangeAll={(e: any) => updateItem(e, 'detail', item)}
+                  {...item.detail}
                 />}
               </div>
             </Collapse.Panel>
           ))
         }
       </Collapse>
+      <div className="mt-4 text-right">
+        <Button type="primary" onClick={handleAddItem}>Add Item</Button>
+      </div>
     </div>
   )
 }

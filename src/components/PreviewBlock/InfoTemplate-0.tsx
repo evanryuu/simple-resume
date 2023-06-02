@@ -12,7 +12,7 @@ export type InfoTemplateProps = IResumeInfoData
 
 const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
   const {
-    title, name, avatar, info,
+    title, name, avatar, items,
   } = props
   const { resumeStyle } = useResumeStyleStore()
 
@@ -37,8 +37,8 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
         <div className="info-name">{name}</div>
         <div className="info-desc-container grid grid-cols-1">
           {
-            info.items.length && info.items.map((item, i) => (
-              <Text key={i} {...item} />
+            items.length && items.map((item, i) => (
+              <Text className="flex items-center" key={i} {...item} />
             ))
           }
         </div>

@@ -21,7 +21,7 @@ export interface IResumeStyleState {
 
 export const useResumeStyleStore = create<IResumeStyleState>()((set) => ({
   resumeStyle: {
-    themeColor: '#2f5785',
+    themeColor: '#d94a38',
     avatarWidth: 120,
     avatarRounded: true,
     titleStyle: 'banner',

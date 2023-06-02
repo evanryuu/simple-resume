@@ -10,6 +10,7 @@ import { useResumeStore } from './store/resume'
 const Preview = () => {
   const { setPreviewMode, setShowEdit } = useAppStore()
   const { resumeData } = useResumeStore()
+
   return (
     <>
       <div className="flex justify-center">

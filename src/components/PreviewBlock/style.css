@@ -1,0 +1,21 @@
+.block-title.is-banner {
+  position: relative;
+width: 240px;
+display: flex;
+align-items: center;
+height: 20px;
+border-radius: 8px;
+}
+
+.block-title.is-banner::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  top: 0;
+  left: calc(100% - 13px);
+  z-index: 1;
+  transform-origin: center;
+  transform: rotate(45deg);
+}

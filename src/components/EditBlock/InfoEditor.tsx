@@ -7,7 +7,7 @@ import {
 
 import { useResumeStore } from '@/store/resume'
 
-import type { IResumeInfoSetting } from '@/store/resume'
+import type { IResumeInfoSetting, IResumeInfoItem } from '@/store/resume'
 import type { TextProps } from '@/types'
 import type { UploadProps } from 'antd'
 
@@ -44,15 +44,12 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
     icon: 'la:github',
   }
 
-  const handleItemChange = <T extends keyof TextProps>(type: T, index: number, value: TextProps[T]) => {
-    const newItem = resume.data.info.items[index]
+  const handleItemChange = <T extends keyof IResumeInfoItem>(type: T, index: number, value: IResumeInfoItem[T]) => {
+    const newItem = resume.data.items[index]
     newItem[type] = value
     setResumeInfoData({
       ...resume.data,
-      info: {
-        ...resume.data.info,
-        items: resume.data.info.items,
-      },
+      items: resume.data.items,
     })
   }
 
@@ -94,19 +91,16 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
         type="number"
         onChange={(value: number) => setResumeInfoData({
           ...resume.data,
-          info: {
-            ...resume.data.info,
-            column: value,
-          },
+          column: value,
         })}
-        value={resume.data.info.column}
+        value={resume.data.column}
         hideMore
       />
       {/* E Column Edit Section */}
 
       {/* S Items Edit Section */}
       {
-        resume.data.info.items.map((item, ii) => (
+        resume.data.items.map((item, ii) => (
           <div key={`item-${ii}`}>
             <TextEditor
               key={`Title-${ii}`}
