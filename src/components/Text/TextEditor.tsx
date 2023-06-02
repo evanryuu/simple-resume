@@ -5,6 +5,8 @@ import {
   ColorPicker, Input, InputNumber, Switch,
 } from 'antd'
 
+import { useResumeStyleStore } from '@/store'
+
 import type { Color, TextProps } from '@/types'
 import type { InputNumberProps } from 'antd'
 import type { Color as AntColor } from 'antd/es/color-picker'
@@ -48,6 +50,9 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   const [icon, setIcon] = useState(props.icon || '')
   const [iconColor, setIconColor] = useState(props.iconColor)
   const [md, setMd] = useState(props.md)
+
+  const { resumeStyle } = useResumeStyleStore()
+
   // const [styles, setStyles] = useState(props.style || {})
   useEffect(() => {
     setLoaded(true)
@@ -137,6 +142,12 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
                 </span>
                 <span className="ml-2">
                   <ColorPicker
+                    presets={[
+                      {
+                        label: 'theme',
+                        colors: [resumeStyle.themeColor],
+                      },
+                    ]}
                     value={iconColor}
                     onChange={handleIconColorChange}
                   />

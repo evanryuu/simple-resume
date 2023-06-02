@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import {
-  Button, Card, Drawer, Modal,
+  Button, Card, Drawer, Modal, message,
 } from 'antd'
 
 import { useResumeStore } from './store/resume'
@@ -22,14 +22,18 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
   const { addResumeBlock } = useResumeStore()
 
   const handleConfirm = () => {
-    addResumeBlock(0)
+    if (selectedTemplate === -1) {
+      message.info('请选择一个模板')
+      return
+    }
+    addResumeBlock(selectedTemplate as 0)
     setIsModalOpen(false)
   }
 
   const DrawerHeader = (
     <div className="flex justify-between">
-      <span>Edit</span>
-      <Button onClick={() => setIsModalOpen(true)}>Add Block</Button>
+      <span>编辑内容</span>
+      <Button onClick={() => setIsModalOpen(true)}>添加块</Button>
     </div>
   )
 

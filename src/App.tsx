@@ -1,12 +1,15 @@
 import BlocksContainer from './components/EditBlock/EditorContainer'
-import EditDrawer from './editDrawer'
+import EditDrawer from './editContentDrawer'
+import EditStyleDrawer from './editStyleDrawer'
 import Preview from './preview'
 import { useAppStore } from './store'
 
 import './App.css'
 
 function App() {
-  const { showEdit, setShowEdit } = useAppStore()
+  const {
+    showEdit, setShowEdit, showEditStyle, setShowEditStyle,
+  } = useAppStore()
 
   return (
     <>
@@ -16,6 +19,10 @@ function App() {
       >
         <BlocksContainer />
       </EditDrawer>
+      <EditStyleDrawer
+        open={showEditStyle}
+        onClose={() => setShowEditStyle(false)}
+      />
       <Preview />
     </>
   )

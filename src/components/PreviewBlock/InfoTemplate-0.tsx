@@ -1,7 +1,5 @@
 import React from 'react'
 
-import classNames from 'classnames'
-
 import { useResumeStyleStore } from '@/store/style'
 
 import type { IResumeInfoData } from '@/store/resume'
@@ -12,13 +10,9 @@ export type InfoTemplateProps = IResumeInfoData
 
 const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
   const {
-    title, name, avatar, items,
+    name, avatar, items,
   } = props
   const { resumeStyle } = useResumeStyleStore()
-
-  const titleClasses = classNames('block-title', {
-    'is-banner': resumeStyle.titleStyle === 'banner',
-  })
 
   return (
     <div className="flex items-start">
@@ -33,7 +27,7 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
           )
           : null
       }
-      <div className="info-container">
+      <div className="info-container ml-4">
         <div className="info-name">{name}</div>
         <div className="info-desc-container grid grid-cols-1 text-sm">
           {

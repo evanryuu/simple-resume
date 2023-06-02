@@ -9,8 +9,10 @@ import { useResumeStore } from './store/resume'
 import { useResumeStyleStore } from './store/style'
 import { downloadJSON } from './utils'
 
+import type { UploadProps } from 'antd'
+
 const Preview = () => {
-  const { setPreviewMode, setShowEdit } = useAppStore()
+  const { setPreviewMode, setShowEdit, setShowEditStyle } = useAppStore()
   const { resumeData } = useResumeStore()
   const { resumeStyle } = useResumeStyleStore()
 
@@ -45,7 +47,7 @@ const Preview = () => {
         style={{ backgroundColor: resumeStyle.themeColor }}
       >
         <Button size="small" onClick={() => setShowEdit(true)}>编辑内容</Button>
-        <Button size="small" className="ml-4" onClick={() => setShowEdit(true)}>编辑样式</Button>
+        <Button size="small" className="ml-4" onClick={() => setShowEditStyle(true)}>编辑样式</Button>
         <Button size="small" className="ml-4" onClick={() => setPreviewMode(true)}>预览</Button>
         <Button
           size="small"

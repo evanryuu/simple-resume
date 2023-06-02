@@ -19,3 +19,5 @@ export interface TextProps {
   // className?: string
 
 }
+
+export type BaseInputType = 'color' | 'string' | 'number' | 'textarea' | 'boolean' | 'slider' | 'select'

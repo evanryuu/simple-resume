@@ -16,7 +16,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
 
   const titleIsBanner = resumeStyle.titleStyle === 'banner'
 
-  const titleClasses = classNames('block-title font-semibold text-sm text-left p-1 tracking-widest', {
+  const titleClasses = classNames('block-title font-semibold text-sm text-left py-1 tracking-widest', {
     'is-banner': titleIsBanner,
   })
 
@@ -27,6 +27,8 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
         style={{
           color: titleIsBanner ? '#fff' : resumeStyle.themeColor,
           background: titleIsBanner ? resumeStyle.themeColor : '#fff',
+          paddingLeft: titleIsBanner ? 8 : 0,
+          fontSize: resumeStyle.titleSize,
         }}
       >
         {title.value}
