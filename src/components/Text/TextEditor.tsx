@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Icon } from '@iconify/react'
-import { ColorPicker, Input, InputNumber } from 'antd'
+import {
+  ColorPicker, Input, InputNumber, Switch,
+} from 'antd'
 
 import type { Color, TextProps } from '@/types'
 import type { InputNumberProps } from 'antd'
@@ -19,8 +21,8 @@ export type TextEditorProps = TextProps & DifferentInput & {
 }
 
 type DifferentInput = {
-  type?: 'text'
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  type?: 'text' | 'textarea'
+  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 } | {
   type?: 'number'
   onChange?: (value: number) => void
@@ -40,32 +42,31 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     onChangeAll,
   } = props
 
+  const [loaded, setLoaded] = useState(false)
   const [value, setValue] = useState(props.value)
   const [showMore, setShowMore] = useState(false)
   const [icon, setIcon] = useState(props.icon || '')
   const [iconColor, setIconColor] = useState(props.iconColor)
   const [md, setMd] = useState(props.md)
-  const [fieldsData, setTextData] = useState<TextProps>({
-    value,
-    icon,
-    iconColor,
-    color: props.color,
-    style: props.style,
-    classes: props.classes,
-    md,
-  })
   // const [styles, setStyles] = useState(props.style || {})
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
+  useEffect(() => {
+    if (onChangeAll && loaded) {
+      onChangeAll({
+        value: value || '',
+        icon: icon || '',
+        iconColor,
+        md: md ?? false,
+      })
+    }
+  }, [value, icon, iconColor, md])
 
   const handleIconChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIcon(e.target.value)
     if (onIconChange) {
       onIconChange(e.target.value)
-    }
-    if (onChangeAll) {
-      onChangeAll({
-        ...fieldsData,
-        icon: e.target.value,
-      })
     }
   }
 
@@ -75,24 +76,13 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     if (onIconColorChange) {
       onIconColorChange(color as Color)
     }
-    if (onChangeAll) {
-      onChangeAll({
-        ...fieldsData,
-        iconColor: color as Color,
-      })
-    }
   }
 
-  const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    console.log(e.target.value)
     setValue(e.target.value)
     if (onChange) {
       onChange(e as React.ChangeEvent<HTMLInputElement> & number)
-    }
-    if (onChangeAll) {
-      onChangeAll({
-        ...fieldsData,
-        value: e.target.value,
-      })
     }
   }
 
@@ -102,16 +92,13 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     if (onChange) {
       onChange(val as React.ChangeEvent<HTMLInputElement> & number)
     }
-    if (onChangeAll) {
-      onChangeAll({
-        ...fieldsData,
-        value: val,
-      })
-    }
   }
 
   const generateInput = () => {
     if (type === 'text') {
+      if (md) {
+        return <Input.TextArea id={label} value={value} onChange={handleTextInputChange} />
+      }
       return <Input id={label} value={value} onChange={handleTextInputChange} />
     } if (type === 'number') {
       return <InputNumber {...props.inputNumberProps} onChange={handleNumberInputChange} value={value as number} placeholder="Icon" />
@@ -154,6 +141,19 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
                     onChange={handleIconColorChange}
                   />
                 </span>
+              </div>
+              <div className="mt-2 flex w-full items-center">
+                <span>Markdown </span>
+                <Switch
+                  className="ml2"
+                  checked={md}
+                  checkedChildren="On"
+                  unCheckedChildren="Off"
+                  onChange={() => {
+                    console.log(1, md)
+                    setMd(!md)
+                  }}
+                />
               </div>
             </div>
           )

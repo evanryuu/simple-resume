@@ -16,7 +16,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
 
   const titleIsBanner = resumeStyle.titleStyle === 'banner'
 
-  const titleClasses = classNames('block-title text-left p-1', {
+  const titleClasses = classNames('block-title font-semibold text-sm text-left p-1 tracking-widest', {
     'is-banner': titleIsBanner,
   })
 
@@ -36,7 +36,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
           <div className="specific-container" key={i}>
             <div className="flex items-center justify-between">
               <div className="specific-title flex">
-                <Text {...item.title} />
+                <Text classes="text-sm font-bold" {...item.title} />
                 <Text classes="ml-2 text-xs" {...item.subtitle!} />
               </div>
               {item.note && <Text classes="specific-title-note text-sm" {...item.note} />}

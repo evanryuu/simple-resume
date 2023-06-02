@@ -38,7 +38,10 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
       <Drawer
         title={DrawerHeader}
         placement="left"
-        mask={false}
+        mask
+        maskStyle={{
+          backgroundColor: 'transparent',
+        }}
         open={open}
         onClose={onClose}
         {...rest}

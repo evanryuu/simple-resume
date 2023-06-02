@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import { create } from 'zustand'
 
 import { generateRandomId } from '@/utils'
@@ -53,6 +54,7 @@ export type IResumeBlock = IResumeBlockSetting | IResumeInfoSetting
 interface IResumeState {
   resumeData: IResumeBlock[]
   setResumeData: (resumes: IResumeBlock[]) => void
+  moveResumeBlock: (id: string, moveto: number) => void
 
   setResumeInfoData: (resumeInfo: IResumeInfoData) => void
   setResumeBlockData: (id: string, blockData: IResumeBlockData) => void
@@ -69,9 +71,32 @@ interface IResumeState {
 }
 
 export const useResumeStore = create<IResumeState>()((set) => ({
-  resumeData: TemplateData as IResumeBlock[],
+  resumeData: TemplateData.resumeData as IResumeBlock[],
   /** Set whole resume data, including ResumeInfo and ResumeBlock */
   setResumeData: (resumes) => set(() => ({ resumeData: resumes })),
+  moveResumeBlock: (id, moveto) => set((state) => {
+    const { resumeData } = state
+    const targetIndex = resumeData.findIndex((r) => r.id === id)!
+    const newIndex = targetIndex + moveto
+    /**
+     * <= 0 not < 0
+     *
+     * because info block needs to be the first.
+     *
+     * this might change in the future thought (lol)
+     */
+    if (newIndex <= 0) {
+      message.info('Oops, 不能再往前了朋友')
+      return { ...state }
+    } if (newIndex >= resumeData.length) {
+      message.info('真的下不去了')
+      return { ...state }
+    }
+    const el = resumeData.splice(targetIndex, 1)[0]
+    resumeData.splice(newIndex, 0, el)
+
+    return { resumeData }
+  }),
   setResumeInfoData: (resume) => set((state) => {
     const infoIndex = state.resumeData.findIndex((r) => r.type === 'info')!
     if (infoIndex !== -1) {

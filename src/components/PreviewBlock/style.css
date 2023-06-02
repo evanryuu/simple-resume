@@ -1,10 +1,12 @@
 .block-title.is-banner {
   position: relative;
-width: 240px;
-display: flex;
-align-items: center;
-height: 20px;
-border-radius: 8px;
+  padding-right: 80px;
+  padding-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  border-radius: 2px;
+  margin-bottom: 8px;
 }
 
 .block-title.is-banner::after {

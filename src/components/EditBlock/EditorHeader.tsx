@@ -15,7 +15,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   const [showBlockNameInput, setShowBlockNameInput] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
-  const { deleteResumeBlock, updateResumeBlockData } = useResumeStore()
+  const { deleteResumeBlock, updateResumeBlockData, moveResumeBlock } = useResumeStore()
 
   const handleBlockNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateResumeBlockData(props.id, {
@@ -33,6 +33,11 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   const handleDeleteClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     e.stopPropagation()
     setShowDeleteConfirm(true)
+  }
+
+  const handleMoveBlock = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    moveResumeBlock(props.id, -1)
   }
 
   const deleteBlock = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -72,6 +77,19 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
           >
             <Icon fontSize={16} icon="mingcute:edit-line" />
           </span>
+          {
+            type === 'block'
+              ? (
+                <span
+                  role="presentation"
+                  onClick={handleMoveBlock}
+                  className="hover:text-cyan flex ml-1 items-center"
+                >
+                  <Icon fontSize={16} icon="fluent:arrow-up-16-regular" />
+                </span>
+              )
+              : null
+          }
           {
             type === 'block'
               ? (

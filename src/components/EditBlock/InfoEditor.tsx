@@ -71,7 +71,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
       <div className="avatar-url-container">
         <TextEditor
           label="Avatar"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setResumeInfoData({
+          onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setResumeInfoData({
             ...resume.data,
             avatar: e.target.value,
           })}
@@ -105,13 +105,13 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
             <TextEditor
               key={`Title-${ii}`}
               label="Desc"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleItemChange('value', ii, e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleItemChange('value', ii, e.target.value)}
               onIconChange={(icon) => handleItemChange('icon', ii, icon)}
               onIconColorChange={(color) => handleItemChange('iconColor', ii, color)}
               {...item}
             >
               <Button danger className="mt-4" onClick={() => deleteResumeInfoItem(ii)}>
-                <Icon icon="mdi:delete" width={20} />
+                <Icon icon="fluent:delete-28-regular" width={20} />
               </Button>
             </TextEditor>
           </div>
