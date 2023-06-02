@@ -2,14 +2,14 @@
   "resumeData": [
     {
       "type": "info",
-      "id": "82460945",
+      "id": "31218382",
       "template": 0,
       "data": {
         "title": {
           "value": "个人信息"
         },
         "name": "EvanLiu",
-        "avatar": "https://avatars.githubusercontent.com/u/119531951?v=4",
+        "avatar": "\thttps://avatars.githubusercontent.com/u/55378595?v=4",
         "column": 1,
         "items": [
           {
@@ -36,7 +36,7 @@
       "template": 0,
       "data": {
         "title": {
-          "value": "工作经历"
+          "value": "皮一下经历"
         },
         "items": [
           {
@@ -70,25 +70,103 @@
       "template": 0,
       "data": {
         "title": {
-          "value": "hi"
+          "value": "教育经历"
         },
         "items": [
           {
             "id": "9134277385",
             "title": {
-              "value": "Jingli2"
+              "value": "家里蹲大学",
+              "icon": "",
+              "md": false
             },
             "subtitle": {
-              "value": "SubTitle2"
+              "value": "博士后",
+              "icon": "",
+              "md": false
             },
             "note": {
-              "value": "Note2"
+              "value": "(2019.03.22 - 2020.03.22)",
+              "icon": "",
+              "md": false
             },
             "description": {
-              "value": "description2"
+              "value": "",
+              "icon": "",
+              "md": false
             },
             "detail": {
-              "value": "detail2"
+              "value": "",
+              "icon": "",
+              "md": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "block",
+      "id": "44414245",
+      "template": 0,
+      "data": {
+        "title": {
+          "value": "项目经历"
+        },
+        "items": [
+          {
+            "id": "5653954805",
+            "title": {
+              "value": "数据中台",
+              "icon": "",
+              "md": false
+            },
+            "subtitle": {
+              "value": "前端负责人",
+              "icon": "",
+              "md": false
+            },
+            "note": {
+              "value": "(2019.03.22 - 2020.03.22)",
+              "icon": "",
+              "md": false
+            },
+            "description": {
+              "value": "面向公司内部的数据收集分析产品。收集并处理公司所有APP的数据，通过Metabase进行数据指标看板的生成，使得高管以及各部门能够获取到产品的指标进展从而推动决策。",
+              "icon": "",
+              "md": false
+            },
+            "detail": {
+              "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作",
+              "icon": "",
+              "md": true
+            }
+          },
+          {
+            "id": "0168553166",
+            "title": {
+              "value": "另一个项目名",
+              "icon": "",
+              "md": false
+            },
+            "subtitle": {
+              "value": "职位",
+              "icon": "",
+              "md": false
+            },
+            "note": {
+              "value": "(开始 - 结束)",
+              "icon": "",
+              "md": false
+            },
+            "description": {
+              "value": "项目描述",
+              "icon": "",
+              "md": false
+            },
+            "detail": {
+              "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作\n\n**项目成果:**\n\n1. 减少了xxx的时间，大幅减少成本\n2. 提高了xxx%的留存率，综合提高了xxx%的收益。",
+              "icon": "",
+              "md": true
             }
           }
         ]

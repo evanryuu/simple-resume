@@ -35,8 +35,8 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
         items.map((item, i) => (
           <div className="specific-container" key={i}>
             <div className="flex items-center justify-between">
-              <div className="specific-title flex">
-                <Text classes="text-sm font-bold" {...item.title} />
+              <div className="specific-title flex items-center">
+                <Text classes="text-md font-bold" {...item.title} />
                 <Text classes="ml-2 text-xs" {...item.subtitle!} />
               </div>
               {item.note && <Text classes="specific-title-note text-sm" {...item.note} />}

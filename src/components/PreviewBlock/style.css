@@ -21,3 +21,11 @@
   transform-origin: center;
   transform: rotate(45deg);
 }
+
+.specific-container + .specific-container {
+  margin-top: 16px;
+}
+
+.specific-title-note {
+  letter-spacing: 0.2px;
+}

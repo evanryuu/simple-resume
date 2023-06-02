@@ -21,7 +21,7 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
   })
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-start">
       {
         avatar
           ? (<img
@@ -35,10 +35,10 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
       }
       <div className="info-container">
         <div className="info-name">{name}</div>
-        <div className="info-desc-container grid grid-cols-1">
+        <div className="info-desc-container grid grid-cols-1 text-sm">
           {
             items.length && items.map((item, i) => (
-              <Text className="flex items-center" key={i} {...item} />
+              <Text classes="flex items-center" key={i} {...item} />
             ))
           }
         </div>

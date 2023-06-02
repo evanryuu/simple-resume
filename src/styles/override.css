@@ -1,3 +1,7 @@
 .ant-collapse-header {
   align-items: center !important;
 }
+
+.text-xs {
+  line-height: initial;
+}
