@@ -1,7 +1,17 @@
 @import url('./override.css');
 
 @import url('../components/PreviewBlock/style.css');
+html[theme='dark'] {
+  filter: invert(1) hue-rotate(180deg);
+}
 
+html[theme='dark'] img{
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html {
+  transition: all 300ms;
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

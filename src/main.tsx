@@ -7,8 +7,10 @@ import App from './App'
 import './styles/index.css'
 import 'uno.css'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+const Root = () => (
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 )
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<Root />)

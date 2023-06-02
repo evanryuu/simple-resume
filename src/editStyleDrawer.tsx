@@ -144,6 +144,12 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
         onChange={(value) => handleChange('subtitleColor', value)}
       />
       <BaseInput
+        type="color"
+        label="Subtitle Background Color"
+        value={resumeStyle.subtitleBackgroundColor}
+        onChange={(value) => handleChange('subtitleBackgroundColor', value)}
+      />
+      <BaseInput
         type="slider"
         label="Note Size"
         value={resumeStyle.noteSize}

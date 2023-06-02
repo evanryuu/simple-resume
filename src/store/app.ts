@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 
 interface IAppState {
+  darkMode: boolean,
+  setDarkMode: (val: boolean) => void,
   themeColor: string
   setThemeColor: (color: string) => void
   previewMode: boolean
@@ -12,6 +14,8 @@ interface IAppState {
 }
 
 export const useAppStore = create<IAppState>()((set) => ({
+  darkMode: false,
+  setDarkMode: (val) => set(() => ({ darkMode: val })),
   previewMode: false,
   showEdit: false,
   showEditStyle: false,

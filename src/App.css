@@ -1,7 +1,10 @@
 .preview-container {
   width: 80%;
   max-width: 794px;
-  box-shadow: 0 0 3px rgba(0,0,0,.3);
-  margin: 20px auto;
+  margin: 0px auto;
 }
 
+html:hover .preview-toggler {
+  transition: opacity .3s;
+  opacity: 1;
+}

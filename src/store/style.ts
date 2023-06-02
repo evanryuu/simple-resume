@@ -13,6 +13,7 @@ export interface IResumeStyle {
   titleStyle: 'banner' | 'text'
   subtitleSize: number
   subtitleColor: Color
+  subtitleBackgroundColor: Color,
   blockHeaderSize: number
 
   noteSize: number
@@ -27,19 +28,20 @@ export interface IResumeStyleState {
 
 export const useResumeStyleStore = create<IResumeStyleState>()((set) => ({
   resumeStyle: {
-    themeColor: '#d94a38',
+    themeColor: '#01579b',
     avatarWidth: 120,
     avatarRounded: true,
     infoItemsColumn: 2,
     titleStyle: 'banner',
     lineBelowInfo: '#E8E8E8',
     blockPadding: 32,
-    blockHeaderSize: 20,
-    titleSize: 20,
+    blockHeaderSize: 14,
+    titleSize: 18,
     subtitleSize: 12,
-    subtitleColor: '#ddd',
+    subtitleColor: '#bbb',
+    subtitleBackgroundColor: '#fff',
     noteSize: 14,
-    noteColor: '#ddd',
+    noteColor: '#bbb',
     noteBackgroundColor: '#fff',
   },
   setResumeStyle: (style) => set(() => ({ resumeStyle: style })),
