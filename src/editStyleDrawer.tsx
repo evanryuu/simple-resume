@@ -70,6 +70,16 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
         onChange={(value) => handleChange('avatarRounded', value)}
       />
       <BaseInput
+        type="slider"
+        componentProps={{
+          min: 1,
+          max: 4,
+        }}
+        label="Info Items Column"
+        value={resumeStyle.infoItemsColumn}
+        onChange={(value) => handleChange('infoItemsColumn', value)}
+      />
+      <BaseInput
         type="color"
         label="Line Below Info"
         value={resumeStyle.lineBelowInfo}
@@ -84,6 +94,16 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
         }}
         value={resumeStyle.blockPadding}
         onChange={(value) => handleChange('blockPadding', value)}
+      />
+      <BaseInput
+        type="slider"
+        label="Block Header Size"
+        componentProps={{
+          min: 10,
+          max: 40,
+        }}
+        value={resumeStyle.blockHeaderSize}
+        onChange={(value) => handleChange('blockHeaderSize', value)}
       />
       <BaseInput
         type="slider"
@@ -122,6 +142,24 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
         label="Subtitle Color"
         value={resumeStyle.subtitleColor}
         onChange={(value) => handleChange('subtitleColor', value)}
+      />
+      <BaseInput
+        type="slider"
+        label="Note Size"
+        value={resumeStyle.noteSize}
+        onChange={(value) => handleChange('subtitleColor', value)}
+      />
+      <BaseInput
+        type="color"
+        label="Note Color"
+        value={resumeStyle.noteColor}
+        onChange={(value) => handleChange('noteColor', value)}
+      />
+      <BaseInput
+        type="color"
+        label="Note Background Color"
+        value={resumeStyle.noteBackgroundColor}
+        onChange={(value) => handleChange('noteBackgroundColor', value)}
       />
       {children}
     </Drawer>

@@ -71,7 +71,12 @@ const Preview = () => {
           </Button>
         </Upload>
       </div>
-      <div className="preview-container">
+      <div
+        className="preview-container"
+        style={{
+          padding: resumeStyle.blockPadding,
+        }}
+      >
         {
           resumeData.map((resume, i) => (
             <PreviewTemplate

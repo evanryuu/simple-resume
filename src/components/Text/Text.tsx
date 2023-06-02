@@ -24,7 +24,7 @@ const Text: React.FC<TextProps> = (props) => {
           )
           : (
             <>
-              {icon ? <Icon className="mr-1" icon={icon} color={iconColor} /> : null}
+              {icon ? <Icon className="mr-1 flex-shrink-0" icon={icon} color={iconColor} /> : null}
               <span style={style}>{value}</span>
             </>
           )

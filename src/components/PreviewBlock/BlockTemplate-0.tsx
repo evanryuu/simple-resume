@@ -16,7 +16,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
 
   const titleIsBanner = resumeStyle.titleStyle === 'banner'
 
-  const titleClasses = classNames('block-title font-semibold text-sm text-left py-1 tracking-widest', {
+  const titleClasses = classNames('block-title font-semibold text-left py-1 tracking-widest', {
     'is-banner': titleIsBanner,
   })
 
@@ -28,7 +28,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
           color: titleIsBanner ? '#fff' : resumeStyle.themeColor,
           background: titleIsBanner ? resumeStyle.themeColor : '#fff',
           paddingLeft: titleIsBanner ? 8 : 0,
-          fontSize: resumeStyle.titleSize,
+          fontSize: resumeStyle.blockHeaderSize,
         }}
       >
         {title.value}
@@ -38,10 +38,31 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
           <div className="specific-container" key={i}>
             <div className="flex items-center justify-between">
               <div className="specific-title flex items-center">
-                <Text classes="text-md font-bold" {...item.title} />
-                <Text classes="ml-2 text-xs" {...item.subtitle!} />
+                <Text
+                  style={{
+                    fontSize: resumeStyle.titleSize,
+                  }}
+                  classes="text-md font-bold"
+                  {...item.title}
+                />
+                <Text
+                  classes="ml-2 text-xs"
+                  style={{
+                    fontSize: resumeStyle.subtitleSize,
+                    color: resumeStyle.subtitleColor,
+                  }}
+                  {...item.subtitle!}
+                />
               </div>
-              {item.note && <Text classes="specific-title-note text-sm" {...item.note} />}
+              {item.note && <Text
+                style={{
+                  fontSize: resumeStyle.noteSize,
+                  color: resumeStyle.noteColor,
+                  backgroundColor: resumeStyle.noteBackgroundColor,
+                }}
+                classes="specific-title-note text-sm"
+                {...item.note}
+              />}
             </div>
             {item.description && <Text classes="text-sm" {...item.description} />}
             {item.detail && <Text {...item.detail} />}
