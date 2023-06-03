@@ -153,7 +153,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
                     presets={[
                       {
                         label: 'theme',
-                        colors: [resumeStyle.themeColor],
+                        colors: [resumeStyle.themeColor.value],
                       },
                     ]}
                     value={iconColor}

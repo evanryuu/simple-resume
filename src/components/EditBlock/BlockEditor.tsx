@@ -54,7 +54,7 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
     return (
       <div className="flex items-center justify-between">
         <span>{item.title.value}</span>
-        <span><Icon icon="fluent:delete-28-regular" onClick={handleDeleteIconClick} /></span>
+        <span className="text-red"><Icon icon="fluent:delete-28-regular" onClick={handleDeleteIconClick} /></span>
       </div>
     )
   }

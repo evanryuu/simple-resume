@@ -8,6 +8,8 @@ import { useResumeStore } from '@/store/resume'
 
 import type { IResumeBlock } from '@/store/resume'
 
+import HoverChangeColor from '../Hover'
+
 export type BlockEditorHeaderProps = IResumeBlock
 
 const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
@@ -76,27 +78,34 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
             type === 'block'
               ? (
                 <>
-                  <span
-                    role="presentation"
-                    onClick={handleEditBlockName}
-                    className="hover:text-cyan flex ml-1 items-center"
-                  >
-                    <Icon fontSize={16} icon="mingcute:edit-line" />
-                  </span>
-                  <span
-                    role="presentation"
-                    onClick={handleMoveBlock}
-                    className="hover:text-cyan flex ml-1 items-center"
-                  >
-                    <Icon fontSize={16} icon="fluent:arrow-up-16-regular" />
-                  </span>
-                  <span
-                    role="presentation"
-                    onClick={handleDeleteClick}
-                    className="text-red hover:text-indigo flex ml-1 items-center"
-                  >
-                    <Icon fontSize={16} icon="fluent:delete-28-regular" />
-                  </span>
+                  <HoverChangeColor>
+                    <span
+                      role="presentation"
+                      onClick={handleEditBlockName}
+                      className="flex ml-1 items-center"
+                    >
+                      <Icon fontSize={16} icon="mingcute:edit-line" />
+                    </span>
+                  </HoverChangeColor>
+                  <HoverChangeColor>
+
+                    <span
+                      role="presentation"
+                      onClick={handleMoveBlock}
+                      className="flex ml-1 items-center"
+                    >
+                      <Icon fontSize={16} icon="fluent:arrow-up-16-regular" />
+                    </span>
+                  </HoverChangeColor>
+                  <HoverChangeColor>
+                    <span
+                      role="presentation"
+                      onClick={handleDeleteClick}
+                      className="text-red flex ml-1 items-center"
+                    >
+                      <Icon fontSize={16} icon="fluent:delete-28-regular" />
+                    </span>
+                  </HoverChangeColor>
                 </>
               )
               : null
@@ -104,13 +113,12 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
         </div>
       </div>
       <Modal
-        title="Warning"
+        title={t('warning')}
         open={showDeleteConfirm}
         onOk={deleteBlock}
         onCancel={() => setShowDeleteConfirm(false)}
       >
-        Are you sure you want to delete this block?
-
+        {t('deleteBlockTip')}
       </Modal>
     </>
   )

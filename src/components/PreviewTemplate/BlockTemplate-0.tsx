@@ -14,10 +14,10 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
   const { title, items } = props
   const { resumeStyle } = useResumeStore()
 
-  const titleIsNotText = resumeStyle.titleStyle !== 'text'
+  const titleIsNotText = resumeStyle.titleStyle.value !== 'text'
 
   const titleClasses = classNames('block-title font-semibold text-left py-1 tracking-widest', {
-    [`is-${resumeStyle.titleStyle}`]: titleIsNotText,
+    [`is-${resumeStyle.titleStyle.value}`]: titleIsNotText,
   })
 
   return (
@@ -25,10 +25,10 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
       <div
         className={titleClasses}
         style={{
-          color: titleIsNotText ? '#fff' : resumeStyle.themeColor,
-          background: titleIsNotText ? resumeStyle.themeColor : '#fff',
+          color: titleIsNotText ? '#fff' : resumeStyle.themeColor.value,
+          background: titleIsNotText ? resumeStyle.themeColor.value : '#fff',
           paddingLeft: titleIsNotText ? 8 : 0,
-          fontSize: resumeStyle.blockHeaderSize,
+          fontSize: resumeStyle.blockHeaderSize.value,
         }}
       >
         {title.value}
@@ -40,7 +40,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
               <div className="specific-title flex items-center">
                 <Text
                   style={{
-                    fontSize: resumeStyle.titleSize,
+                    fontSize: resumeStyle.titleSize.value,
                   }}
                   classes="text-md font-bold"
                   {...item.title}
@@ -48,22 +48,22 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                 <Text
                   classes="ml-2 text-xs inline-block"
                   style={{
-                    fontSize: resumeStyle.subtitleSize,
-                    color: resumeStyle.subtitleColor,
+                    fontSize: resumeStyle.subtitleSize.value,
+                    color: resumeStyle.subtitleColor.value,
                     padding: '0px 4px',
                     borderRadius: 2,
-                    backgroundColor: resumeStyle.subtitleBackgroundColor,
+                    backgroundColor: resumeStyle.subtitleBackgroundColor.value,
                   }}
                   {...item.subtitle!}
                 />
               </div>
               {item.note && <Text
                 style={{
-                  fontSize: resumeStyle.noteSize,
-                  color: resumeStyle.noteColor,
+                  fontSize: resumeStyle.noteSize.value,
+                  color: resumeStyle.noteColor.value,
                   padding: '0px 4px',
                   borderRadius: 2,
-                  backgroundColor: resumeStyle.noteBackgroundColor,
+                  backgroundColor: resumeStyle.noteBackgroundColor.value,
                 }}
                 classes="specific-title-note text-sm inline-block"
                 {...item.note}

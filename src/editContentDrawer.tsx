@@ -68,7 +68,7 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
           onClick={() => setSelectedTemplate(selectedTemplate === 0 ? -1 : 0)}
           style={{
             width: 300,
-            borderColor: selectedTemplate === 0 ? resumeStyle.themeColor : '#ccc',
+            borderColor: selectedTemplate === 0 ? resumeStyle.themeColor.value : '#ccc',
           }}
         >
           {t('template')} 0

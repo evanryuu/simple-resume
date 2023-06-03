@@ -66,7 +66,7 @@ const BaseInput: React.FC<BaseInputProps> = (props) => {
           console.log('value', data)
           onChange(data)
         }
-        return <Slider {...componentProps} onChange={handleSlideChange} value={value} />
+        return <Slider {...props.componentProps} onChange={handleSlideChange} value={value} />
       }
       case 'select': {
         const handleSelectChange = (data: string) => {
@@ -82,7 +82,9 @@ const BaseInput: React.FC<BaseInputProps> = (props) => {
 
   return (
     <div className="mt-2">
-      <div className="text-gray-400 font-semibold tracking-widest">{label ? <label htmlFor={label}>{label}</label> : null}</div>
+      <div className="text-gray-400 font-semibold tracking-widest">
+        {label ? <span>{label}</span> : null}
+      </div>
       {renderInput()}
       {description}
     </div>

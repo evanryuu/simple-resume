@@ -23,8 +23,8 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
             ? (<img
               src={avatar}
               alt="Avatar"
-              width={resumeStyle.avatarWidth}
-              style={{ borderRadius: resumeStyle.avatarRounded ? '50%' : 0 }}
+              width={resumeStyle.avatarWidth.value}
+              style={{ borderRadius: resumeStyle.avatarRounded.value ? '50%' : 0 }}
             />
             )
             : null
@@ -34,7 +34,8 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
           <div
             className="info-desc-container grid text-sm"
             style={{
-              gridTemplateColumns: `repeat(${resumeStyle.infoItemsColumn}, minmax(0, 1fr))`,
+              marginTop: resumeStyle.infoDescMarginTop.value,
+              gridTemplateColumns: `repeat(${resumeStyle.infoItemsColumn.value}, minmax(0, 1fr))`,
             }}
           >
             {
@@ -48,7 +49,7 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
       <div
         style={{
           height: 1,
-          backgroundColor: resumeStyle.lineBelowInfo,
+          backgroundColor: resumeStyle.lineBelowInfo.value,
         }}
         className="my-6"
       />

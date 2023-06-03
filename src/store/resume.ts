@@ -6,7 +6,7 @@ import constant from '@/config/constant'
 import TemplateData from '@/config/template.json'
 import { generateRandomId, initTemplateData } from '@/utils'
 
-import type { Color, TextProps } from '@/types'
+import type { BaseInputType, Color, TextProps } from '@/types'
 
 export interface IResumeBlockItem {
   id: string
@@ -55,22 +55,87 @@ export type IResumeBlock = IResumeBlockSetting | IResumeInfoSetting
 export type IResumeData = IResumeBlock[]
 
 export interface IResumeStyle {
-  themeColor: Color
-  avatarWidth: number
-  avatarRounded: boolean
-  infoItemsColumn: number
-  lineBelowInfo: Color
-  pagePadding: number
-  titleSize: number
-  titleStyle: 'banner' | 'text' | 'tag'
-  subtitleSize: number
-  subtitleColor: Color
-  subtitleBackgroundColor: Color,
-  blockHeaderSize: number
+  themeColor: {
+    type: BaseInputType
+    value: Color
+    componentProps: any
+  }
+  infoDescMarginTop: {
+    type: BaseInputType
+    value: number
+    componentProps: any
+  }
+  avatarWidth: {
+    type: BaseInputType
+    value: number
+    componentProps: any
+  }
+  avatarRounded: {
+    type: BaseInputType
+    value: boolean
+    componentProps: any
+  }
+  infoItemsColumn: {
+    type: BaseInputType
+    value: number
+    componentProps: any
+  }
+  lineBelowInfo: {
+    type: BaseInputType
+    value: Color
+    componentProps: any
+  }
+  pagePadding: {
+    type: BaseInputType
+    value: number
+    componentProps: any
+  }
+  titleSize: {
+    type: BaseInputType
+    value: number
+    componentProps: any
+  }
+  titleStyle: {
+    type: BaseInputType
+    value: 'banner' | 'text' | 'tag',
+    componentProps: any
+  }
+  subtitleSize: {
+    type: BaseInputType
+    value: number
+    componentProps: any
+  }
+  subtitleColor: {
+    type: BaseInputType
+    value: Color
+    componentProps: any
+  }
+  subtitleBackgroundColor: {
+    type: BaseInputType
+    value: Color
+    componentProps: any
+  }
+  blockHeaderSize: {
+    type: BaseInputType
+    value: number
+    componentProps: any
+  }
 
-  noteSize: number
-  noteColor: Color
-  noteBackgroundColor: Color
+  noteSize: {
+    type: BaseInputType
+    value: number
+    componentProps: any
+  }
+  noteColor: {
+    type: BaseInputType
+    value: Color
+    componentProps: any
+  }
+  noteBackgroundColor: {
+    type: BaseInputType
+    value: Color
+    componentProps: any
+  }
 }
 
 interface IResumeState {

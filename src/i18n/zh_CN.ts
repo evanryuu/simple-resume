@@ -25,6 +25,7 @@ export default {
     themeColor: '主题色',
     avatarWidth: '头像大小',
     avatarRounded: '头像圆不圆',
+    infoDescMarginTop: '个人信息描述顶部距离',
     infoItemsColumn: '个人信息描述有几列',
     lineBelowInfo: '个人信息下方的横线',
     pagePadding: '页面间距',
@@ -41,10 +42,10 @@ export default {
 
     /**  */
     warning: '警告',
-    deleteBlockTip: '',
-    deleteItemTip: '',
+    deleteBlockTip: '确定删除这个块吗？',
+    deleteItemTip: '确定要删除这个项吗？',
     confirm: '确认',
-    resetConfigTip: '',
+    resetConfigTip: '确定要重置配置吗？',
     success: '成功',
     failed: '失败',
 

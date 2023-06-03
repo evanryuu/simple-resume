@@ -175,21 +175,127 @@
       }
     ],
     "resumeStyle": {
-      "themeColor": "#01579b",
-      "avatarWidth": 120,
-      "avatarRounded": true,
-      "infoItemsColumn": 2,
-      "titleStyle": "banner",
-      "lineBelowInfo": "#E8E8E8",
-      "pagePadding": 32,
-      "blockHeaderSize": 14,
-      "titleSize": 18,
-      "subtitleSize": 12,
-      "subtitleColor": "#bbb",
-      "subtitleBackgroundColor": "#fff",
-      "noteSize": 14,
-      "noteColor": "#bbb",
-      "noteBackgroundColor": "#fff"
+      "themeColor": {
+        "type": "color",
+        "value": "#01579b",
+        "componentProps": {}
+      },
+      "avatarWidth": {
+        "type": "slider",
+        "value": 120,
+        "componentProps": {
+          "min": 40,
+          "max": 240
+        }
+      },
+      "avatarRounded": {
+        "type": "switch",
+        "value": true,
+        "componentProps": {
+          "defaultChecked": false
+        }
+      },
+      "infoDescMarginTop": {
+        "type": "slider",
+        "value": 0,
+        "componentProps": {
+          "min": 0,
+          "max": 80
+        }
+      },
+      "infoItemsColumn": {
+        "type": "slider",
+        "value": 2,
+        "componentProps": {
+          "min": 1,
+          "max": 4
+        }
+      },
+      "titleStyle": {
+        "type": "select",
+        "value": "banner",
+        "componentProps": {
+          "options": [
+            {
+              "value": "banner",
+              "label": "Banner"
+            },
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "tag",
+              "label": "Tag"
+            }
+          ]
+        }
+      },
+      "lineBelowInfo": {
+        "type": "color",
+        "value": "#E8E8E8",
+        "componentProps": {}
+      },
+      "pagePadding": {
+        "type": "slider",
+        "value": 32,
+        "componentProps": {
+          "min": 0,
+          "max": 40
+        }
+      },
+      "blockHeaderSize": {
+        "type": "slider",
+        "value": 14,
+        "componentProps": {
+          "min": 10,
+          "max": 40
+        }
+      },
+      "titleSize": {
+        "type": "slider",
+        "value": 18,
+        "componentProps": {
+          "min": 10,
+          "max": 40
+        }
+      },
+      "subtitleSize": {
+        "type": "slider",
+        "value": 12,
+        "componentProps": {
+          "min": 10,
+          "max": 40
+        }
+      },
+      "subtitleColor": {
+        "type": "color",
+        "value": "#bbb",
+        "componentProps": {}
+      },
+      "subtitleBackgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "componentProps": {}
+      },
+      "noteSize": {
+        "type": "slider",
+        "value": 14,
+        "componentProps": {
+          "min": 10,
+          "max": 40
+        }
+      },
+      "noteColor": {
+        "type": "color",
+        "value": "#bbb",
+        "componentProps": {}
+      },
+      "noteBackgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "componentProps": {}
+      }
     }
   }
 }

@@ -21,6 +21,16 @@
   transform: rotate(45deg);
 }
 
+.block-title.is-tag {
+  position: relative;
+  padding-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+}b
+
 .specific-container + .specific-container {
   margin-top: 16px;
 }

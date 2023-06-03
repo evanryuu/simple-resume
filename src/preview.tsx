@@ -86,7 +86,7 @@ const Preview = () => {
 
   const exportPdf = () => {
     html2pdf().set({
-      margin: resumeStyle.pagePadding / 4,
+      margin: resumeStyle.pagePadding.value / 4,
       image: { type: 'jpeg', quality: 1 },
       html2canvas: { scale: 2.5 },
       pagebreak: { avoid: 'span ' },
@@ -117,7 +117,7 @@ const Preview = () => {
           : (
             <div
               className="flex justify-end p-2 text-white mb-8"
-              style={{ backgroundColor: resumeStyle.themeColor }}
+              style={{ backgroundColor: resumeStyle.themeColor.value }}
             >
 
               <PreviewSwitcher className="ml-4 text-xs cursor-pointer flex items-center" />
@@ -169,7 +169,7 @@ const Preview = () => {
           : null}
         <div
           style={{
-            padding: resumeStyle.pagePadding,
+            padding: resumeStyle.pagePadding.value,
             boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
             marginBottom: previewMode ? 0 : 20,
           }}

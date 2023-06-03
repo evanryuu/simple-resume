@@ -25,6 +25,7 @@ export default {
     themeColor: 'Theme Color',
     avatarWidth: 'Avatar Width',
     avatarRounded: 'Avatar Rounded',
+    infoDescMarginTop: 'Info Descriptions Margin Top',
     infoItemsColumn: 'Info Items Column',
     lineBelowInfo: 'Line Below Info',
     pagePadding: 'Page Padding',
