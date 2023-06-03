@@ -57,5 +57,6 @@ export default {
     preview: 'Preview',
     personalInfo: 'Personal Info',
 
+    footerHope: 'Hope this can be of some help for you. 😋',
   },
 }

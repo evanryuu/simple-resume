@@ -11,6 +11,7 @@ import { useAppStore } from '@/store'
 
 import DarkModeSwitcher from './components/DarkModeSwitcher'
 import LanguageSelect from './components/LanguageSelect'
+import MyGithub from './components/MyGithub'
 import PreviewSwitcher from './components/PreviewSwitcher'
 import PreviewTemplate from './components/PreviewTemplate/Template'
 import { useResumeStore } from './store/resume'
@@ -128,7 +129,7 @@ const Preview = () => {
       }
 
       <div
-        className="preview-container relative"
+        className="preview-container relative mb-16"
       >
         {!previewMode
           ? (
@@ -188,6 +189,24 @@ const Preview = () => {
           </ComponentToPrint>
         </div>
       </div>
+
+      {
+        !previewMode
+          ? (
+            <div
+              className="fixed p-2 pr-4 bottom-0 w-full h-4 text-white text-sm flex
+              items-center"
+              style={{
+                backgroundColor: resumeStyle.themeColor.value,
+              }}
+            >
+              <span />
+              <span className="m-auto">{t('footerHope')}</span>
+              <MyGithub className="text-white mr-4 hover:text-white" />
+            </div>
+          )
+          : null
+      }
     </>
   )
 }
