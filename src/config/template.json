@@ -7,10 +7,10 @@
         "template": 0,
         "data": {
           "title": {
-            "value": "个人信息"
+            "value": "Personal Info"
           },
           "name": "EvanLiu",
-          "avatar": "\thttps://avatars.githubusercontent.com/u/55378595?v=4",
+          "avatar": "https://avatars.githubusercontent.com/u/55378595?v=4",
           "column": 1,
           "items": [
             {
@@ -181,7 +181,7 @@
       "infoItemsColumn": 2,
       "titleStyle": "banner",
       "lineBelowInfo": "#E8E8E8",
-      "blockPadding": 32,
+      "pagePadding": 32,
       "blockHeaderSize": 14,
       "titleSize": 18,
       "subtitleSize": 12,

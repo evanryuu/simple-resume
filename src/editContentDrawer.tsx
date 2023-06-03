@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import {
   Button, Card, Drawer, Modal, message,
 } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import { useResumeStore } from './store/resume'
 
@@ -19,7 +20,9 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
 
   const [selectedTemplate, setSelectedTemplate] = useState(-1)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { addResumeBlock } = useResumeStore()
+  const { t } = useTranslation()
+
+  const { addResumeBlock, resumeStyle } = useResumeStore()
 
   const handleConfirm = () => {
     if (selectedTemplate === -1) {
@@ -31,9 +34,9 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
   }
 
   const DrawerHeader = (
-    <div className="flex justify-between">
-      <span>编辑内容</span>
-      <Button onClick={() => setIsModalOpen(true)}>添加块</Button>
+    <div className="flex justify-between items-center">
+      <span>{t('editContent')}</span>
+      <Button onClick={() => setIsModalOpen(true)}>{t('addBlock')}</Button>
     </div>
   )
 
@@ -53,19 +56,22 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
         {children}
       </Drawer>
       <Modal
-        title="Choose Template"
+        title={t('chooseTemplate')}
         open={isModalOpen}
         onOk={handleConfirm}
         onCancel={() => setIsModalOpen(false)}
       >
         <Card
-          className="cursor-pointer focus:border-cyan"
+          className="cursor-pointer my-8"
           tabIndex={-1}
-          title="Normal"
-          onClick={() => setSelectedTemplate(0)}
-          style={{ width: 300 }}
+          title={t('default')}
+          onClick={() => setSelectedTemplate(selectedTemplate === 0 ? -1 : 0)}
+          style={{
+            width: 300,
+            borderColor: selectedTemplate === 0 ? resumeStyle.themeColor : '#ccc',
+          }}
         >
-          Template 0
+          {t('template')} 0
         </Card>
 
       </Modal>

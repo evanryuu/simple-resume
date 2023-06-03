@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react'
 import {
   Button, message,
 } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import { useResumeStore } from '@/store/resume'
 
@@ -16,6 +17,8 @@ export interface InfoEditorProps extends IResumeInfoSetting { }
 
 const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
   const avatarInputEl = useRef<HTMLInputElement>(null)
+  const { t } = useTranslation()
+
   const { addResumeInfoItem, deleteResumeInfoItem, setResumeInfoData } = useResumeStore()
 
   const defaultText: TextProps = {
@@ -115,7 +118,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
       {/* E Items Edit Section */}
 
       <div className="mt-4 flex justify-end">
-        <Button type="primary" onClick={() => addResumeInfoItem(defaultText)}>Add Item</Button>
+        <Button type="primary" onClick={() => addResumeInfoItem(defaultText)}>{t('addItem')}</Button>
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Drawer } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import BaseInput from './components/Input/BaseInput'
 import { useResumeStore } from './store'
@@ -17,6 +18,8 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
     open, onClose, children, ...rest
   } = props
 
+  const { t } = useTranslation()
+
   const { resumeStyle, setResumeStyle } = useResumeStore()
 
   const handleChange = <T extends keyof IResumeStyle>(key: T, value: IResumeStyle[T]) => {
@@ -27,8 +30,8 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
   }
 
   const DrawerHeader = (
-    <div className="flex justify-between">
-      <span>编辑样式</span>
+    <div className="flex justify-between items-center">
+      <span>{t('editStyle')}</span>
     </div>
   )
 
@@ -46,7 +49,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
     >
       <BaseInput
         type="color"
-        label="Theme Color"
+        label={t('themeColor')}
         value={resumeStyle.themeColor}
         onChange={(value) => handleChange('themeColor', value)}
       />
@@ -56,7 +59,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
           min: 40,
           max: 240,
         }}
-        label="Avatar Width"
+        label={t('avatarWidth')}
         value={resumeStyle.avatarWidth}
         onChange={(value) => handleChange('avatarWidth', value)}
       />
@@ -65,7 +68,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
         componentProps={{
           defaultChecked: resumeStyle.avatarRounded,
         }}
-        label="Avatar Rounded"
+        label={t('avatarRounded')}
         value={resumeStyle.avatarRounded}
         onChange={(value) => handleChange('avatarRounded', value)}
       />
@@ -75,29 +78,29 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
           min: 1,
           max: 4,
         }}
-        label="Info Items Column"
+        label={t('infoItemsColumn')}
         value={resumeStyle.infoItemsColumn}
         onChange={(value) => handleChange('infoItemsColumn', value)}
       />
       <BaseInput
         type="color"
-        label="Line Below Info"
+        label={t('lineBelowInfo')}
         value={resumeStyle.lineBelowInfo}
         onChange={(value) => handleChange('lineBelowInfo', value)}
       />
       <BaseInput
         type="slider"
-        label="Block Padding"
+        label={t('pagePadding')}
         componentProps={{
           min: 0,
           max: 40,
         }}
-        value={resumeStyle.blockPadding}
-        onChange={(value) => handleChange('blockPadding', value)}
+        value={resumeStyle.pagePadding}
+        onChange={(value) => handleChange('pagePadding', value)}
       />
       <BaseInput
         type="slider"
-        label="Block Header Size"
+        label={t('blockHeaderSize')}
         componentProps={{
           min: 10,
           max: 40,
@@ -107,7 +110,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
       />
       <BaseInput
         type="slider"
-        label="Title Size"
+        label={t('titleSize')}
         componentProps={{
           min: 10,
           max: 40,
@@ -117,7 +120,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
       />
       <BaseInput
         type="select"
-        label="Title Style"
+        label={t('titleStyle')}
         componentProps={{
           options: [
             { value: 'banner', label: 'Banner' },
@@ -130,7 +133,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
       />
       <BaseInput
         type="slider"
-        label="Subtitle Size"
+        label={t('subtitleSize')}
         componentProps={{
           min: 10,
           max: 40,
@@ -140,31 +143,31 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
       />
       <BaseInput
         type="color"
-        label="Subtitle Color"
+        label={t('subtitleColor')}
         value={resumeStyle.subtitleColor}
         onChange={(value) => handleChange('subtitleColor', value)}
       />
       <BaseInput
         type="color"
-        label="Subtitle Background Color"
+        label={t('subtitleBackgroundColor')}
         value={resumeStyle.subtitleBackgroundColor}
         onChange={(value) => handleChange('subtitleBackgroundColor', value)}
       />
       <BaseInput
         type="slider"
-        label="Note Size"
+        label={t('noteSize')}
         value={resumeStyle.noteSize}
-        onChange={(value) => handleChange('subtitleColor', value)}
+        onChange={(value) => handleChange('noteSize', value)}
       />
       <BaseInput
         type="color"
-        label="Note Color"
+        label={t('noteColor')}
         value={resumeStyle.noteColor}
         onChange={(value) => handleChange('noteColor', value)}
       />
       <BaseInput
         type="color"
-        label="Note Background Color"
+        label={t('noteBackgroundColor')}
         value={resumeStyle.noteBackgroundColor}
         onChange={(value) => handleChange('noteBackgroundColor', value)}
       />

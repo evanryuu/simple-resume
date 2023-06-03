@@ -60,7 +60,7 @@ export interface IResumeStyle {
   avatarRounded: boolean
   infoItemsColumn: number
   lineBelowInfo: Color
-  blockPadding: number
+  pagePadding: number
   titleSize: number
   titleStyle: 'banner' | 'text' | 'tag'
   subtitleSize: number

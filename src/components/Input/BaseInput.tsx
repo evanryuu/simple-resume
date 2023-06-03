@@ -9,7 +9,7 @@ import type { BaseInputType } from '@/types'
 export interface BaseInputProps {
   type: BaseInputType
   value: any
-  label?: string
+  label?: React.ReactNode
   defaultChecked?: boolean
   componentProps?: any
   description?: React.ReactNode

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Icon } from '@iconify/react'
 import { Button, Collapse, Modal } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import { useResumeStore } from '@/store/resume'
 
@@ -15,6 +16,8 @@ export interface BlockEditorProps extends IResumeBlockSetting { }
 const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [currentItem, setCurrentItem] = useState<IResumeBlockItem>({} as IResumeBlockItem)
+
+  const { t } = useTranslation()
 
   const { addResumeBlockItem, updateResumeBlockItem, deleteResumeBlockItem } = useResumeStore()
 
@@ -71,27 +74,27 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
             <Collapse.Panel header={renderHeader(item)} key={i}>
               <div key={`Item-${i}`}>
                 <TextEditor
-                  label="Title"
+                  label={t('title')}
                   onChangeAll={(e: any) => updateItem(e, 'title', item)}
                   {...item.title}
                 />
                 <TextEditor
-                  label="SubTitle"
+                  label={t('subtitle')}
                   onChangeAll={(e: any) => updateItem(e, 'subtitle', item)}
                   {...item.subtitle!}
                 />
                 {item.note && <TextEditor
-                  label="Note"
+                  label={t('note')}
                   onChangeAll={(e: any) => updateItem(e, 'note', item)}
                   {...item.note}
                 />}
                 {item.description && <TextEditor
-                  label="Description"
+                  label={t('description')}
                   onChangeAll={(e: any) => updateItem(e, 'description', item)}
                   {...item.description}
                 />}
                 {item.detail && <TextEditor
-                  label="Detail"
+                  label={t('detail')}
                   onChangeAll={(e: any) => updateItem(e, 'detail', item)}
                   {...item.detail}
                 />}
@@ -101,7 +104,7 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
         }
       </Collapse>
       <div className="mt-4 text-right">
-        <Button type="primary" onClick={handleAddItem}>Add Item</Button>
+        <Button type="primary" onClick={handleAddItem}>{t('addItem')}</Button>
       </div>
     </div>
   )

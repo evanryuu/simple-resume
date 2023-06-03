@@ -4,12 +4,15 @@ import { Icon } from '@iconify/react'
 import { Button, Modal, message } from 'antd'
 // @ts-ignore
 import html2pdf from 'html2pdf.js'
+import { useTranslation } from 'react-i18next'
 import { useReactToPrint } from 'react-to-print'
 
 import { useAppStore } from '@/store'
 
+import DarkModeSwitcher from './components/DarkModeSwitcher'
+import LanguageSelect from './components/LanguageSelect'
+import PreviewSwitcher from './components/PreviewSwitcher'
 import PreviewTemplate from './components/PreviewTemplate/Template'
-import useDarkMode from './hooks/useDarkMode'
 import { useResumeStore } from './store/resume'
 import { downloadJSON } from './utils'
 
@@ -45,10 +48,10 @@ const PrintButton: React.FC<{
 const Preview = () => {
   const [showConfirm, setShowConfirm] = useState(false)
 
+  const { t } = useTranslation()
   const {
     previewMode, setPreviewMode, setShowEdit, setShowEditStyle,
   } = useAppStore()
-  const [darkMode, setDarkMode] = useDarkMode()
   const {
     resumeStyle, resumeData, setResumeData, setResumeStyle, resetResumeSettings,
   } = useResumeStore()
@@ -83,7 +86,7 @@ const Preview = () => {
 
   const exportPdf = () => {
     html2pdf().set({
-      margin: resumeStyle.blockPadding / 4,
+      margin: resumeStyle.pagePadding / 4,
       image: { type: 'jpeg', quality: 1 },
       html2canvas: { scale: 2.5 },
       pagebreak: { avoid: 'span ' },
@@ -116,21 +119,10 @@ const Preview = () => {
               className="flex justify-end p-2 text-white mb-8"
               style={{ backgroundColor: resumeStyle.themeColor }}
             >
-              <span
-                role="presentation"
-                className="ml-4 text-xs cursor-pointer"
-                onClick={() => setPreviewMode(true)}
-              >
-                预览
-              </span>
 
-              <span
-                className="ml-4 flex items-center cursor-pointer hover:fill-true-gray-700"
-                onClick={() => setDarkMode(!darkMode)}
-                role="presentation"
-              >
-                <Icon icon={darkMode ? 'ic:outline-dark-mode' : 'ic:outline-light-mode'} />
-              </span>
+              <PreviewSwitcher className="ml-4 text-xs cursor-pointer flex items-center" />
+              <DarkModeSwitcher className="ml-4 flex items-center cursor-pointer hover:fill-true-gray-700" />
+              <LanguageSelect placement="bottomRight" className="flex items-center ml-4" />
             </div>
           )
       }
@@ -141,8 +133,8 @@ const Preview = () => {
         {!previewMode
           ? (
             <div className="absolute flex flex-col justify-center right-full mr-4">
-              <Button size="small" onClick={() => setShowEdit(true)}>编辑内容</Button>
-              <Button size="small" className="mt-4" onClick={() => setShowEditStyle(true)}>编辑样式</Button>
+              <Button size="small" onClick={() => setShowEdit(true)}>{t('editContent')}</Button>
+              <Button size="small" className="mt-4" onClick={() => setShowEditStyle(true)}>{t('editStyle')}</Button>
               <Button
                 size="small"
                 className="mt-4"
@@ -152,14 +144,14 @@ const Preview = () => {
                     resumeStyle,
                   },
                 })}
-              >导出配置
+              >{t('exportConfig')}
               </Button>
               <Button
                 size="small"
                 className="mt-4"
                 onClick={() => fileInputEl.current?.click()}
               >
-                导入配置
+                {t('importConfig')}
                 <input
                   ref={fileInputEl}
                   className="hidden"
@@ -168,16 +160,16 @@ const Preview = () => {
                   onChange={handleFileChange}
                 />
               </Button>
-              <Button size="small" className="mt-4" onClick={() => setShowConfirm(true)}>恢复默认配置</Button>
+              <Button size="small" className="mt-4" onClick={() => setShowConfirm(true)}>{t('resetConfig')}</Button>
 
-              <Button size="small" className="mt-4" onClick={exportPdf}>导出图片PDF（不推荐）</Button>
-              <PrintButton size="small" className="mt-4" type="primary" contentRef={componentRef}>导出PDF</PrintButton>
+              <Button size="small" className="mt-4" onClick={exportPdf}>{t('exportPicturePDF')}</Button>
+              <PrintButton size="small" className="mt-4" type="primary" contentRef={componentRef}>{t('exportPDF')}</PrintButton>
             </div>
           )
           : null}
         <div
           style={{
-            padding: resumeStyle.blockPadding,
+            padding: resumeStyle.pagePadding,
             boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
             marginBottom: previewMode ? 0 : 20,
           }}
@@ -190,7 +182,6 @@ const Preview = () => {
                     key={i}
                     {...resume}
                   />
-
                 ))
               }
             </div>

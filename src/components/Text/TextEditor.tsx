@@ -71,7 +71,9 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
 
   useEffect(() => {
     console.log('props.value')
-    setValue(props.value)
+    if (props.value !== value) {
+      setValue(props.value)
+    }
   }, [props.value])
 
   const handleIconChange = (e: React.ChangeEvent<HTMLInputElement>) => {

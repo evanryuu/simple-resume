@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Icon } from '@iconify/react'
 import { Input, Modal, Tag } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import { useResumeStore } from '@/store/resume'
 
@@ -11,6 +12,7 @@ export type BlockEditorHeaderProps = IResumeBlock
 
 const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   const { data, type } = props
+  const { t } = useTranslation()
 
   const [showBlockNameInput, setShowBlockNameInput] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
@@ -54,7 +56,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
         className="flex justify-between items-center cursor-pointer"
       >
         {
-          showBlockNameInput
+          showBlockNameInput && props.type === 'block'
             ? <Input
               onBlur={() => setShowBlockNameInput(false)}
               onPressEnter={() => setShowBlockNameInput(false)}
@@ -64,42 +66,38 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
             />
             : (
               <div>
-                {data.title.value}
+                {props.type === 'block' ? data.title.value : t('personalInfo')}
               </div>
             )
         }
         <div className="flex items-center">
           <Tag className="tracking-wider ml-4">{props.type.toUpperCase()}</Tag>
-          <span
-            role="presentation"
-            onClick={handleEditBlockName}
-            className="hover:text-cyan flex ml-1 items-center"
-          >
-            <Icon fontSize={16} icon="mingcute:edit-line" />
-          </span>
           {
             type === 'block'
               ? (
-                <span
-                  role="presentation"
-                  onClick={handleMoveBlock}
-                  className="hover:text-cyan flex ml-1 items-center"
-                >
-                  <Icon fontSize={16} icon="fluent:arrow-up-16-regular" />
-                </span>
-              )
-              : null
-          }
-          {
-            type === 'block'
-              ? (
-                <span
-                  role="presentation"
-                  onClick={handleDeleteClick}
-                  className="text-red hover:text-indigo flex ml-1 items-center"
-                >
-                  <Icon fontSize={16} icon="fluent:delete-28-regular" />
-                </span>
+                <>
+                  <span
+                    role="presentation"
+                    onClick={handleEditBlockName}
+                    className="hover:text-cyan flex ml-1 items-center"
+                  >
+                    <Icon fontSize={16} icon="mingcute:edit-line" />
+                  </span>
+                  <span
+                    role="presentation"
+                    onClick={handleMoveBlock}
+                    className="hover:text-cyan flex ml-1 items-center"
+                  >
+                    <Icon fontSize={16} icon="fluent:arrow-up-16-regular" />
+                  </span>
+                  <span
+                    role="presentation"
+                    onClick={handleDeleteClick}
+                    className="text-red hover:text-indigo flex ml-1 items-center"
+                  >
+                    <Icon fontSize={16} icon="fluent:delete-28-regular" />
+                  </span>
+                </>
               )
               : null
           }
