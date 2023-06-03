@@ -1,27 +1,61 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { Icon } from '@iconify/react'
-import { Button, Upload, message } from 'antd'
+import { Button, Modal, message } from 'antd'
+// @ts-ignore
+import html2pdf from 'html2pdf.js'
+import { useReactToPrint } from 'react-to-print'
 
 import { useAppStore } from '@/store'
 
-import PreviewTemplate from './components/PreviewBlock/Template'
+import PreviewTemplate from './components/PreviewTemplate/Template'
 import useDarkMode from './hooks/useDarkMode'
 import { useResumeStore } from './store/resume'
 import { downloadJSON } from './utils'
 
 import type { IResumeStorage } from './utils/initTemplateData'
+import type { ButtonProps } from 'antd'
+
+const ComponentToPrint: React.FC<{ children: React.ReactNode }> = (props) => (
+  <div>
+    {props.children}
+  </div>
+)
+
+const PrintButton: React.FC<{
+  contentRef: React.RefObject<any>
+} & ButtonProps> = (props) => {
+  const { contentRef, children, ...rest } = props
+  const handlePrint = useReactToPrint({
+    content: () => contentRef.current,
+    pageStyle: `
+    @media print {
+      @page {
+        size: A4;
+        orientation: portrait;
+        -webkit-print-color-adjust: exact;
+      }
+    }
+    `,
+  })
+
+  return <Button {...rest} onClick={handlePrint}>{children}</Button>
+}
 
 const Preview = () => {
+  const [showConfirm, setShowConfirm] = useState(false)
+
   const {
     previewMode, setPreviewMode, setShowEdit, setShowEditStyle,
   } = useAppStore()
   const [darkMode, setDarkMode] = useDarkMode()
   const {
-    resumeStyle, resumeData, setResumeData, setResumeStyle,
+    resumeStyle, resumeData, setResumeData, setResumeStyle, resetResumeSettings,
   } = useResumeStore()
+
   const previewEl = useRef<HTMLDivElement>(null)
   const fileInputEl = useRef<HTMLInputElement>(null)
+  const componentRef = useRef<HTMLDivElement>(null)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -34,34 +68,38 @@ const Preview = () => {
           const jsonData = JSON.parse(fileContent) as IResumeStorage
           setResumeData(jsonData.state.resumeData)
           setResumeStyle(jsonData.state.resumeStyle)
+          message.success('导入成功！')
         }
       }
       reader.readAsText(file)
     }
   }
 
-  // const exportPdf = () => {
-  //   if (previewEl) {
-  //     const pdf = new JsPDF()
-  //     // pdf.html(previewEl.current!, {
-  //     pdf.html(document.querySelector('.preview-container')!, {
-  //       callback() {
-  //         pdf.save('outpub.pdf')
-  //       },
-  //     })
-  //   }
-  // }
-
-  const exportPdf = () => {
-
+  const handleRecoverResumeData = () => {
+    resetResumeSettings()
+    message.success('重置成功！')
+    setShowConfirm(false)
   }
 
-  const importResumeData = (data: string) => {
-
+  const exportPdf = () => {
+    html2pdf().set({
+      margin: resumeStyle.blockPadding / 4,
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 2.5 },
+      pagebreak: { avoid: 'span ' },
+    }).from(previewEl.current).save('nihaoya.pdf')
   }
 
   return (
     <>
+      <Modal
+        open={showConfirm}
+        onOk={handleRecoverResumeData}
+        title="Confirm"
+        onCancel={() => setShowConfirm(false)}
+      >
+        确认恢复默认配置吗？
+      </Modal>
       {
         previewMode
           ? (
@@ -99,11 +137,6 @@ const Preview = () => {
 
       <div
         className="preview-container relative"
-        style={{
-          padding: resumeStyle.blockPadding,
-          boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
-          marginBottom: previewMode ? 0 : 20,
-        }}
       >
         {!previewMode
           ? (
@@ -135,20 +168,33 @@ const Preview = () => {
                   onChange={handleFileChange}
                 />
               </Button>
-              <Button size="small" type="primary" className="mt-4" onClick={exportPdf}>导出PDF</Button>
+              <Button size="small" className="mt-4" onClick={() => setShowConfirm(true)}>恢复默认配置</Button>
+
+              <Button size="small" className="mt-4" onClick={exportPdf}>导出图片PDF（不推荐）</Button>
+              <PrintButton size="small" className="mt-4" type="primary" contentRef={componentRef}>导出PDF</PrintButton>
             </div>
           )
           : null}
-        <div ref={previewEl}>
-          {
-            resumeData.map((resume, i) => (
-              <PreviewTemplate
-                key={i}
-                {...resume}
-              />
+        <div
+          style={{
+            padding: resumeStyle.blockPadding,
+            boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
+            marginBottom: previewMode ? 0 : 20,
+          }}
+        >
+          <ComponentToPrint>
+            <div id="print-target" ref={componentRef}>
+              {
+                resumeData.map((resume, i) => (
+                  <PreviewTemplate
+                    key={i}
+                    {...resume}
+                  />
 
-            ))
-          }
+                ))
+              }
+            </div>
+          </ComponentToPrint>
         </div>
       </div>
     </>

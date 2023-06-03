@@ -8,14 +8,6 @@ import BlockEditor from './BlockEditor'
 import BlockHeader from './EditorHeader'
 import InfoEditor from './InfoEditor'
 
-// export interface BlocksContainerProps {
-//   type: EditBlockType
-//   /** Block title */
-//   title?: string
-//   /** Style of the title */
-//   titleStyle?: 'banner' | 'text'
-// }
-
 const BlocksContainer: React.FC = () => {
   const { resumeData } = useResumeStore()
 

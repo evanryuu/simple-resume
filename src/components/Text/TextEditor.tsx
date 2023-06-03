@@ -58,6 +58,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     setLoaded(true)
   }, [])
   useEffect(() => {
+    console.log('onchangeall')
     if (onChangeAll && loaded) {
       onChangeAll({
         value: value || '',
@@ -67,6 +68,11 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
       })
     }
   }, [value, icon, iconColor, md])
+
+  useEffect(() => {
+    console.log('props.value')
+    setValue(props.value)
+  }, [props.value])
 
   const handleIconChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIcon(e.target.value)

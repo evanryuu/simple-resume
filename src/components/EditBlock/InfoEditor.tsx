@@ -1,43 +1,22 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 
 import { Icon } from '@iconify/react'
 import {
-  Button, Upload, message,
+  Button, message,
 } from 'antd'
 
 import { useResumeStore } from '@/store/resume'
 
 import type { IResumeInfoSetting, IResumeInfoItem } from '@/store/resume'
 import type { TextProps } from '@/types'
-import type { UploadProps } from 'antd'
 
 import TextEditor from '../Text/TextEditor'
 
 export interface InfoEditorProps extends IResumeInfoSetting { }
 
 const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
-  const [imgUrl, setImgUrl] = useState('')
+  const avatarInputEl = useRef<HTMLInputElement>(null)
   const { addResumeInfoItem, deleteResumeInfoItem, setResumeInfoData } = useResumeStore()
-
-  const uploadProps: UploadProps = {
-    name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info) {
-      // URL.createObjectURL(info.file)
-      console.log(info)
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList)
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`)
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`)
-      }
-    },
-  }
 
   const defaultText: TextProps = {
     value: 'Example',
@@ -51,6 +30,27 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
       ...resume.data,
       items: resume.data.items,
     })
+  }
+
+  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // 获取选择的文件
+    const file = event.target.files![0]
+    // 创建一个FileReader对象
+    const reader = new FileReader()
+
+    // 当文件加载完成时触发
+    reader.onload = function (e) {
+      console.log(e.target!.result)
+      // 将读取的数据赋值给<img>标签的src属性
+      setResumeInfoData({
+        ...resume.data,
+        avatar: e.target!.result as string,
+      })
+      message.success('上传成功！')
+    }
+
+    // 读取文件数据
+    reader.readAsDataURL(file)
   }
 
   return (
@@ -79,24 +79,19 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
           hideMore
         >
           <div className="mt-4">
-            <Upload {...uploadProps}><Button>Upload</Button></Upload>
+            <Button onClick={() => avatarInputEl.current?.click()}>Upload</Button>
+            <input
+              ref={avatarInputEl}
+              className="hidden"
+              type="file"
+              id="upload"
+              accept="image/*"
+              onChange={handleAvatarChange}
+            />
           </div>
         </TextEditor>
       </div>
       {/* E Avatar Edit Section */}
-
-      {/* S Column Edit Section */}
-      <TextEditor
-        label="Column"
-        type="number"
-        onChange={(value: number) => setResumeInfoData({
-          ...resume.data,
-          column: value,
-        })}
-        value={resume.data.column}
-        hideMore
-      />
-      {/* E Column Edit Section */}
 
       {/* S Items Edit Section */}
       {

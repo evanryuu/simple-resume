@@ -1,6 +1,6 @@
 @import url('./override.css');
 
-@import url('../components/PreviewBlock/style.css');
+@import url('../components/PreviewTemplate/style.css');
 html[theme='dark'] {
   filter: invert(1) hue-rotate(180deg);
 }

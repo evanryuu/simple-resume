@@ -14,10 +14,10 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
   const { title, items } = props
   const { resumeStyle } = useResumeStore()
 
-  const titleIsBanner = resumeStyle.titleStyle === 'banner'
+  const titleIsNotText = resumeStyle.titleStyle !== 'text'
 
   const titleClasses = classNames('block-title font-semibold text-left py-1 tracking-widest', {
-    'is-banner': titleIsBanner,
+    [`is-${resumeStyle.titleStyle}`]: titleIsNotText,
   })
 
   return (
@@ -25,9 +25,9 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
       <div
         className={titleClasses}
         style={{
-          color: titleIsBanner ? '#fff' : resumeStyle.themeColor,
-          background: titleIsBanner ? resumeStyle.themeColor : '#fff',
-          paddingLeft: titleIsBanner ? 8 : 0,
+          color: titleIsNotText ? '#fff' : resumeStyle.themeColor,
+          background: titleIsNotText ? resumeStyle.themeColor : '#fff',
+          paddingLeft: titleIsNotText ? 8 : 0,
           fontSize: resumeStyle.blockHeaderSize,
         }}
       >
@@ -46,10 +46,13 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                   {...item.title}
                 />
                 <Text
-                  classes="ml-2 text-xs"
+                  classes="ml-2 text-xs inline-block"
                   style={{
                     fontSize: resumeStyle.subtitleSize,
                     color: resumeStyle.subtitleColor,
+                    padding: '0px 4px',
+                    borderRadius: 2,
+                    backgroundColor: resumeStyle.subtitleBackgroundColor,
                   }}
                   {...item.subtitle!}
                 />
@@ -58,9 +61,11 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                 style={{
                   fontSize: resumeStyle.noteSize,
                   color: resumeStyle.noteColor,
+                  padding: '0px 4px',
+                  borderRadius: 2,
                   backgroundColor: resumeStyle.noteBackgroundColor,
                 }}
-                classes="specific-title-note text-sm"
+                classes="specific-title-note text-sm inline-block"
                 {...item.note}
               />}
             </div>

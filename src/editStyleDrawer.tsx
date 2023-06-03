@@ -122,6 +122,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
           options: [
             { value: 'banner', label: 'Banner' },
             { value: 'text', label: 'Text' },
+            { value: 'tag', label: 'Tag' },
           ],
         }}
         value={resumeStyle.titleStyle}

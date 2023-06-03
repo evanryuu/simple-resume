@@ -3,6 +3,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 import constant from '@/config/constant'
+import TemplateData from '@/config/template.json'
 import { generateRandomId, initTemplateData } from '@/utils'
 
 import type { Color, TextProps } from '@/types'
@@ -51,6 +52,8 @@ export interface IResumeInfoSetting {
 
 export type IResumeBlock = IResumeBlockSetting | IResumeInfoSetting
 
+export type IResumeData = IResumeBlock[]
+
 export interface IResumeStyle {
   themeColor: Color
   avatarWidth: number
@@ -59,7 +62,7 @@ export interface IResumeStyle {
   lineBelowInfo: Color
   blockPadding: number
   titleSize: number
-  titleStyle: 'banner' | 'text'
+  titleStyle: 'banner' | 'text' | 'tag'
   subtitleSize: number
   subtitleColor: Color
   subtitleBackgroundColor: Color,
@@ -71,10 +74,12 @@ export interface IResumeStyle {
 }
 
 interface IResumeState {
+  resetResumeSettings: () => void
+
   resumeStyle: IResumeStyle
   setResumeStyle: (style: IResumeStyle) => void
 
-  resumeData: IResumeBlock[]
+  resumeData: IResumeData
   setResumeData: (resumes: IResumeBlock[]) => void
   moveResumeBlock: (id: string, moveto: number) => void
 
@@ -95,6 +100,11 @@ interface IResumeState {
 export const useResumeStore = create<IResumeState>()(
   persist(
     (set, get) => ({
+      resetResumeSettings: () => set(() => ({
+        resumeStyle: TemplateData.state.resumeStyle as IResumeStyle,
+        resumeData: TemplateData.state.resumeData as IResumeData,
+      })),
+
       resumeStyle: initTemplateData().state.resumeStyle,
       setResumeStyle: (style) => set(() => ({ resumeStyle: style })),
 
