@@ -31,6 +31,7 @@ const BaseInput: React.FC<BaseInputProps> = (props) => {
         }
         return <ColorPicker className="mt-2" {...componentProps} value={value} onChange={handleColorChange} />
       }
+      case 'switch':
       case 'boolean': {
         const handleSwitchChange = (checked: boolean) => {
           setValue(checked)

@@ -190,7 +190,7 @@
       },
       "avatarRounded": {
         "type": "switch",
-        "value": true,
+        "value": false,
         "componentProps": {
           "defaultChecked": false
         }

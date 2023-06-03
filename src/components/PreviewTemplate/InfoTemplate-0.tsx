@@ -30,7 +30,7 @@ const InfoTemplate0: React.FC<IResumeInfoData> = (props) => {
             : null
         }
         <div className="info-container ml-4">
-          <div className="info-name">{name}</div>
+          <div className="info-name font-semibold text-lg">{name}</div>
           <div
             className="info-desc-container grid text-sm"
             style={{

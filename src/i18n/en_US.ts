@@ -20,6 +20,7 @@ export default {
     note: 'Note',
     description: 'Description',
     detail: 'Detail',
+    moreIcon: 'More Icon',
 
     /** S resume style */
     themeColor: 'Theme Color',

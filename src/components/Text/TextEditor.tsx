@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react'
 import {
   ColorPicker, Input, InputNumber, Switch,
 } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import { useResumeStore } from '@/store'
 
@@ -11,6 +12,8 @@ import type { Color, TextProps } from '@/types'
 import type { InputNumberProps } from 'antd'
 import type { Color as AntColor } from 'antd/es/color-picker'
 import type { valueType } from 'antd/es/statistic/utils'
+
+import HoverChangeColor from '../Hover'
 
 export type TextEditorProps = TextProps & DifferentInput & {
   label: string
@@ -50,6 +53,8 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   const [icon, setIcon] = useState(props.icon || '')
   const [iconColor, setIconColor] = useState(props.iconColor)
   const [md, setMd] = useState(props.md)
+
+  const { t } = useTranslation()
 
   const { resumeStyle } = useResumeStore()
 
@@ -131,12 +136,14 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
         }
         {!hideMore
           ? (
-            <Icon
-              fontSize={32}
-              icon="mingcute:more-3-line"
-              className="hover:text-cyan ml-4 cursor-pointer"
-              onClick={() => setShowMore(!showMore)}
-            />
+            <HoverChangeColor>
+              <Icon
+                fontSize={20}
+                icon="mingcute:more-3-line"
+                className="ml-4 cursor-pointer"
+                onClick={() => setShowMore(!showMore)}
+              />
+            </HoverChangeColor>
           )
           : null}
       </div>
@@ -144,7 +151,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
         showMore && !hideMore
           ? (
             <div className="flex items-center flex-col mt-2">
-              <div className="grid grid-cols-2">
+              <div className="flex item-center">
                 <span>
                   <Input value={icon} onChange={handleIconChange} placeholder="Icon" />
                 </span>
@@ -160,6 +167,16 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
                     onChange={handleIconColorChange}
                   />
                 </span>
+                <a
+                  style={{
+                    color: resumeStyle.themeColor.value,
+                  }}
+                  className="flex items-center flex-shrink-0 ml-2"
+                  href="https://icon-sets.iconify.design/"
+                  target="_blank"
+                  rel="noreferrer"
+                >{t('moreIcon')}
+                </a>
               </div>
               <div className="mt-2 flex w-full items-center">
                 <span>Markdown </span>

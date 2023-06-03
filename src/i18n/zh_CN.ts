@@ -20,6 +20,7 @@ export default {
     note: '备注',
     description: '描述',
     detail: '详细内容',
+    moreIcon: '更多Icon',
 
     /** S resume style */
     themeColor: '主题色',
