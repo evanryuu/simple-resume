@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react'
 import classNames from 'classnames'
 
 export interface MyGithubProps {
-  type?: 'icon' | 'tag'
+  type?: 'icon' | 'tag' | 'shield'
   className?: string
 }
 
@@ -19,7 +19,13 @@ const MyGithub: React.FC<MyGithubProps> = (props) => {
       className={cname}
       rel="noreferrer"
     >
-      {type === 'icon' ? null : <span className="mr-1">Star</span>} <Icon icon="bytesize:github" />
+      {
+        type === 'shield'
+          ? <img src="https://img.shields.io/github/stars/evankwolf/simple-resume?style=social" alt="github" />
+          : <Icon icon="bytesize:github" />
+      }
+
+      {type === 'tag' ? <span className="ml-1 text-xs">Star</span> : null}
     </a>
   )
 }

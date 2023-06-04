@@ -14,7 +14,18 @@ const DarkModeSwitcher: React.FC<{ className?: string }> = (props) => {
       onClick={() => setDarkMode(!darkMode)}
       role="presentation"
     >
-      <Icon icon={darkMode ? 'ic:outline-dark-mode' : 'ic:outline-light-mode'} />
+      <Icon
+        style={{
+          display: darkMode ? 'none' : '',
+        }}
+        icon="ic:outline-light-mode"
+      />
+      <Icon
+        style={{
+          display: darkMode ? '' : 'none',
+        }}
+        icon="ic:outline-dark-mode"
+      />
     </span>
   )
 }

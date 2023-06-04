@@ -41,7 +41,6 @@ const BaseInput: React.FC<BaseInputProps> = (props) => {
       }
       case 'number': {
         const handleNumberChange = (number: number | null) => {
-          console.log('changed', number)
           setValue(number)
           onChange(number)
         }
@@ -64,7 +63,6 @@ const BaseInput: React.FC<BaseInputProps> = (props) => {
       case 'slider': {
         const handleSlideChange = (data: any) => {
           setValue(data)
-          console.log('value', data)
           onChange(data)
         }
         return <Slider {...props.componentProps} onChange={handleSlideChange} value={value} />

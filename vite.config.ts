@@ -7,6 +7,13 @@ import { defineConfig } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/simple-resume/',
+  build: {
+    rollupOptions: {
+      output: {
+        intro: 'console.log(\'Build time:\', new Date().toLocaleString())',
+      },
+    },
+  },
   plugins: [
     react(),
     UnoCSS({ /* options */ }),

@@ -59,6 +59,7 @@ export default {
     preview: '预览',
     personalInfo: '个人信息',
 
-    footerHope: '希望这个小项目对你有所帮助😋',
+    footerTip: '希望这个小项目对你有所帮助😋',
+    headerTip: 'Simple Resume',
   },
 }

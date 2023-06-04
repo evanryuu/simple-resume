@@ -46,7 +46,6 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
 
   const deleteBlock = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     e.stopPropagation()
-    console.log('delete', props)
     deleteResumeBlock(props.id)
     setShowDeleteConfirm(false)
   }

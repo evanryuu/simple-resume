@@ -18,6 +18,7 @@ import { useResumeStore } from './store/resume'
 import { downloadJSON } from './utils'
 
 import type { IResumeStorage } from './utils/initTemplateData'
+import type { IResumeInfoSetting } from '@/store'
 import type { ButtonProps } from 'antd'
 
 const ComponentToPrint: React.FC<{ children: React.ReactNode }> = (props) => (
@@ -86,12 +87,15 @@ const Preview = () => {
   }
 
   const exportPdf = () => {
-    html2pdf().set({
-      margin: resumeStyle.pagePadding.value / 4,
-      image: { type: 'jpeg', quality: 1 },
-      html2canvas: { scale: 2.5 },
-      pagebreak: { avoid: 'span ' },
-    }).from(previewEl.current).save('nihaoya.pdf')
+    html2pdf()
+      .set({
+        margin: resumeStyle.pagePadding.value / 4,
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 2.5 },
+        pagebreak: { avoid: 'span ' },
+      })
+      .from(previewEl.current)
+      .save(`${(resumeData.find((r) => r.type === 'info') as IResumeInfoSetting).data.name}'s Resume.pdf`)
   }
 
   return (
@@ -117,13 +121,16 @@ const Preview = () => {
           )
           : (
             <div
-              className="flex justify-end p-2 text-white mb-8"
+              className="relative flex justify-between p-2 text-white mb-8 text-xs h-4"
               style={{ backgroundColor: resumeStyle.themeColor.value }}
             >
-
-              <PreviewSwitcher className="ml-4 text-xs cursor-pointer flex items-center" />
-              <DarkModeSwitcher className="ml-4 flex items-center cursor-pointer hover:fill-true-gray-700" />
-              <LanguageSelect placement="bottomRight" className="flex items-center ml-4" />
+              <div />
+              <span className="absolute left-1/2 translate-x--1/2">{t('headerTip')}</span>
+              <div className="flex">
+                <PreviewSwitcher className="ml-4 cursor-pointer flex items-center px-1 border-solid border-1" />
+                <DarkModeSwitcher className="text-lg ml-4 flex items-center cursor-pointer hover:fill-true-gray-700" />
+                <LanguageSelect placement="bottomRight" className="text-lg flex items-center ml-4" />
+              </div>
             </div>
           )
       }
@@ -200,9 +207,8 @@ const Preview = () => {
                 backgroundColor: resumeStyle.themeColor.value,
               }}
             >
-              <span />
-              <span className="m-auto">{t('footerHope')}</span>
-              <MyGithub className="text-white mr-4 hover:text-white" />
+              <span className="absolute left-1/2 translate-x--1/2 text-xs">{t('footerTip')}</span>
+              <MyGithub type="tag" className="ml-auto text-white mr-4 hover:text-white text-md" />
             </div>
           )
           : null

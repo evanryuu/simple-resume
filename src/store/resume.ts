@@ -361,11 +361,8 @@ export const useResumeStore = create<IResumeState>()(
       deleteResumeBlock: (id) => set(() => {
         const state = get()
 
-        console.log(id, state.resumeData)
-
         const targetIndex = state.resumeData.findIndex((block) => block.id === id)
         if (targetIndex !== -1) {
-          console.log(targetIndex)
           state.resumeData.splice(targetIndex, 1)
         }
         return { ...state }

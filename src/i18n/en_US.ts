@@ -7,7 +7,7 @@ export default {
     importConfig: 'Import Config',
     resetConfig: 'Reset Config',
     exportPicturePDF: 'Export Picture PDF (Not Recommended)',
-    exportPDF: 'Export PDf',
+    exportPDF: 'Export PDF',
     /** E preview button content */
 
     addBlock: 'Add Block',
@@ -58,6 +58,7 @@ export default {
     preview: 'Preview',
     personalInfo: 'Personal Info',
 
-    footerHope: 'Hope this can be of some help for you. 😋',
+    footerTip: 'Hope this can be of some help for you. 😋',
+    headerTip: 'Simple Resume',
   },
 }

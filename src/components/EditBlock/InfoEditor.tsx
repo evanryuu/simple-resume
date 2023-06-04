@@ -43,7 +43,6 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
 
     // 当文件加载完成时触发
     reader.onload = function (e) {
-      console.log(e.target!.result)
       // 将读取的数据赋值给<img>标签的src属性
       setResumeInfoData({
         ...resume.data,

@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
-    "publish": "npm run build && gh-pages -d dist"
+    "publish": "pnpm run build && gh-pages -d dist"
   },
   "dependencies": {
     "antd": "^5.5.2",

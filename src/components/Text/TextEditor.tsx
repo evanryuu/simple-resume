@@ -63,7 +63,6 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     setLoaded(true)
   }, [])
   useEffect(() => {
-    console.log('onchangeall')
     if (onChangeAll && loaded) {
       onChangeAll({
         value: value || '',
@@ -75,7 +74,6 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   }, [value, icon, iconColor, md])
 
   useEffect(() => {
-    console.log('props.value')
     if (props.value !== value) {
       setValue(props.value)
     }
@@ -89,7 +87,6 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   }
 
   const handleIconColorChange = (_: AntColor, color: string) => {
-    console.log('IconColorChange', color)
     setIconColor(color as Color)
     if (onIconColorChange) {
       onIconColorChange(color as Color)
@@ -97,7 +94,6 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   }
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    console.log(e.target.value)
     setValue(e.target.value)
     if (onChange) {
       onChange(e as React.ChangeEvent<HTMLInputElement> & number)
@@ -186,7 +182,6 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
                   checkedChildren="On"
                   unCheckedChildren="Off"
                   onChange={() => {
-                    console.log(1, md)
                     setMd(!md)
                   }}
                 />

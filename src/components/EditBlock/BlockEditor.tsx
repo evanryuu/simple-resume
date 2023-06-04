@@ -35,7 +35,6 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
     type: keyof Omit<IResumeBlockItem, 'id'>,
     item: IResumeBlockItem,
   ) => {
-    console.log(newValue, type, item)
     updateResumeBlockItem(resume.id, item.id, {
       ...item,
       [type]: {
