@@ -1,7 +1,7 @@
 # Simple Resume
-<!-- <p align="center">
-  <a href=""><img src="https://img.shields.io/badge/lang-en-green.svg" /></a>
-</p> -->
+<p align="center">
+  <a href="https://github.com/evankwolf/simple-resume/blob/main/README.md"><img src="https://img.shields.io/badge/lang-zh_CN-green.svg" /></a>
+</p>
 
 ## Project Introduction
 A simple front-end resume generator that does not collect any of your data and does not make any backend requests. Therefore, all changes are saved in `localStorage`. You can experience it at the following website:
