@@ -3,7 +3,7 @@
     "resumeData": [
       {
         "type": "info",
-        "id": "31218382",
+        "id": "30769056",
         "template": 0,
         "data": {
           "title": {
@@ -16,17 +16,23 @@
             {
               "id": "756865294",
               "value": "evanakihito@outlook.com",
-              "icon": "eva:email-outline"
+              "icon": "eva:email-outline",
+              "iconColor": "#ff1647"
             },
             {
               "id": "410277393",
-              "value": "13726270953",
+              "value": "137****0953",
               "icon": "eva:phone-outline"
             },
             {
               "id": "945473855",
-              "value": "https://github.com/evankwolf",
+              "value": "github.com/evankwolf",
               "icon": "eva:github-outline"
+            },
+            {
+              "value": "juejin.cn/user/427030498524711",
+              "icon": "tabler:brand-juejin",
+              "id": "321482400"
             }
           ]
         }
@@ -43,7 +49,10 @@
             {
               "id": "5434710422",
               "title": {
-                "value": "苇名城时辰有限集团"
+                "value": "苇名城时辰有限集团",
+                "icon": "",
+                "md": false,
+                "iconSize": "md"
               },
               "subtitle": {
                 "value": "天子贴身侍卫"
@@ -59,7 +68,8 @@
               "detail": {
                 "value": "所做工作：\n- 父慈子孝\n- 击败“怨恨之鬼”\n- 击败“苇名一心”",
                 "icon": "",
-                "md": true
+                "md": true,
+                "iconSize": "md"
               }
             }
           ]
@@ -99,7 +109,8 @@
               "detail": {
                 "value": "",
                 "icon": "",
-                "md": false
+                "md": false,
+                "iconSize": "md"
               }
             }
           ]
@@ -139,7 +150,8 @@
               "detail": {
                 "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作",
                 "icon": "",
-                "md": true
+                "md": true,
+                "iconSize": "md"
               }
             },
             {
@@ -165,9 +177,52 @@
                 "md": false
               },
               "detail": {
-                "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作\n\n**项目成果:**\n\n1. 减少了xxx的时间，大幅减少成本\n2. 提高了xxx%的留存率，综合提高了xxx%的收益。",
+                "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作\n\n**项目成果:**\n\n1. 减少了`xxx`的时间，大幅减少成本\n2. 提高了xxx%的留存率，综合提高了xxx%的收益。",
                 "icon": "",
-                "md": true
+                "md": true,
+                "iconSize": "md"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "block",
+        "id": "47036135",
+        "template": 0,
+        "data": {
+          "title": {
+            "value": "能力证明"
+          },
+          "items": [
+            {
+              "id": "0194047849",
+              "title": {
+                "value": "",
+                "icon": "",
+                "md": false
+              },
+              "subtitle": {
+                "value": "",
+                "icon": "",
+                "md": false
+              },
+              "note": {
+                "value": "",
+                "icon": "",
+                "md": false
+              },
+              "description": {
+                "value": "CET-556",
+                "icon": "ph:exam-light",
+                "md": false,
+                "iconSize": "lg"
+              },
+              "detail": {
+                "value": "",
+                "icon": "",
+                "md": false,
+                "iconSize": "md"
               }
             }
           ]
@@ -176,8 +231,8 @@
     ],
     "resumeStyle": {
       "themeColor": {
+        "value": "#0685b0",
         "type": "color",
-        "value": "#01579b",
         "componentProps": {}
       },
       "avatarWidth": {
@@ -196,16 +251,16 @@
         }
       },
       "infoDescMarginTop": {
+        "value": 6,
         "type": "slider",
-        "value": 0,
         "componentProps": {
           "min": 0,
           "max": 80
         }
       },
       "infoItemsColumn": {
-        "type": "slider",
         "value": 2,
+        "type": "slider",
         "componentProps": {
           "min": 1,
           "max": 4

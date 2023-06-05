@@ -67,6 +67,6 @@ export default {
     personalInfo: 'Personal Info',
 
     footerTip: 'All data will be stored locally (except for Incognito mode)',
-    headerTip: 'Hope this can be of some help for you. 👏',
+    headerTip: 'Hope this can be of some help for you 👏',
   },
 }
