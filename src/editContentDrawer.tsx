@@ -26,7 +26,7 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
 
   const handleConfirm = () => {
     if (selectedTemplate === -1) {
-      message.info('请选择一个模板')
+      message.info(t('plsChooseTemp'))
       return
     }
     addResumeBlock(selectedTemplate as 0)
@@ -45,10 +45,7 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
       <Drawer
         title={DrawerHeader}
         placement="left"
-        mask
-        maskStyle={{
-          backgroundColor: 'transparent',
-        }}
+        mask={false}
         open={open}
         onClose={onClose}
         {...rest}

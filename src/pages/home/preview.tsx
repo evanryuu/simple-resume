@@ -48,6 +48,7 @@ const Preview = () => {
       <div className="preview-container relative mb-16">
         <div
           style={{
+            marginTop: previewMode ? 0 : 72,
             padding: resumeStyle.pagePadding.value,
             boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
             marginBottom: previewMode ? 0 : 20,

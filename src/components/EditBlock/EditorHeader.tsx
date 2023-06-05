@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Icon } from '@iconify/react'
 import { Input, Modal, Tag } from 'antd'
 import { useTranslation } from 'react-i18next'
 
+import { AppContext } from '@/App'
 import { useResumeStore } from '@/store/resume'
 
+import type { SelectedEditItemData } from '@/App'
 import type { IResumeBlock } from '@/store/resume'
 
 import HoverChangeColor from '../Hover'
@@ -15,6 +17,7 @@ export type BlockEditorHeaderProps = IResumeBlock
 const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   const { data, type } = props
   const { t } = useTranslation()
+  const { selectedEditItem, setSelectedEditItem } = useContext(AppContext)
 
   const [showBlockNameInput, setShowBlockNameInput] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
@@ -23,7 +26,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
 
   const handleBlockNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateResumeBlockData(props.id, {
-      title: {
+      blockTitle: {
         value: e.target.value,
       },
     })
@@ -32,6 +35,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   const handleEditBlockName = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     e.stopPropagation()
     setShowBlockNameInput(!showBlockNameInput)
+    setSelectedEditItem({} as SelectedEditItemData)
   }
 
   const handleDeleteClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -50,6 +54,8 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
     setShowDeleteConfirm(false)
   }
 
+  const selectingBlockTitle = selectedEditItem.blockId === props.id && selectedEditItem.type === 'blockTitle'
+
   return (
     <>
       <div
@@ -57,17 +63,17 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
         className="flex justify-between items-center cursor-pointer"
       >
         {
-          showBlockNameInput && props.type === 'block'
+          (showBlockNameInput && props.type === 'block') || selectingBlockTitle
             ? <Input
               onBlur={() => setShowBlockNameInput(false)}
               onPressEnter={() => setShowBlockNameInput(false)}
               onClick={(e) => e.stopPropagation()}
-              value={data.title.value}
+              value={data.blockTitle.value}
               onChange={handleBlockNameChange}
             />
             : (
               <div>
-                {props.type === 'block' ? data.title.value : t('personalInfo')}
+                {props.type === 'block' ? data.blockTitle.value : t('personalInfo')}
               </div>
             )
         }

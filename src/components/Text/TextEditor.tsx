@@ -1,21 +1,51 @@
-import React, { useEffect, useState } from 'react'
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react'
 
 import { Icon } from '@iconify/react'
 import {
-  ColorPicker, Input, InputNumber, Select, Switch,
+  ColorPicker, Input, Select, Switch,
 } from 'antd'
 import { useTranslation } from 'react-i18next'
 
+import { AppContext } from '@/App'
 import { useResumeStore } from '@/store'
 
+import type {
+  IResumeBlockSetting, IResumeInfoSetting,
+  IResumeBlockItem,
+} from '@/store'
 import type { Color, IconSize, TextProps } from '@/types'
-import type { InputNumberProps } from 'antd'
 import type { Color as AntColor } from 'antd/es/color-picker'
-import type { valueType } from 'antd/es/statistic/utils'
 
 import HoverChangeColor from '../Hover'
 
-export type TextEditorProps = TextProps & DifferentInput & {
+interface IdWhenNotItems {
+  /**
+   * !important
+   *
+   * used to differ `name` and `avatar` to highlight input
+   *
+   */
+  dataKey?: undefined | 'name' | 'avatar'
+  id?: undefined
+}
+
+interface IdWhenItems {
+  /**
+   * !important
+   *
+   * used to differ `name` and `avatar` to highlight input
+   *
+   */
+  dataKey: 'items' | keyof IResumeBlockItem
+  id: string
+}
+
+export type TextEditorProps = TextProps & (IdWhenItems | IdWhenNotItems) & {
+  type?: 'text' | 'textarea'
+  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  block?: IResumeInfoSetting | IResumeBlockSetting
   label: string
   labelRightEl?: React.ReactNode
   hideMore?: boolean
@@ -24,15 +54,6 @@ export type TextEditorProps = TextProps & DifferentInput & {
   onIconColorChange?: (value: Color) => void
   onIconChange?: (value: string) => void
   onIconSizeChange?: (value: IconSize) => void
-}
-
-type DifferentInput = {
-  type?: 'text' | 'textarea'
-  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-} | {
-  type?: 'number'
-  onChange?: (value: number) => void
-  inputNumberProps?: InputNumberProps
 }
 
 const TextEditor: React.FC<TextEditorProps> = (props) => {
@@ -57,14 +78,18 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   const [iconSize, setIconSize] = useState(props.iconSize)
   const [md, setMd] = useState(props.md)
 
+  const inputRef = useRef<any>(null)
+
+  const { selectedEditItem } = useContext(AppContext)
+
   const { t } = useTranslation()
 
   const { resumeStyle } = useResumeStore()
 
-  // const [styles, setStyles] = useState(props.style || {})
   useEffect(() => {
     setLoaded(true)
   }, [])
+
   useEffect(() => {
     if (onChangeAll && loaded) {
       onChangeAll({
@@ -82,6 +107,31 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
       setValue(props.value)
     }
   }, [props.value])
+
+  useEffect(() => {
+    if (selectedEditItem.type === 'items') {
+      if (props.id === selectedEditItem.itemId && selectedEditItem.type === props.dataKey) {
+        inputRef.current?.focus()
+      }
+    } else if (selectedEditItem.type === props.dataKey) {
+      inputRef.current?.focus()
+    }
+  }, [selectedEditItem])
+
+  // const ifHighlight = () => {
+  //   /** avatar and name don't have id */
+  //   if (selectedEditItem.type === 'avatar' || selectedEditItem.type === 'name') {
+  //     return props.dataKey === selectedEditItem.type
+  //   }
+  //   if (selectedEditItem.type === 'items') {
+  //     if (selectedEditItem.blockType === 'info') {
+  //       return props.id === selectedEditItem.itemId
+  //     }
+  //   } else {
+  //     return props.dataKey === selectedEditItem.type
+  //   }
+  //   return false
+  // }
 
   const handleIconChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIcon(e.target.value)
@@ -113,22 +163,15 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     }
   }
 
-  const handleNumberInputChange = (v: valueType | null) => {
-    const val = v as number
-    setValue(val)
-    if (onChange) {
-      onChange(val as React.ChangeEvent<HTMLInputElement> & number)
-    }
-  }
-
   const generateInput = () => {
     if (type === 'text') {
       if (md) {
-        return <Input.TextArea id={label} value={value} onChange={handleTextInputChange} />
+        return <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} />
       }
-      return <Input id={label} value={value} onChange={handleTextInputChange} />
-    } if (type === 'number') {
-      return <InputNumber {...props.inputNumberProps} onChange={handleNumberInputChange} value={value as number} placeholder="Icon" />
+      return <Input ref={inputRef} id={label} value={value} onChange={handleTextInputChange} />
+    }
+    if (type === 'textarea') {
+      return <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} />
     }
     return null
   }
@@ -139,23 +182,31 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
         <label className="text-gray-400 font-semibold tracking-widest" htmlFor={label}>{label.toUpperCase()}</label>
         {labelRightEl || null}
       </div>
+
       <div className="flex items-center justify-between mt-2">
+        {/* S Input */}
+        {generateInput()}
+        {/* E Input */}
+
+        {/* S More Button */}
         {
-          generateInput()
+          !hideMore
+            ? (
+              <HoverChangeColor>
+                <Icon
+                  fontSize={20}
+                  icon="mingcute:more-3-line"
+                  className="ml-4 cursor-pointer"
+                  onClick={() => setShowMore(!showMore)}
+                />
+              </HoverChangeColor>
+            )
+            : null
         }
-        {!hideMore
-          ? (
-            <HoverChangeColor>
-              <Icon
-                fontSize={20}
-                icon="mingcute:more-3-line"
-                className="ml-4 cursor-pointer"
-                onClick={() => setShowMore(!showMore)}
-              />
-            </HoverChangeColor>
-          )
-          : null}
+        {/* E More Button */}
       </div>
+
+      {/* S More Section */}
       {
         showMore && !hideMore
           ? (
@@ -204,6 +255,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
           )
           : null
       }
+      {/* E More Section */}
       <div>
         {children}
       </div>
@@ -213,6 +265,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
 
 TextEditor.defaultProps = {
   type: 'text',
+  dataKey: 'items',
 }
 
 export default TextEditor

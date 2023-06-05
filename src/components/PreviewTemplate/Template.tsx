@@ -4,7 +4,7 @@ import BlockTemplate0 from './BlockTemplate-0'
 import InfoTemplate0 from './InfoTemplate-0'
 
 import type {
-  IResumeBlock, IResumeBlockData, IResumeInfoData, TemplateType,
+  IResumeBlock, IResumeBlockSetting, IResumeInfoSetting, TemplateType,
 } from '@/store/resume'
 
 export type DisplayTemplateProps = IResumeBlock
@@ -14,11 +14,11 @@ const PreviewTemplate: React.FC<DisplayTemplateProps> = (props) => {
   const { type, template } = props
 
   const blockTemplateMap: TemplateMap = {
-    0: <BlockTemplate0 {...(props.data as IResumeBlockData)} />,
+    0: <BlockTemplate0 {...(props as IResumeBlockSetting)} />,
   }
 
   const InfoTemplateMap: TemplateMap = {
-    0: <InfoTemplate0 {...(props.data as IResumeInfoData)} />,
+    0: <InfoTemplate0 {...(props as IResumeInfoSetting)} />,
   }
 
   return (

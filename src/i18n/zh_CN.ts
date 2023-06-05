@@ -3,6 +3,7 @@ export default {
     /** S preview button content */
     edit: '编辑',
     share: '分享',
+    save: '保存',
     export: '导出',
     editContent: '编辑内容',
     editStyle: '编辑样式',
@@ -10,7 +11,8 @@ export default {
     importTemplate: '导入模板',
     resetTemplate: '重置模板',
     exportPicturePDF: '导出图片PDF(不推荐)',
-    exportPDF: '导出PDF',
+    exportPDF: '导出PDF 👍',
+    plsChooseTemp: '请选择一个模板',
     /** E preview button content */
 
     addBlock: '添加块',
@@ -69,5 +71,7 @@ export default {
 
     footerTip: '所有数据自动保存在本地（无痕模式下不生效）',
     headerTip: '希望这个小项目对你有所帮助👏',
+
+    dataInvalidTip: '数据未通过校验，重置数据...',
   },
 }

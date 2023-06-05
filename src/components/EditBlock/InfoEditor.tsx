@@ -60,25 +60,29 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
       {/* S Name Edit Section */}
       <TextEditor
         type="text"
-        label="Name"
+        dataKey="name"
+        label={t('name')}
         onChange={(e) => setResumeInfoData({
           ...resume.data,
           name: e.target.value,
         })}
         value={resume.data.name}
+        block={resume}
       />
       {/* E Name Edit Section */}
 
       {/* S Avatar Edit Section */}
       <div className="avatar-url-container">
         <TextEditor
-          label="Avatar"
+          label={t('avatar')}
+          dataKey="avatar"
           onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setResumeInfoData({
             ...resume.data,
             avatar: e.target.value,
           })}
           value={resume.data.avatar}
           hideMore
+          block={resume}
         >
           <div className="mt-4">
             <Button onClick={() => avatarInputEl.current?.click()}>Upload</Button>
@@ -100,12 +104,14 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
         resume.data.items.map((item, ii) => (
           <div key={`item-${ii}`}>
             <TextEditor
+              dataKey="items"
               key={`Title-${ii}`}
-              label="Desc"
+              label={t('desc')}
               onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleItemChange('value', ii, e.target.value)}
               onIconChange={(icon) => handleItemChange('icon', ii, icon)}
               onIconColorChange={(color) => handleItemChange('iconColor', ii, color)}
               {...item}
+              block={resume}
             >
               <Button danger className="mt-4" onClick={() => deleteResumeInfoItem(ii)}>
                 <Icon icon="fluent:delete-28-regular" width={20} />

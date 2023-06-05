@@ -19,7 +19,7 @@ export interface IResumeBlockItem {
 }
 
 export interface IResumeBlockData {
-  title: TextProps & {
+  blockTitle: TextProps & {
     value: string
   }
   items: IResumeBlockItem[]
@@ -28,10 +28,9 @@ export interface IResumeBlockData {
 export type IResumeInfoItem = (TextProps & { id: string })
 
 export interface IResumeInfoData {
-  title: { value: string }
+  blockTitle: { value: string }
   name: string
   avatar: string
-  column: number
   items: IResumeInfoItem[]
 }
 
@@ -296,7 +295,7 @@ export const useResumeStore = create<IResumeState>()(
           id,
           template,
           data: {
-            title: {
+            blockTitle: {
               value: `Item-${id}`,
             },
             items: [

@@ -1,7 +1,5 @@
 # Simple Resume
-<p align="center">
-  <a href="https://github.com/evankwolf/simple-resume/blob/main/README.en.md"><img src="https://img.shields.io/badge/lang-en-green.svg" /></a>
-</p>
+<a href="https://github.com/evankwolf/simple-resume/blob/main/README.en.md"><img src="https://img.shields.io/badge/lang-en-green.svg" /></a>
 
 ## 项目介绍
 一个简单的纯前端简历生成器，不会搜集你的任何数据，也没有任何后端请求。所以改动均保存在 `localStorage` 。可以在下面的网址体验

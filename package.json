@@ -1,6 +1,6 @@
 {
-  "name": "react-st",
-  "description": "My personal starter template for react-typescript",
+  "name": "simple-resume",
+  "description": "A pure front-end resume generator.",
   "private": true,
   "version": "0.0.0",
   "type": "module",

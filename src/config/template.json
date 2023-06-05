@@ -6,7 +6,7 @@
         "id": "30769056",
         "template": 0,
         "data": {
-          "title": {
+          "blockTitle": {
             "value": "Personal Info"
           },
           "name": "EvanLiu",
@@ -42,7 +42,7 @@
         "id": "16037268",
         "template": 0,
         "data": {
-          "title": {
+          "blockTitle": {
             "value": "皮一下经历"
           },
           "items": [
@@ -80,7 +80,7 @@
         "id": "56085698",
         "template": 0,
         "data": {
-          "title": {
+          "blockTitle": {
             "value": "教育经历"
           },
           "items": [
@@ -121,7 +121,7 @@
         "id": "44414245",
         "template": 0,
         "data": {
-          "title": {
+          "blockTitle": {
             "value": "项目经历"
           },
           "items": [
@@ -191,7 +191,7 @@
         "id": "47036135",
         "template": 0,
         "data": {
-          "title": {
+          "blockTitle": {
             "value": "能力证明"
           },
           "items": [
@@ -213,7 +213,7 @@
                 "md": false
               },
               "description": {
-                "value": "CET-556",
+                "value": "CET6-777",
                 "icon": "ph:exam-light",
                 "md": false,
                 "iconSize": "lg"

@@ -32,14 +32,14 @@ const Header: React.FC = () => {
           )
           : (
             <div
-              className="relative flex justify-between p-2 mb-8 text-xs h-4 py-3"
+              className="fixed top-0 left-0 right-0 z-30 flex justify-between p-2 mb-8 text-xs h-4 py-3 bg-white"
               style={{
                 boxShadow: `0 0 2px ${resumeStyle.themeColor.value}`,
               }}
             >
               <div />
               <span className="absolute left-1/2 translate-x--1/2 text-md">{t('headerTip')}</span>
-              <div className="flex">
+              <div className="flex items-center">
                 <EditDropdown />
                 <OptDropdown className="ml-4" />
                 <ExportDropdown className="ml-4" />

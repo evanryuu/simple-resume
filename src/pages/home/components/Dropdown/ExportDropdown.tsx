@@ -35,7 +35,7 @@ const ExportDropdown: React.FC<DropdownProps> = (props) => {
       label: (
         <div
           role="presentation"
-          className="font-semibold"
+          className="font-semibold flex items-center"
           style={{
             color: resumeStyle.themeColor.value,
           }}
@@ -48,6 +48,7 @@ const ExportDropdown: React.FC<DropdownProps> = (props) => {
       key: '2',
       label: (
         <div
+          className="text-bluegray"
           role="presentation"
           onClick={exportPicPdf}
         >{t('exportPicturePDF')}

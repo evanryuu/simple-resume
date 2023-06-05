@@ -3,6 +3,7 @@ export default {
     /** S preview button content */
     edit: 'Edit',
     share: 'Share',
+    save: 'Save',
     export: 'Export',
     editContent: 'Edit Content',
     editStyle: 'Edit Style',
@@ -10,7 +11,8 @@ export default {
     importTemplate: 'Import Template',
     resetTemplate: 'Reset Template',
     exportPicturePDF: 'Export Picture PDF (Not Recommended)',
-    exportPDF: 'Export PDF',
+    exportPDF: 'Export PDF 👍',
+    plsChooseTemp: 'Please choose a template',
     /** E preview button content */
 
     addBlock: 'Add Block',
@@ -68,5 +70,7 @@ export default {
 
     footerTip: 'All data will be stored locally (except for Incognito mode)',
     headerTip: 'Hope this can be of some help for you 👏',
+
+    dataInvalidTip: 'Data is not valid. Reset Resume...',
   },
 }
