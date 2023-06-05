@@ -1,3 +1,4 @@
+@import url('./global.css');
 @import url('./override.css');
 
 @import url('../components/PreviewTemplate/style.css');
@@ -71,6 +72,16 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+code {
+  padding: 2px 4px;
+  background-color: #ffffff;
+  border-color: #f0ecec;
+  border-width: 1px;
+  border-radius: 4px;
+  border-style: solid;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.02);
 }
 
 @media (prefers-color-scheme: light) {

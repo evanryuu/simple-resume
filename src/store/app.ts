@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+import constant from '@/config/constant'
+
 export type LangType = 'en_US' | 'zh_CN'
 
 interface IAppState {
@@ -39,7 +41,7 @@ export const useAppStore = create<IAppState>()(
       setShowEditStyle: (showEditStyle: boolean) => set(() => ({ showEditStyle })),
     }),
     {
-      name: 'app_settings',
+      name: constant.APP_SETTING,
     },
   ),
 )

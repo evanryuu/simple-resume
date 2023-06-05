@@ -1,7 +1,7 @@
 import BlocksContainer from './components/EditBlock/EditorContainer'
 import EditDrawer from './editContentDrawer'
 import EditStyleDrawer from './editStyleDrawer'
-import Preview from './preview'
+import Preview from './pages/home/preview'
 import { useAppStore } from './store'
 
 import './App.css'

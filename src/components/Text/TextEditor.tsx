@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 
 import { Icon } from '@iconify/react'
 import {
-  ColorPicker, Input, InputNumber, Switch,
+  ColorPicker, Input, InputNumber, Select, Switch,
 } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { useResumeStore } from '@/store'
 
-import type { Color, TextProps } from '@/types'
+import type { Color, IconSize, TextProps } from '@/types'
 import type { InputNumberProps } from 'antd'
 import type { Color as AntColor } from 'antd/es/color-picker'
 import type { valueType } from 'antd/es/statistic/utils'
@@ -23,6 +23,7 @@ export type TextEditorProps = TextProps & DifferentInput & {
   onChangeAll?: (data: TextProps) => void
   onIconColorChange?: (value: Color) => void
   onIconChange?: (value: string) => void
+  onIconSizeChange?: (value: IconSize) => void
 }
 
 type DifferentInput = {
@@ -43,6 +44,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     type,
     onIconChange,
     onIconColorChange,
+    onIconSizeChange,
     labelRightEl,
     onChangeAll,
   } = props
@@ -52,6 +54,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   const [showMore, setShowMore] = useState(false)
   const [icon, setIcon] = useState(props.icon || '')
   const [iconColor, setIconColor] = useState(props.iconColor)
+  const [iconSize, setIconSize] = useState(props.iconSize)
   const [md, setMd] = useState(props.md)
 
   const { t } = useTranslation()
@@ -69,9 +72,10 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
         icon: icon || '',
         iconColor,
         md: md ?? false,
+        iconSize: iconSize || 'md',
       })
     }
-  }, [value, icon, iconColor, md])
+  }, [value, icon, iconColor, md, iconSize])
 
   useEffect(() => {
     if (props.value !== value) {
@@ -90,6 +94,15 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     setIconColor(color as Color)
     if (onIconColorChange) {
       onIconColorChange(color as Color)
+    }
+  }
+
+  const iconSizeOptions = ['xs', 'sm', 'md', 'lg', 'xl'].map((v) => ({ label: v, value: v }))
+
+  const handleIconSizeChange = (size: IconSize) => {
+    setIconSize(size)
+    if (onIconSizeChange) {
+      onIconSizeChange(size)
     }
   }
 
@@ -146,35 +159,36 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
       {
         showMore && !hideMore
           ? (
-            <div className="flex items-center flex-col mt-2">
-              <div className="flex item-center">
-                <span>
-                  <Input value={icon} onChange={handleIconChange} placeholder="Icon" />
-                </span>
-                <span className="ml-2">
-                  <ColorPicker
-                    presets={[
-                      {
-                        label: 'theme',
-                        colors: [resumeStyle.themeColor.value],
-                      },
-                    ]}
-                    value={iconColor}
-                    onChange={handleIconColorChange}
-                  />
-                </span>
-                <a
-                  style={{
-                    color: resumeStyle.themeColor.value,
-                  }}
-                  className="flex items-center flex-shrink-0 ml-2"
-                  href="https://icon-sets.iconify.design/"
-                  target="_blank"
-                  rel="noreferrer"
-                >{t('moreIcon')}
-                </a>
+            <div className="flex items-start flex-col mt-2">
+              <div className="flex items-center">
+                <span className="flex-shrink-0">{t('icon')}</span>
+                <Input className="ml-2" value={icon} onChange={handleIconChange} placeholder="Icon" />
               </div>
-              <div className="mt-2 flex w-full items-center">
+              <div className="mt-2 flex items-center">
+                <span>{t('iconColor')}</span>
+                <ColorPicker
+                  className="ml-2"
+                  presets={[
+                    {
+                      label: 'theme',
+                      colors: [resumeStyle.themeColor.value],
+                    },
+                  ]}
+                  value={iconColor}
+                  onChange={handleIconColorChange}
+                />
+              </div>
+              <div className="mt-2 flex items-center">
+                <span>{t('iconSize')}</span>
+                <Select
+                  className="ml-2"
+                  defaultValue="md"
+                  options={iconSizeOptions}
+                  value={iconSize}
+                  onSelect={(size) => handleIconSizeChange(size as IconSize)}
+                />
+              </div>
+              <div className="mt-2 flex w-full justify-between">
                 <span>Markdown </span>
                 <Switch
                   className="ml2"

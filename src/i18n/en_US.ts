@@ -1,11 +1,14 @@
 export default {
   translation: {
     /** S preview button content */
+    edit: 'Edit',
+    share: 'Share',
+    export: 'Export',
     editContent: 'Edit Content',
     editStyle: 'Edit Style',
-    exportConfig: 'Export Config',
-    importConfig: 'Import Config',
-    resetConfig: 'Reset Config',
+    exportTemplate: 'Export Template',
+    importTemplate: 'Import Template',
+    resetTemplate: 'Reset Template',
     exportPicturePDF: 'Export Picture PDF (Not Recommended)',
     exportPDF: 'Export PDF',
     /** E preview button content */
@@ -21,6 +24,11 @@ export default {
     description: 'Description',
     detail: 'Detail',
     moreIcon: 'More Icon',
+    icon: 'icon',
+    iconColor: 'Icon Color',
+    iconSize: 'Icon Size',
+    noMoreUp: 'Oops, stay where you are',
+    noMoreBottom: 'That\'s my bottom line!',
 
     /** S resume style */
     themeColor: 'Theme Color',
@@ -58,7 +66,7 @@ export default {
     preview: 'Preview',
     personalInfo: 'Personal Info',
 
-    footerTip: 'Hope this can be of some help for you. 😋',
-    headerTip: 'Simple Resume',
+    footerTip: 'All data will be stored locally (except for Incognito mode)',
+    headerTip: 'Hope this can be of some help for you. 👏',
   },
 }

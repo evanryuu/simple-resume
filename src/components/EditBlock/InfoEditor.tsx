@@ -48,7 +48,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
         ...resume.data,
         avatar: e.target!.result as string,
       })
-      message.success('上传成功！')
+      message.success(t('success'))
     }
 
     // 读取文件数据

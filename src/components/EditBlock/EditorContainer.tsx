@@ -13,7 +13,7 @@ const BlocksContainer: React.FC = () => {
 
   return (
     <div>
-      <Collapse>
+      <Collapse ghost>
         {
           resumeData.length >= 0 && resumeData.map((resume, i) => (
             <Collapse.Panel header={<BlockHeader {...resume} />} key={String(i)}>

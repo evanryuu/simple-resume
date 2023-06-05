@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware'
 
 import constant from '@/config/constant'
 import TemplateData from '@/config/template.json'
+import i18nInstance from '@/i18n'
 import { generateRandomId, initTemplateData } from '@/utils'
 
 import type { BaseInputType, Color, TextProps } from '@/types'
@@ -189,10 +190,10 @@ export const useResumeStore = create<IResumeState>()(
          * this might change in the future thought (lol)
          */
         if (newIndex <= 0) {
-          message.info('Oops, 不能再往前了朋友')
+          message.info(i18nInstance.t('noMoreUp'))
           return { ...state }
         } if (newIndex >= resumeData.length) {
-          message.info('真的下不去了')
+          message.info(i18nInstance.t('noMoreBottom'))
           return { ...state }
         }
         const el = resumeData.splice(targetIndex, 1)[0]
@@ -242,8 +243,6 @@ export const useResumeStore = create<IResumeState>()(
         const targetIndex = block.data.items.findIndex((i) => i.id === itemId)!
 
         if (targetIndex !== -1) {
-          console.log('updata', targetIndex, block.data.items[targetIndex], item)
-
           if (item === undefined) {
             block.data.items.splice(targetIndex, 1)
           } else {
@@ -269,7 +268,7 @@ export const useResumeStore = create<IResumeState>()(
           targetBlock.data.items.push({
             id,
             title: {
-              value: `Jingli-${id}`,
+              value: `Experience-${id}`,
             },
             subtitle: {
               value: `SubTitle-${id}`,
@@ -304,7 +303,7 @@ export const useResumeStore = create<IResumeState>()(
               {
                 id: generateRandomId(10),
                 title: {
-                  value: `Jingli-${id}`,
+                  value: `Experience-${id}`,
                 },
                 subtitle: {
                   value: `SubTitle-${id}`,

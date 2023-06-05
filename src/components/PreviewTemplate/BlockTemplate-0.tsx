@@ -38,39 +38,48 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
           <div className="specific-container" key={i}>
             <div className="flex items-center justify-between">
               <div className="specific-title flex items-center">
-                <Text
+                {
+                  item.title && item.title.value
+                  && <Text
+                    style={{
+                      fontSize: resumeStyle.titleSize.value,
+                    }}
+                    classes="text-md font-bold"
+                    {...item.title}
+                  />
+                }
+                {
+                  item.subtitle && item.subtitle.value
+                  && <Text
+                    classes="ml-2 text-xs inline-block"
+                    style={{
+                      fontSize: resumeStyle.subtitleSize.value,
+                      color: resumeStyle.subtitleColor.value,
+                      padding: '0px 4px',
+                      borderRadius: 2,
+                      backgroundColor: resumeStyle.subtitleBackgroundColor.value,
+                    }}
+                    {...item.subtitle}
+                  />
+                }
+              </div>
+              {
+                item.note && item.note.value
+                && <Text
                   style={{
-                    fontSize: resumeStyle.titleSize.value,
-                  }}
-                  classes="text-md font-bold"
-                  {...item.title}
-                />
-                <Text
-                  classes="ml-2 text-xs inline-block"
-                  style={{
-                    fontSize: resumeStyle.subtitleSize.value,
-                    color: resumeStyle.subtitleColor.value,
+                    fontSize: resumeStyle.noteSize.value,
+                    color: resumeStyle.noteColor.value,
                     padding: '0px 4px',
                     borderRadius: 2,
-                    backgroundColor: resumeStyle.subtitleBackgroundColor.value,
+                    backgroundColor: resumeStyle.noteBackgroundColor.value,
                   }}
-                  {...item.subtitle!}
+                  classes="specific-title-note text-sm inline-block"
+                  {...item.note}
                 />
-              </div>
-              {item.note && <Text
-                style={{
-                  fontSize: resumeStyle.noteSize.value,
-                  color: resumeStyle.noteColor.value,
-                  padding: '0px 4px',
-                  borderRadius: 2,
-                  backgroundColor: resumeStyle.noteBackgroundColor.value,
-                }}
-                classes="specific-title-note text-sm inline-block"
-                {...item.note}
-              />}
+              }
             </div>
-            {item.description && <Text classes="text-sm" {...item.description} />}
-            {item.detail && <Text {...item.detail} />}
+            {item.description && item.description.value && <Text classes="text-sm" {...item.description} />}
+            {item.detail && item.detail.value && <Text {...item.detail} />}
           </div>
         ))
       }

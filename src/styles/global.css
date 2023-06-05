@@ -1,0 +1,4 @@
+.editable:hover {
+  border: 1px solid dashed;
+  cursor: pointer;
+}

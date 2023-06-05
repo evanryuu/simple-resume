@@ -6,11 +6,16 @@ type HEX = `#${string}`;
 
 export type Color = RGB | RGBA | HEX;
 
+export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+
+export type IconSize = TextSize
+
 export interface TextProps {
   value: string | number
   color?: string
   icon?: string
   iconColor?: Color
+  iconSize?: IconSize
   style?: React.CSSProperties
   /** className not working, change to classes */
   classes?: string
@@ -21,3 +26,9 @@ export interface TextProps {
 }
 
 export type BaseInputType = 'color' | 'string' | 'number' | 'textarea' | 'boolean' | 'switch' | 'slider' | 'select'
+
+export interface BaseComponentProps {
+  className?: string
+  style?: React.CSSProperties
+  children?: React.ReactNode
+}

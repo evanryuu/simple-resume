@@ -1,11 +1,14 @@
 export default {
   translation: {
     /** S preview button content */
+    edit: '编辑',
+    share: '分享',
+    export: '导出',
     editContent: '编辑内容',
     editStyle: '编辑样式',
-    exportConfig: '导出配置',
-    importConfig: '导入配置',
-    resetConfig: '重置配置',
+    exportTemplate: '导出模板',
+    importTemplate: '导入模板',
+    resetTemplate: '重置模板',
     exportPicturePDF: '导出图片PDF(不推荐)',
     exportPDF: '导出PDF',
     /** E preview button content */
@@ -20,7 +23,12 @@ export default {
     note: '备注',
     description: '描述',
     detail: '详细内容',
-    moreIcon: '更多Icon',
+    moreIcon: '更多图标',
+    icon: '图标',
+    iconColor: '图标颜色',
+    iconSize: '图标大小',
+    noMoreUp: 'Oops, 上不去了朋友',
+    noMoreBottom: '我是真的有底线的！',
 
     /** S resume style */
     themeColor: '主题色',
@@ -59,7 +67,7 @@ export default {
     preview: '预览',
     personalInfo: '个人信息',
 
-    footerTip: '希望这个小项目对你有所帮助😋',
-    headerTip: 'Simple Resume',
+    footerTip: '所有数据自动保存在本地（无痕模式下不生效）',
+    headerTip: '希望这个小项目对你有所帮助👏',
   },
 }

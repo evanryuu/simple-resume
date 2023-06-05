@@ -8,10 +8,13 @@ import type { TextProps } from '@/types'
 
 const Text: React.FC<TextProps> = (props) => {
   const {
-    value, style, icon, iconColor, classes, md,
+    value, style, icon, iconColor, classes, md, iconSize,
   } = props
 
   const cname = classNames('text-left', classes)
+  const iconClass = classNames('mr-1 flex-shrink-0', {
+    [`text-${iconSize}`]: iconSize,
+  })
 
   return (
     <div className={cname}>
@@ -23,10 +26,10 @@ const Text: React.FC<TextProps> = (props) => {
             </div>
           )
           : (
-            <>
-              {icon ? <Icon className="mr-1 flex-shrink-0" icon={icon} color={iconColor} /> : null}
+            <div className="flex items-center">
+              {icon ? <Icon className={iconClass} icon={icon} color={iconColor} /> : null}
               <span style={style}>{value}</span>
-            </>
+            </div>
           )
 
       }
