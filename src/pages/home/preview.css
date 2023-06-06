@@ -1,7 +1,7 @@
-.preview-container {
-  width: 80%;
+#preview-target {
   max-width: 794px;
-  margin: 0px auto;
+  /* margin: 0 auto; */
+  background-color: white;
 }
 
 html:hover .preview-toggler {

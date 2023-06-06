@@ -23,7 +23,7 @@ const Header: React.FC = () => {
         previewMode
           ? (
             <div
-              className="preview-toggler fixed right-4 top-4 cursor-pointer opacity-0"
+              className="preview-toggler fixed right-4 top-4 cursor-pointer opacity-0 z-30"
               role="presentation"
               onClick={() => setPreviewMode(false)}
             >
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
           )
           : (
             <div
-              className="fixed top-0 left-0 right-0 z-30 flex justify-between p-2 mb-8 text-xs h-4 py-3 bg-white"
+              className="fixed top-0 left-0 right-0 z-30 flex justify-between p-2 text-xs h-4 py-3 bg-white"
               style={{
                 boxShadow: `0 0 2px ${resumeStyle.themeColor.value}`,
               }}

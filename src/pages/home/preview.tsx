@@ -1,15 +1,18 @@
-import React, { createContext, useMemo, useRef } from 'react'
+import React, {
+  createContext, useMemo, useRef,
+} from 'react'
 
+import DraggableResizableBackground from '@/components/DraggableResizableBackground'
 import { usePrint } from '@/hooks'
 import { useAppStore } from '@/store'
 
 import Footer from './components/Footer'
 import Header from './components/Header'
 
-import type { BaseComponentProps } from '@/types'
-
 import PreviewTemplate from '../../components/PreviewTemplate/Template'
 import { useResumeStore } from '../../store/resume'
+
+import './preview.css'
 
 export interface IPreviewContext {
   previewRef: React.RefObject<any>
@@ -17,12 +20,6 @@ export interface IPreviewContext {
 }
 
 export const PreviewContext = createContext<IPreviewContext>({} as IPreviewContext)
-
-const ComponentToPrint: React.FC<BaseComponentProps> = React.forwardRef((props, ref: any) => (
-  <div ref={ref}>
-    {props.children}
-  </div>
-))
 
 const Preview = () => {
   const { previewMode } = useAppStore()
@@ -32,6 +29,7 @@ const Preview = () => {
   } = useResumeStore()
 
   const previewEl = useRef<HTMLDivElement>(null)
+  const previewParent = useRef<HTMLDivElement>(null)
 
   const { print } = usePrint(previewEl)
 
@@ -45,17 +43,20 @@ const Preview = () => {
       <Header />
 
       {/* S Preview */}
-      <div className="preview-container relative mb-16">
+      <DraggableResizableBackground gridBackground>
         <div
-          style={{
-            marginTop: previewMode ? 0 : 72,
-            padding: resumeStyle.pagePadding.value,
-            boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
-            marginBottom: previewMode ? 0 : 20,
-          }}
+          ref={previewParent}
+          className="preview-container h-full flex justify-center items-center relative mb-16 pt-8 cursor-grab"
         >
-          <ComponentToPrint>
-            <div id="print-target" ref={previewEl}>
+          {/* <Draggable> */}
+          <div
+            id="preview-target"
+            style={{
+              padding: resumeStyle.pagePadding.value,
+              boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
+            }}
+          >
+            <div ref={previewEl} className="bg-white">
               {
                 resumeData.map((resume, i) => (
                   <PreviewTemplate
@@ -65,9 +66,10 @@ const Preview = () => {
                 ))
               }
             </div>
-          </ComponentToPrint>
+
+          </div>
         </div>
-      </div>
+      </DraggableResizableBackground>
       {/* E Preview */}
 
       <Footer />

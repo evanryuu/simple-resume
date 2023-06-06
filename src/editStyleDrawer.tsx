@@ -50,6 +50,7 @@ const EditStyleDrawer: React.FC<EditDrawerProps> = (props) => {
     >
       {
         Object.keys(resumeStyle)
+          .filter((key) => key !== 'pagePadding')
           .map((key) => (
             <BaseInput
               key={key}

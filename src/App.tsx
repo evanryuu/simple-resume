@@ -13,8 +13,6 @@ import type {
   IResumeInfoSetting, IResumeBlockItem, IResumeBlockData, IResumeInfoData,
 } from './store'
 
-import './App.css'
-
 export type SelectedEditItemData = {
   type: Omit<keyof IResumeBlockData | keyof IResumeBlockItem, 'id'>
   blockType: 'block'
@@ -32,12 +30,15 @@ export type SelectedEditItemData = {
 export interface IAppContext {
   selectedEditItem: SelectedEditItemData
   setSelectedEditItem: React.Dispatch<SetStateAction<SelectedEditItemData>>
+  previewScale: number
+  setPreviewScale: (number: number) => void
 }
 
 export const AppContext = createContext<IAppContext>({} as IAppContext)
 
 function App() {
   const [selectedEditItem, setSelectedEditItem] = useState<SelectedEditItemData>({} as SelectedEditItemData)
+  const [previewScale, setPreviewScale] = useState(1)
 
   const {
     showEdit, setShowEdit, showEditStyle, setShowEditStyle,
@@ -47,7 +48,9 @@ function App() {
   const ctxValue = useMemo(() => ({
     selectedEditItem,
     setSelectedEditItem,
-  }), [selectedEditItem])
+    previewScale,
+    setPreviewScale,
+  }), [selectedEditItem, previewScale])
 
   useEffect(() => {
     document.title = `${(resumeData.find((r) => r.type === 'info') as IResumeInfoSetting).data.name}'s Resume`
