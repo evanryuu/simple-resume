@@ -28,6 +28,9 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
   const genParam = (type: Omit<keyof IResumeBlockItem, 'id'>, itemId?: string): SelectedEditItemData => {
     const idArr = [blockId]
     if (itemId) idArr.push(itemId)
+    if (type === 'blockTitle') {
+      idArr.length = 0
+    }
     console.log(idArr)
     return {
       blockType: 'block',

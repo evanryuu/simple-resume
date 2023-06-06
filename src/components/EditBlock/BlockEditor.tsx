@@ -63,7 +63,6 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
   }
 
   const handlePanelChange = (ids: string[]) => {
-    console.log(ids)
     if (!showEdit) {
       setShowEdit(true)
     }

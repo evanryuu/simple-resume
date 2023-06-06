@@ -1,4 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, {
+  useContext, useLayoutEffect, useRef, useState,
+} from 'react'
 
 import { Icon } from '@iconify/react'
 import { Input, Modal, Tag } from 'antd'
@@ -22,7 +24,14 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   const [showBlockNameInput, setShowBlockNameInput] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
+  const blockTitleInputRef = useRef<any>(null)
+
   const { deleteResumeBlock, updateResumeBlockData, moveResumeBlock } = useResumeStore()
+
+  const handleInputFinished = () => {
+    setShowBlockNameInput(false)
+    setSelectedEditItem({} as SelectedEditItemData)
+  }
 
   const handleBlockNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateResumeBlockData(props.id, {
@@ -56,6 +65,10 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
 
   const selectingBlockTitle = selectedEditItem.blockId === props.id && selectedEditItem.type === 'blockTitle'
 
+  useLayoutEffect(() => {
+    setTimeout(blockTitleInputRef.current?.focus, 0)
+  }, [selectingBlockTitle])
+
   return (
     <>
       <div
@@ -65,8 +78,9 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
         {
           (showBlockNameInput && props.type === 'block') || selectingBlockTitle
             ? <Input
-              onBlur={() => setShowBlockNameInput(false)}
-              onPressEnter={() => setShowBlockNameInput(false)}
+              ref={blockTitleInputRef}
+              onBlur={handleInputFinished}
+              onPressEnter={handleInputFinished}
               onClick={(e) => e.stopPropagation()}
               value={data.blockTitle.value}
               onChange={handleBlockNameChange}

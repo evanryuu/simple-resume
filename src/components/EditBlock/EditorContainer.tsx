@@ -16,7 +16,6 @@ const BlocksContainer: React.FC = () => {
   const appContext = useContext(AppContext)
 
   const handleChange = (keys: string[]) => {
-    console.log(keys)
     if (!showEdit) {
       setShowEdit(true)
     }

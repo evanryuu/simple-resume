@@ -111,10 +111,10 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   useEffect(() => {
     if (selectedEditItem.type === 'items') {
       if (props.id === selectedEditItem.itemId && selectedEditItem.type === props.dataKey) {
-        inputRef.current?.focus()
+        setTimeout(inputRef.current?.focus, 0)
       }
     } else if (selectedEditItem.type === props.dataKey) {
-      inputRef.current?.focus()
+      setTimeout(inputRef.current?.focus, 0)
     }
   }, [selectedEditItem])
 
