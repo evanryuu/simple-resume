@@ -8,10 +8,10 @@ import { useTranslation } from 'react-i18next'
 
 import { useResumeStore } from '@/store/resume'
 
+import TextEditor from './TextEditor'
+
 import type { IResumeInfoSetting, IResumeInfoItem } from '@/store/resume'
 import type { TextProps } from '@/types'
-
-import TextEditor from '../Text/TextEditor'
 
 export interface InfoEditorProps extends IResumeInfoSetting { }
 

@@ -4,6 +4,9 @@ export default {
     edit: 'Edit',
     share: 'Share',
     save: 'Save',
+    saveResume: 'Save Resume',
+    importResume: 'Import Resume',
+    resetResume: 'Reset Resume',
     export: 'Export',
     editContent: 'Edit Content',
     editStyle: 'Edit Style',
@@ -51,7 +54,7 @@ export default {
     noteBackgroundColor: 'Note Background Color',
     /** E resume style */
 
-    /**  */
+    /** tip */
     warning: 'Warning',
     deleteBlockTip: 'Are you sure you want to delete this block? It is not undoable.',
     deleteItemTip: 'Are you sure you want to delete this item? It is not undoable.',
@@ -71,6 +74,6 @@ export default {
     footerTip: 'All data will be stored locally (except for Incognito mode)',
     headerTip: 'Hope this can be of some help for you 👏',
 
-    dataInvalidTip: 'Data is not valid. Reset Resume...',
+    dataInvalidTip: 'Seems like data is not valid. Resume has been reset. Please refresh this page 🧐',
   },
 }

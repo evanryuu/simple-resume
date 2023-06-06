@@ -8,10 +8,10 @@ import { AppContext } from '@/App'
 import { useAppStore } from '@/store'
 import { useResumeStore } from '@/store/resume'
 
+import TextEditor from './TextEditor'
+
 import type { IResumeBlockSetting, IResumeBlockItem } from '@/store/resume'
 import type { TextProps } from '@/types'
-
-import TextEditor from '../Text/TextEditor'
 
 export interface BlockEditorProps extends IResumeBlockSetting { }
 
@@ -89,12 +89,14 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
                 <TextEditor
                   dataKey="title"
                   id={item.id}
+                  block={resume}
                   label={t('title')}
                   onChangeAll={(e: any) => updateItem(e, 'title', item)}
                   {...item.title}
                 />
                 <TextEditor
                   dataKey="subtitle"
+                  block={resume}
                   id={item.id}
                   label={t('subtitle')}
                   onChangeAll={(e: any) => updateItem(e, 'subtitle', item)}
@@ -102,6 +104,7 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
                 />
                 {item.note && <TextEditor
                   dataKey="note"
+                  block={resume}
                   id={item.id}
                   label={t('note')}
                   onChangeAll={(e: any) => updateItem(e, 'note', item)}
@@ -110,6 +113,7 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
                 {item.description && <TextEditor
                   type="textarea"
                   dataKey="description"
+                  block={resume}
                   id={item.id}
                   label={t('description')}
                   onChangeAll={(e: any) => updateItem(e, 'description', item)}
@@ -118,6 +122,7 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
                 {item.detail && <TextEditor
                   type="textarea"
                   dataKey="detail"
+                  block={resume}
                   id={item.id}
                   label={t('detail')}
                   onChangeAll={(e: any) => updateItem(e, 'detail', item)}

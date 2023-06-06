@@ -4,6 +4,9 @@ export default {
     edit: '编辑',
     share: '分享',
     save: '保存',
+    saveResume: '保存简历',
+    importResume: '导入简历',
+    resetResume: '重置简历',
     export: '导出',
     editContent: '编辑内容',
     editStyle: '编辑样式',
@@ -51,7 +54,7 @@ export default {
     noteBackgroundColor: '备注背景颜色',
     /** E resume style */
 
-    /**  */
+    /** tip */
     warning: '警告',
     deleteBlockTip: '确定删除这个块吗？',
     deleteItemTip: '确定要删除这个项吗？',
@@ -72,6 +75,6 @@ export default {
     footerTip: '所有数据自动保存在本地（无痕模式下不生效）',
     headerTip: '希望这个小项目对你有所帮助👏',
 
-    dataInvalidTip: '数据未通过校验，重置数据...',
+    dataInvalidTip: '数据好像有点问题，已经重置了。请刷新页面 🧐',
   },
 }

@@ -22,7 +22,7 @@ export type SelectedEditItemData = {
   blockId: string
   itemId?: string
 } | {
-  type: Partial<keyof IResumeInfoData>
+  type: Omit<Partial<keyof IResumeInfoData>, 'blockTitle'>
   blockType: 'info'
   ids: string[]
   blockId: string

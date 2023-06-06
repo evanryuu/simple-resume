@@ -33,6 +33,15 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
     setSelectedEditItem({} as SelectedEditItemData)
   }
 
+  const handleInputFocus = () => {
+    setSelectedEditItem({
+      ...selectedEditItem,
+      blockType: 'block',
+      blockId: props.id,
+      type: 'blockTitle',
+    })
+  }
+
   const handleBlockNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateResumeBlockData(props.id, {
       blockTitle: {
@@ -82,6 +91,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
               onBlur={handleInputFinished}
               onPressEnter={handleInputFinished}
               onClick={(e) => e.stopPropagation()}
+              onFocus={handleInputFocus}
               value={data.blockTitle.value}
               onChange={handleBlockNameChange}
             />

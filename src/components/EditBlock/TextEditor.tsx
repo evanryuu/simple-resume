@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { AppContext } from '@/App'
 import { useResumeStore } from '@/store'
 
+import type { SelectedEditItemData } from '@/App'
 import type {
   IResumeBlockSetting, IResumeInfoSetting,
   IResumeBlockItem,
@@ -27,7 +28,7 @@ interface IdWhenNotItems {
    * used to differ `name` and `avatar` to highlight input
    *
    */
-  dataKey?: undefined | 'name' | 'avatar'
+  dataKey: 'name' | 'avatar'
   id?: undefined
 }
 
@@ -45,7 +46,7 @@ interface IdWhenItems {
 export type TextEditorProps = TextProps & (IdWhenItems | IdWhenNotItems) & {
   type?: 'text' | 'textarea'
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  block?: IResumeInfoSetting | IResumeBlockSetting
+  block: IResumeInfoSetting | IResumeBlockSetting
   label: string
   labelRightEl?: React.ReactNode
   hideMore?: boolean
@@ -80,7 +81,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
 
   const inputRef = useRef<any>(null)
 
-  const { selectedEditItem } = useContext(AppContext)
+  const { selectedEditItem, setSelectedEditItem } = useContext(AppContext)
 
   const { t } = useTranslation()
 
@@ -110,13 +111,19 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
 
   useEffect(() => {
     if (selectedEditItem.type === 'items') {
-      if (props.id === selectedEditItem.itemId && selectedEditItem.type === props.dataKey) {
+      if (props.id === selectedEditItem.itemId && selectedEditItem.type === props.dataKey && props.block.id === selectedEditItem.blockId) {
         setTimeout(inputRef.current?.focus, 0)
       }
-    } else if (selectedEditItem.type === props.dataKey) {
+      /**
+       * must judge blockId
+       *
+       *  make sure same item(title/subtitle/note/detail/description) in different blocks won't conflict
+       *
+       */
+    } else if (selectedEditItem.type === props.dataKey && props.block.id === selectedEditItem.blockId) {
       setTimeout(inputRef.current?.focus, 0)
     }
-  }, [selectedEditItem])
+  }, [selectedEditItem.type, selectedEditItem.itemId])
 
   // const ifHighlight = () => {
   //   /** avatar and name don't have id */
@@ -163,15 +170,29 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
     }
   }
 
+  const handleInputFocus = () => {
+    const item: SelectedEditItemData = {
+      ...selectedEditItem,
+      type: props.dataKey,
+      itemId: '',
+    }
+    item.itemId = props.id
+    if (props.block) {
+      item.blockId = props.block.id
+      item.blockType = props.block.type
+    }
+    setSelectedEditItem(item as SelectedEditItemData)
+  }
+
   const generateInput = () => {
     if (type === 'text') {
       if (md) {
-        return <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} />
+        return <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} onFocus={handleInputFocus} />
       }
-      return <Input ref={inputRef} id={label} value={value} onChange={handleTextInputChange} />
+      return <Input ref={inputRef} id={label} value={value} onChange={handleTextInputChange} onFocus={handleInputFocus} />
     }
     if (type === 'textarea') {
-      return <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} />
+      return <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} onFocus={handleInputFocus} />
     }
     return null
   }

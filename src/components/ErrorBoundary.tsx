@@ -2,6 +2,7 @@ import type { ErrorInfo, ReactNode } from 'react'
 import React, { Component } from 'react'
 
 import constant from '@/config/constant'
+import i18nInstance from '@/i18n'
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -29,7 +30,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       if (this.state.error?.message === 'Cannot read properties of undefined (reading \'value\')') {
         localStorage.removeItem(constant.RESUME_SETTING)
       }
-      return <div>Oops! Something went wrong. Setting has been reset. Please refresh the page.</div>
+      return <div>{i18nInstance.t('dataInvalidTip')}</div>
     }
 
     return this.props.children
