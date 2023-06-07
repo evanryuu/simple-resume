@@ -145,6 +145,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                 <div
                   role="presentation"
                   className={classNames('editable', {
+                    'whitespace-pre-wrap': !item.description.md,
                     editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'description',
                   })}
                   onClick={() => handleItemClick(genParam('description', item.id))}
@@ -157,12 +158,13 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
               && (
                 <div
                   role="presentation"
-                  className={classNames('editable', {
+                  className={classNames('editable text-md', {
+                    'whitespace-pre-wrap': !item.detail.md,
                     editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'detail',
                   })}
                   onClick={() => handleItemClick(genParam('detail', item.id))}
                 >
-                  <Text {...item.detail} />
+                  <Text classes="text-sm" {...item.detail} />
                 </div>
               )}
           </div>

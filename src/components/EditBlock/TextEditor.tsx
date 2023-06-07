@@ -241,6 +241,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
               <div className="mt-4 flex items-center justify-between w-full">
                 <span className="flex-shrink-0">{t('icon')}</span>
                 <Input className="ml-2 w-full" value={icon} onChange={handleIconChange} placeholder="Icon" />
+                <a className="flex-shrink-0 ml-2" target="_blank" href="https://icon-sets.iconify.design/" rel="noreferrer">{t('moreIcon')}</a>
               </div>
               <div className="flex items-center w-full justify-between">
                 <div className="mt-4 flex items-center">

@@ -3,6 +3,8 @@ import {
   createContext, useEffect, useMemo, useState,
 } from 'react'
 
+import { Modal } from 'antd'
+
 import BlocksContainer from './components/EditBlock/EditorContainer'
 import EditDrawer from './editContentDrawer'
 import EditStyleDrawer from './editStyleDrawer'
@@ -32,6 +34,8 @@ export interface IAppContext {
   setSelectedEditItem: React.Dispatch<SetStateAction<SelectedEditItemData>>
   previewScale: number
   setPreviewScale: (number: number) => void
+  noMoreIconGuide: boolean
+  setNoMoreIconGuide: (val: boolean) => void
 }
 
 export const AppContext = createContext<IAppContext>({} as IAppContext)
@@ -45,6 +49,7 @@ function App() {
     itemId: '',
   })
   const [previewScale, setPreviewScale] = useState(1)
+  const [noMoreIconGuide, setNoMoreIconGuide] = useState(false)
 
   const {
     showEdit, setShowEdit, showEditStyle, setShowEditStyle,
@@ -56,6 +61,8 @@ function App() {
     setSelectedEditItem,
     previewScale,
     setPreviewScale,
+    noMoreIconGuide,
+    setNoMoreIconGuide,
   }), [selectedEditItem, previewScale])
 
   useEffect(() => {
@@ -104,6 +111,7 @@ function App() {
 
   return (
     <AppContext.Provider value={ctxValue}>
+      <Modal />
       <EditDrawer
         open={showEdit}
         onClose={onEditContentDrawerClose}
