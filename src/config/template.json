@@ -177,7 +177,7 @@
                 "md": false
               },
               "detail": {
-                "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作\n\n**项目成果:**\n\n1. 减少了 `xxx` 的时间，大幅减少成本\n2. 提高了 `xxx%` 的留存率，综合提高了 `xxx%` 的收益。",
+                "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作\n\n**项目成果:**\n\n1. 减少了 `xxx` 的时间，大幅减少成本\n2. 提高了 `xxx%` 的留存率，综合提高了 `xxx%` 的收益。\n3. 还有这样那样的成果",
                 "icon": "",
                 "md": true,
                 "iconSize": "md"
@@ -231,7 +231,7 @@
     ],
     "resumeStyle": {
       "themeColor": {
-        "value": "#0d0133",
+        "value": "#3b3b3b",
         "type": "color",
         "componentProps": {}
       },
@@ -329,7 +329,7 @@
         "componentProps": {}
       },
       "subtitleBackgroundColor": {
-        "value": "#027911",
+        "value": "#6782f1",
         "type": "color",
         "componentProps": {}
       },
