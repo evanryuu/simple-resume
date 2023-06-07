@@ -57,7 +57,7 @@ Many thanks to the following open-source libraries and contributors. They have m
 
 ## Frequently Asked Questions
 ### 1. Can I copy someone else's resume?
-Yes, you can ask your friend to select `Export Configuration` locally and send you the JSON file. Then you can select `Import Configuration` to use it.
+Yes, you can ask your friend to select `Export Resume` locally and send you the JSON file. Then you can select `Import Resume` to use it.
 
 ### 2. Where can I find more icons?
 You can directly go to [Iconify Icons](https://icon-sets.iconify.design/) to search for icons, and then copy the corresponding code and use it.
@@ -85,5 +85,5 @@ pnpm build
 
 ### Deploy on your GitHub pages
 ```bash
-pnpm publish
+pnpm release
 ```

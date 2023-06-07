@@ -149,6 +149,7 @@ interface IResumeState {
   moveResumeBlock: (id: string, moveto: number) => void
 
   setResumeInfoData: (resumeInfo: IResumeInfoData) => void
+  updateResumeInfoData: (id: string, resumeInfoData: IResumeInfoData) => void
   setResumeBlockData: (id: string, blockData: IResumeBlockData) => void
   updateResumeBlockData: (id: string, blockData: Partial<IResumeBlockData>) => void
   addResumeBlockItem: (blockId: string, item?: IResumeBlockItem) => void
@@ -159,7 +160,7 @@ interface IResumeState {
   deleteResumeBlock: (id: string) => void
   updateResumeInfoItem: (itemId: string, item?: Partial<IResumeInfoItem>) => void
   addResumeInfoItem: (item: TextProps) => void
-  deleteResumeInfoItem: (index: number) => void
+  deleteResumeInfoItem: (index: string) => void
 }
 
 export const useResumeStore = create<IResumeState>()(
@@ -211,6 +212,17 @@ export const useResumeStore = create<IResumeState>()(
             template: 0,
             data: resume,
           })
+        }
+        return { ...state }
+      }),
+      updateResumeInfoData: (id, resumeInfoData) => set(() => {
+        const state = get()
+        const targetBlock = state.resumeData.find((r) => r.id === id)
+        if (targetBlock?.type === 'info') {
+          targetBlock!.data = {
+            ...targetBlock!.data,
+            ...resumeInfoData,
+          }
         }
         return { ...state }
       }),
@@ -377,12 +389,13 @@ export const useResumeStore = create<IResumeState>()(
         }
         return { ...state }
       }),
-      deleteResumeInfoItem: (index: number) => set(() => {
+      deleteResumeInfoItem: (itemId) => set(() => {
         const state = get()
 
         const info = state.resumeData.find((resume) => resume.type === 'info')!
         if (info.type === 'info') {
-          info.data.items.splice(index, 1)
+          const targetIndex = info.data.items.findIndex((i) => i.id === itemId)
+          info.data.items.splice(targetIndex, 1)
         }
         return { ...state }
       }),

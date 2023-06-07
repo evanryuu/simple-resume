@@ -7,6 +7,8 @@ export default {
     saveResume: 'Save Resume',
     importResume: 'Import Resume',
     resetResume: 'Reset Resume',
+    resetResumeTip: 'If you reset the resume, all text and formatting will be cleared and restored to the initial resume template. It is recommended to "Save Resume" first for future reference.',
+    saveResumeTip: 'This will save a JSON file. Anyone who imports it through "Import Resume" will have the same text, layout, and formatting as when you saved it.',
     export: 'Export',
     editContent: 'Edit Content',
     editStyle: 'Edit Style',

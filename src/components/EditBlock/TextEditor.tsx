@@ -39,7 +39,7 @@ interface IdWhenItems {
    * used to differ `name` and `avatar` to highlight input
    *
    */
-  dataKey: 'items' | keyof IResumeBlockItem
+  dataKey: 'items' | Omit<keyof IResumeBlockItem, 'id'>
   id: string
 }
 
@@ -81,8 +81,9 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   } = props
 
   const [loaded, setLoaded] = useState(false)
-  const [value, setValue] = useState(props.value)
   const [showMore, setShowMore] = useState(false)
+
+  const [value, setValue] = useState(props.value)
   const [icon, setIcon] = useState(props.icon || '')
   const [iconColor, setIconColor] = useState(props.iconColor)
   const [iconSize, setIconSize] = useState(props.iconSize)
@@ -237,38 +238,40 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
         showMore && !hideMore
           ? (
             <div className="flex items-start flex-col mt-2">
-              <div className="flex items-center">
+              <div className="mt-4 flex items-center justify-between w-full">
                 <span className="flex-shrink-0">{t('icon')}</span>
-                <Input className="ml-2" value={icon} onChange={handleIconChange} placeholder="Icon" />
+                <Input className="ml-2 w-full" value={icon} onChange={handleIconChange} placeholder="Icon" />
               </div>
-              <div className="mt-2 flex items-center">
-                <span>{t('iconColor')}</span>
-                <ColorPicker
-                  className="ml-2"
-                  presets={[
-                    {
-                      label: 'theme',
-                      colors: [resumeStyle.themeColor.value],
-                    },
-                  ]}
-                  value={iconColor}
-                  onChange={handleIconColorChange}
-                />
+              <div className="flex items-center w-full justify-between">
+                <div className="mt-4 flex items-center">
+                  <span>{t('iconColor')}</span>
+                  <ColorPicker
+                    className="ml-2"
+                    presets={[
+                      {
+                        label: 'theme',
+                        colors: [resumeStyle.themeColor.value],
+                      },
+                    ]}
+                    value={iconColor}
+                    onChange={handleIconColorChange}
+                  />
+                </div>
+                <div className="mt-4 flex items-center ml-2">
+                  <span>{t('iconSize')}</span>
+                  <Select
+                    className="ml-2"
+                    defaultValue="md"
+                    options={iconSizeOptions}
+                    value={iconSize}
+                    onSelect={(size) => handleIconSizeChange(size as IconSize)}
+                  />
+                </div>
               </div>
-              <div className="mt-2 flex items-center">
-                <span>{t('iconSize')}</span>
-                <Select
-                  className="ml-2"
-                  defaultValue="md"
-                  options={iconSizeOptions}
-                  value={iconSize}
-                  onSelect={(size) => handleIconSizeChange(size as IconSize)}
-                />
-              </div>
-              <div className="mt-2 flex w-full justify-between">
+              <div className="mt-4 flex w-full justify-between">
                 <span>Markdown </span>
                 <Switch
-                  className="ml2"
+                  className="ml-2"
                   checked={md}
                   checkedChildren="On"
                   unCheckedChildren="Off"

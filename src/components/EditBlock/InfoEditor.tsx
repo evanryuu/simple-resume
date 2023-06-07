@@ -10,7 +10,7 @@ import { useResumeStore } from '@/store/resume'
 
 import TextEditor from './TextEditor'
 
-import type { IResumeInfoSetting, IResumeInfoItem } from '@/store/resume'
+import type { IResumeInfoSetting } from '@/store/resume'
 import type { TextProps } from '@/types'
 
 export interface InfoEditorProps extends IResumeInfoSetting { }
@@ -19,20 +19,13 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
   const avatarInputEl = useRef<HTMLInputElement>(null)
   const { t } = useTranslation()
 
-  const { addResumeInfoItem, deleteResumeInfoItem, setResumeInfoData } = useResumeStore()
+  const {
+    addResumeInfoItem, deleteResumeInfoItem, setResumeInfoData, updateResumeInfoItem,
+  } = useResumeStore()
 
   const defaultText: TextProps = {
     value: 'Example',
     icon: 'la:github',
-  }
-
-  const handleItemChange = <T extends keyof IResumeInfoItem>(type: T, index: number, value: IResumeInfoItem[T]) => {
-    const newItem = resume.data.items[index]
-    newItem[type] = value
-    setResumeInfoData({
-      ...resume.data,
-      items: resume.data.items,
-    })
   }
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +59,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
           ...resume.data,
           name: e.target.value,
         })}
+        hideMore
         value={resume.data.name}
         block={resume}
       />
@@ -76,7 +70,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
         <TextEditor
           label={t('avatar')}
           dataKey="avatar"
-          onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setResumeInfoData({
+          onChange={(e) => setResumeInfoData({
             ...resume.data,
             avatar: e.target.value,
           })}
@@ -101,19 +95,20 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
 
       {/* S Items Edit Section */}
       {
-        resume.data.items.map((item, ii) => (
-          <div key={`item-${ii}`}>
+        resume.data.items.map((item) => (
+          <div key={`item-${item.id}`}>
             <TextEditor
               dataKey="items"
-              key={`Title-${ii}`}
+              key={`Title-${item.id}`}
               label={t('desc')}
-              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleItemChange('value', ii, e.target.value)}
-              onIconChange={(icon) => handleItemChange('icon', ii, icon)}
-              onIconColorChange={(color) => handleItemChange('iconColor', ii, color)}
+              // onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleItemChange('value', item.id, e.target.value)}
+              onChangeAll={(data) => updateResumeInfoItem(item.id, data)}
+              // onIconChange={(icon) => handleItemChange('icon', item.id, icon)}
+              // onIconColorChange={(color) => handleItemChange('iconColor', item.id, color)}
               {...item}
               block={resume}
             >
-              <Button danger className="mt-4" onClick={() => deleteResumeInfoItem(ii)}>
+              <Button danger className="mt-4" onClick={() => deleteResumeInfoItem(item.id)}>
                 <Icon icon="fluent:delete-28-regular" width={20} />
               </Button>
             </TextEditor>

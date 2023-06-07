@@ -92,7 +92,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                   && (
                     <div
                       role="presentation"
-                      className={classNames('editable', {
+                      className={classNames('editable flex items-center', {
                         editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'subtitle',
                       })}
                       onClick={() => handleItemClick(genParam('subtitle', item.id))}

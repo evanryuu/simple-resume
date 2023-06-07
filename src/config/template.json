@@ -177,7 +177,7 @@
                 "md": false
               },
               "detail": {
-                "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作\n\n**项目成果:**\n\n1. 减少了`xxx`的时间，大幅减少成本\n2. 提高了xxx%的留存率，综合提高了xxx%的收益。",
+                "value": "**主要工作**：\n1. 负责产品前期选型；\n2. 牵头负责产品从0到1开发；\n3. 除了Metabase本身的图表，另外添加20+类型的图表以供运营人员使用，提升丰富度；\n4. 建立项目CI/CD流水线，减少大量重复人力工作\n\n**项目成果:**\n\n1. 减少了 `xxx` 的时间，大幅减少成本\n2. 提高了 `xxx%` 的留存率，综合提高了 `xxx%` 的收益。",
                 "icon": "",
                 "md": true,
                 "iconSize": "md"
@@ -213,9 +213,9 @@
                 "md": false
               },
               "description": {
-                "value": "CET6-777",
-                "icon": "ph:exam-light",
-                "md": false,
+                "value": "- GPA 5/4\n- CET6 777\n- 日语 n-1\n- 3202年全星系ACM大赛第一名",
+                "icon": "",
+                "md": true,
                 "iconSize": "lg"
               },
               "detail": {
@@ -231,7 +231,7 @@
     ],
     "resumeStyle": {
       "themeColor": {
-        "value": "#0685b0",
+        "value": "#0d0133",
         "type": "color",
         "componentProps": {}
       },
@@ -308,34 +308,34 @@
         }
       },
       "titleSize": {
+        "value": 16,
         "type": "slider",
-        "value": 18,
         "componentProps": {
           "min": 10,
           "max": 40
         }
       },
       "subtitleSize": {
-        "type": "slider",
         "value": 12,
+        "type": "slider",
         "componentProps": {
           "min": 10,
           "max": 40
         }
       },
       "subtitleColor": {
+        "value": "#ffffff",
         "type": "color",
-        "value": "#bbb",
         "componentProps": {}
       },
       "subtitleBackgroundColor": {
+        "value": "#027911",
         "type": "color",
-        "value": "#fff",
         "componentProps": {}
       },
       "noteSize": {
+        "value": 13,
         "type": "slider",
-        "value": 14,
         "componentProps": {
           "min": 10,
           "max": 40

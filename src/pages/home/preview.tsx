@@ -46,7 +46,7 @@ const Preview = () => {
       <DraggableResizableBackground gridBackground>
         <div
           ref={previewParent}
-          className="preview-container h-full flex justify-center items-center relative mb-16 pt-8 cursor-grab"
+          className="preview-container h-full flex justify-center items-center relative mb-16"
         >
           {/* <Draggable> */}
           <div

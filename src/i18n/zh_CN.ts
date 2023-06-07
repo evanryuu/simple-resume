@@ -7,6 +7,8 @@ export default {
     saveResume: '保存简历',
     importResume: '导入简历',
     resetResume: '重置简历',
+    resetResumeTip: '如果你重置简历的话所有的文字以及样式都会清空并恢复到初始简历模板，建议先 “保存简历” 以备不时之需。',
+    saveResumeTip: '这会保存一个json格式的文件。任何人通过“导入简历”导入后都可以获得你保存时一样的文字、排版和格式噢',
     export: '导出',
     editContent: '编辑内容',
     editStyle: '编辑样式',

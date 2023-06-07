@@ -15,19 +15,21 @@ const EditDropdown: React.FC<DropdownProps> = (props) => {
     {
       key: '1',
       label: (
-        <span role="presentation" className="!rounded-none" onClick={() => setShowEdit(true)}>
+        <span role="presentation" className="!rounded-none">
           {t('editContent')}
         </span>
       ),
+      onClick: () => setShowEdit(true),
     },
     {
       key: '2',
       label: (
-        <span role="presentation" className="mt-4" onClick={() => setShowEditStyle(true)}>
+        <span role="presentation" className="mt-4">
           {t('editStyle')}
         </span>
 
       ),
+      onClick: () => setShowEditStyle(true),
     },
   ]
 

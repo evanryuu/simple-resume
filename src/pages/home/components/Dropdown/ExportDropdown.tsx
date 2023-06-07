@@ -39,10 +39,10 @@ const ExportDropdown: React.FC<DropdownProps> = (props) => {
           style={{
             color: resumeStyle.themeColor.value,
           }}
-          onClick={printResume}
         >{t('exportPDF')}
         </div>
       ),
+      onClick: printResume,
     },
     {
       key: '2',
@@ -50,10 +50,10 @@ const ExportDropdown: React.FC<DropdownProps> = (props) => {
         <div
           className="text-bluegray"
           role="presentation"
-          onClick={exportPicPdf}
         >{t('exportPicturePDF')}
         </div>
       ),
+      onClick: exportPicPdf,
     },
   ]
 

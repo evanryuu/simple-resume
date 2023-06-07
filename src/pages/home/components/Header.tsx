@@ -10,7 +10,7 @@ import { useAppStore, useResumeStore } from '@/store'
 
 import EditDropdown from './Dropdown/EditDropdown'
 import ExportDropdown from './Dropdown/ExportDropdown'
-import OptDropdown from './Dropdown/ShareDropdown'
+import SaveDropdown from './Dropdown/SaveDropdown'
 
 const Header: React.FC = () => {
   const { t } = useTranslation()
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
               <span className="absolute left-1/2 translate-x--1/2 text-md">{t('headerTip')}</span>
               <div className="flex items-center">
                 <EditDropdown />
-                <OptDropdown className="ml-4" />
+                <SaveDropdown className="ml-4" />
                 <ExportDropdown className="ml-4" />
                 <PreviewSwitcher className="ml-4 cursor-pointer flex items-center px-1 border-solid border-1" />
                 <DarkModeSwitcher className="text-lg ml-4 flex items-center cursor-pointer hover:fill-true-gray-700" />

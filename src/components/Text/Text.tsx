@@ -22,6 +22,7 @@ const Text: React.FC<TextProps> = (props) => {
         md
           ? (
             <div className="text-xs">
+              {icon ? <Icon className={iconClass} icon={icon} color={iconColor} /> : null}
               <ReactMarkdown>{value as string}</ReactMarkdown>
             </div>
           )

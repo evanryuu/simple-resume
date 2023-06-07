@@ -28,6 +28,7 @@ export interface TextProps {
 export type BaseInputType = 'color' | 'string' | 'number' | 'textarea' | 'boolean' | 'switch' | 'slider' | 'select'
 
 export interface BaseComponentProps {
+  ref?: React.RefObject<any>
   className?: string
   style?: React.CSSProperties
   children?: React.ReactNode

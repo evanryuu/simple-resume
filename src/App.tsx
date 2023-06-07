@@ -37,7 +37,13 @@ export interface IAppContext {
 export const AppContext = createContext<IAppContext>({} as IAppContext)
 
 function App() {
-  const [selectedEditItem, setSelectedEditItem] = useState<SelectedEditItemData>({} as SelectedEditItemData)
+  const [selectedEditItem, setSelectedEditItem] = useState<SelectedEditItemData>({
+    type: '',
+    blockType: 'info',
+    ids: [],
+    blockId: '',
+    itemId: '',
+  })
   const [previewScale, setPreviewScale] = useState(1)
 
   const {
