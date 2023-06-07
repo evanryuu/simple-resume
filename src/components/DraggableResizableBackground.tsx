@@ -36,6 +36,26 @@ const DraggableResizableBackground: React.FC<DraggableResizableBackgroundProps> 
     setDragging(false)
   }
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0]
+    setStartPosition({ x: touch.clientX, y: touch.clientY })
+    setDragging(true)
+  }
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (dragging) {
+      const touch = event.touches[0]
+      const offsetX = touch.clientX - startPosition.x
+      const offsetY = touch.clientY - startPosition.y
+      setPosition({ x: position.x + offsetX, y: position.y + offsetY })
+      setStartPosition({ x: touch.clientX, y: touch.clientY })
+    }
+  }
+
+  const handleTouchEnd = () => {
+    setDragging(false)
+  }
+
   const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
     const delta = event.deltaY > 0 ? -0.1 : 0.1
     const newScale = scale + delta
@@ -45,7 +65,7 @@ const DraggableResizableBackground: React.FC<DraggableResizableBackgroundProps> 
   }
 
   const gridBackgroundImage = props.gridBackground ? {
-    backgroundImage: 'linear-gradient(to right, transparent 1px, rgb(0, 0, 0) 1px), linear-gradient(transparent 1px, rgb(0, 0, 0) 1px)',
+    backgroundImage: 'linear-gradient(to right, transparent 1px, #000 1px), linear-gradient(transparent 1px, #000 1px)',
     backgroundSize: '20px 20px',
   } : {}
 
@@ -61,6 +81,9 @@ const DraggableResizableBackground: React.FC<DraggableResizableBackgroundProps> 
         cursor: dragging ? 'grabbing' : 'grab',
         ...gridBackgroundImage,
       }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}

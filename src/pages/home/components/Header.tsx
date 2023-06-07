@@ -23,7 +23,7 @@ const Header: React.FC = () => {
         previewMode
           ? (
             <div
-              className="preview-toggler fixed right-4 top-4 cursor-pointer opacity-0 z-30"
+              className="preview-toggler fixed right-4 top-4 cursor-pointer opacity-0 z-30 text-white"
               role="presentation"
               onClick={() => setPreviewMode(false)}
             >
