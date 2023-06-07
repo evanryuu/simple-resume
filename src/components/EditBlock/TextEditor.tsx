@@ -121,7 +121,11 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
        *
        */
     } else if (selectedEditItem.type === props.dataKey && props.block.id === selectedEditItem.blockId) {
-      setTimeout(inputRef.current?.focus, 0)
+      if (!selectedEditItem.itemId) {
+        setTimeout(inputRef.current?.focus, 0)
+      } else if (selectedEditItem.itemId === props.id) {
+        setTimeout(inputRef.current?.focus, 0)
+      }
     }
   }, [selectedEditItem.type, selectedEditItem.itemId])
 
@@ -181,6 +185,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
       item.blockId = props.block.id
       item.blockType = props.block.type
     }
+    // setTimeout(() => setSelectedEditItem(item as SelectedEditItemData), 0)
     setSelectedEditItem(item as SelectedEditItemData)
   }
 
