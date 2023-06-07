@@ -57,6 +57,15 @@ export type TextEditorProps = TextProps & (IdWhenItems | IdWhenNotItems) & {
   onIconSizeChange?: (value: IconSize) => void
 }
 
+const typeNeedsItemId = [
+  'items',
+  'title',
+  'subtitle',
+  'note',
+  'description',
+  'detail',
+] as Omit<keyof IResumeBlockItem, 'id'>[]
+
 const TextEditor: React.FC<TextEditorProps> = (props) => {
   const {
     label,
@@ -110,39 +119,30 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   }, [props.value])
 
   useEffect(() => {
-    if (selectedEditItem.type === 'items') {
-      if (props.id === selectedEditItem.itemId && selectedEditItem.type === props.dataKey && props.block.id === selectedEditItem.blockId) {
-        setTimeout(inputRef.current?.focus, 0)
-      }
-      /**
+    /**
+     *
+     * selectedEditItem.type can be 'name' 'avatar' 'items' for info
+     *
+     * can be 'title' | 'subtitle' | 'note' | 'description' | 'detail' for block
+     *
+     */
+    const { type: selectedType, itemId: selectedId, blockId: selectedBlockId } = selectedEditItem
+    /**
        * must judge blockId
        *
        *  make sure same item(title/subtitle/note/detail/description) in different blocks won't conflict
        *
        */
-    } else if (selectedEditItem.type === props.dataKey && props.block.id === selectedEditItem.blockId) {
-      if (!selectedEditItem.itemId) {
-        setTimeout(inputRef.current?.focus, 0)
-      } else if (selectedEditItem.itemId === props.id) {
+    if (props.block.id === selectedBlockId && props.dataKey === selectedType) {
+      if (typeNeedsItemId.includes(selectedType)) {
+        if (props.id === selectedId) {
+          setTimeout(inputRef.current?.focus, 0)
+        }
+      } else {
         setTimeout(inputRef.current?.focus, 0)
       }
     }
   }, [selectedEditItem.type, selectedEditItem.itemId])
-
-  // const ifHighlight = () => {
-  //   /** avatar and name don't have id */
-  //   if (selectedEditItem.type === 'avatar' || selectedEditItem.type === 'name') {
-  //     return props.dataKey === selectedEditItem.type
-  //   }
-  //   if (selectedEditItem.type === 'items') {
-  //     if (selectedEditItem.blockType === 'info') {
-  //       return props.id === selectedEditItem.itemId
-  //     }
-  //   } else {
-  //     return props.dataKey === selectedEditItem.type
-  //   }
-  //   return false
-  // }
 
   const handleIconChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIcon(e.target.value)

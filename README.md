@@ -81,6 +81,6 @@ pnpm build
 
 ### Deploy on your GitHub pages
 ```bash
-pnpm publish
+pnpm release
 ```
 

@@ -98,7 +98,6 @@ const DraggableResizableBackground: React.FC<DraggableResizableBackgroundProps> 
           height: '100%',
           transform: `scale(${scale})`,
           transformOrigin: 'top left',
-          backgroundImage: 'url(path/to/your/image)',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
         }}
