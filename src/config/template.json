@@ -239,7 +239,7 @@
         "type": "slider",
         "value": 120,
         "componentProps": {
-          "min": 40,
+          "min": 0,
           "max": 240
         }
       },

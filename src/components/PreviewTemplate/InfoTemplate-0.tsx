@@ -59,11 +59,14 @@ const InfoTemplate0: React.FC<IResumeInfoSetting> = (props) => {
             )
             : null
         }
-        <div className="info-container ml-4">
+        <div className={classNames('info-container', {
+          'ml-4': resumeStyle.avatarWidth.value !== 0,
+        })}
+        >
           <div
             role="presentation"
             onClick={() => handleItemClick(genParam('name'))}
-            className={classNames('inline-block info-name font-semibold text-lg editable', {
+            className={classNames('inline-block info-name font-semibold text-2xl editable', {
               editting: selectedEditItem.type === 'name',
             })}
           >
