@@ -20,7 +20,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
   const { t } = useTranslation()
 
   const {
-    addResumeInfoItem, deleteResumeInfoItem, setResumeInfoData, updateResumeInfoItem,
+    addResumeInfoItem, deleteResumeInfoItem, updateResumeInfoData, updateResumeInfoItem,
   } = useResumeStore()
 
   const defaultText: TextProps = {
@@ -37,7 +37,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
     // 当文件加载完成时触发
     reader.onload = function (e) {
       // 将读取的数据赋值给<img>标签的src属性
-      setResumeInfoData({
+      updateResumeInfoData(resume.id, {
         ...resume.data,
         avatar: e.target!.result as string,
       })
@@ -55,10 +55,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
         type="text"
         dataKey="name"
         label={t('name')}
-        onChange={(e) => setResumeInfoData({
-          ...resume.data,
-          name: e.target.value,
-        })}
+        onChangeAll={(data) => updateResumeInfoData(resume.id, { ...resume.data, name: data.value as string })}
         hideMore
         value={resume.data.name}
         block={resume}
@@ -70,10 +67,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
         <TextEditor
           label={t('avatar')}
           dataKey="avatar"
-          onChange={(e) => setResumeInfoData({
-            ...resume.data,
-            avatar: e.target.value,
-          })}
+          onChangeAll={(data) => updateResumeInfoData(resume.id, { ...resume.data, avatar: data.value as string })}
           value={resume.data.avatar}
           hideMore
           block={resume}
