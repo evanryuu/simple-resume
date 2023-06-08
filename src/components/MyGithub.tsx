@@ -25,7 +25,7 @@ const MyGithub: React.FC<MyGithubProps> = (props) => {
           : <Icon icon="bytesize:github" />
       }
 
-      {type === 'tag' ? <span className="ml-1 text-xs">Star</span> : null}
+      {type === 'tag' ? <span className="ml-1 text-sm font-semibold tracking-widest">Star</span> : null}
     </a>
   )
 }

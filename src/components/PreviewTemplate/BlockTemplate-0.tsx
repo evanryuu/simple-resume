@@ -65,7 +65,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
         items.map((item, i) => (
           <div className="specific-container" key={i}>
             <div className="flex items-center justify-between">
-              <div className="specific-title flex items-center">
+              <div className="specific-title flex items-center mb-1">
                 {
                   item.title && item.title.value
                   && (
@@ -144,7 +144,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
               && (
                 <div
                   role="presentation"
-                  className={classNames('editable', {
+                  className={classNames('editable specific-description mb-2', {
                     'whitespace-pre-wrap': !item.description.md,
                     editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'description',
                   })}
@@ -158,7 +158,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
               && (
                 <div
                   role="presentation"
-                  className={classNames('editable text-md', {
+                  className={classNames('editable text-md specific-detail', {
                     'whitespace-pre-wrap': !item.detail.md,
                     editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'detail',
                   })}

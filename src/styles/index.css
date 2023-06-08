@@ -56,6 +56,10 @@ ul, ol {
   margin: 0;
 }
 
+.editable p {
+  margin: 4px 0;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

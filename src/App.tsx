@@ -3,8 +3,10 @@ import {
   createContext, useEffect, useMemo, useState,
 } from 'react'
 
-import { Modal } from 'antd'
+import { Image, Modal } from 'antd'
+import { useTranslation } from 'react-i18next'
 
+import iconGuideGif from './assets/icon-guide.gif'
 import BlocksContainer from './components/EditBlock/EditorContainer'
 import EditDrawer from './editContentDrawer'
 import EditStyleDrawer from './editStyleDrawer'
@@ -34,8 +36,8 @@ export interface IAppContext {
   setSelectedEditItem: React.Dispatch<SetStateAction<SelectedEditItemData>>
   previewScale: number
   setPreviewScale: (number: number) => void
-  noMoreIconGuide: boolean
-  setNoMoreIconGuide: (val: boolean) => void
+  showIconGuide: boolean
+  setShowIconGuide: (val: boolean) => void
 }
 
 export const AppContext = createContext<IAppContext>({} as IAppContext)
@@ -49,6 +51,7 @@ function App() {
     itemId: '',
   })
   const [previewScale, setPreviewScale] = useState(1)
+  const [showIconGuide, setShowIconGuide] = useState(false)
   const [noMoreIconGuide, setNoMoreIconGuide] = useState(false)
 
   const {
@@ -56,13 +59,15 @@ function App() {
   } = useAppStore()
   const { resumeData, resumeStyle } = useResumeStore()
 
+  const { t } = useTranslation()
+
   const ctxValue = useMemo(() => ({
     selectedEditItem,
     setSelectedEditItem,
     previewScale,
     setPreviewScale,
-    noMoreIconGuide,
-    setNoMoreIconGuide,
+    showIconGuide,
+    setShowIconGuide,
   }), [selectedEditItem, previewScale])
 
   useEffect(() => {
@@ -86,6 +91,9 @@ function App() {
       border-width: 1px;
       border-style: dashed;
       cursor: pointer;
+    }
+    a:hover {
+      color: ${resumeStyle.themeColor.value}
     }
     `
 
@@ -111,7 +119,17 @@ function App() {
 
   return (
     <AppContext.Provider value={ctxValue}>
-      <Modal />
+      <Modal
+        open={showIconGuide && !noMoreIconGuide}
+        okText={t('donShowAgain')}
+        onOk={() => setNoMoreIconGuide(true)}
+        onCancel={() => setShowIconGuide(false)}
+        title={t('shortIconGuide')}
+      >
+        <div className="flex justify-center">
+          <Image className="max-w-screen-md w-1/3" src={iconGuideGif} alt="Icon guide" />
+        </div>
+      </Modal>
       <EditDrawer
         open={showEdit}
         onClose={onEditContentDrawerClose}

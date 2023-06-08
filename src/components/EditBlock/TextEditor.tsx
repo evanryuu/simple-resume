@@ -4,12 +4,12 @@ import React, {
 
 import { Icon } from '@iconify/react'
 import {
-  ColorPicker, Input, Select, Switch,
+  ColorPicker, Input, Select, Switch, Tag, Tooltip,
 } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { AppContext } from '@/App'
-import { useResumeStore } from '@/store'
+import { useAppStore, useResumeStore } from '@/store'
 
 import type { SelectedEditItemData } from '@/App'
 import type {
@@ -91,11 +91,12 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
 
   const inputRef = useRef<any>(null)
 
-  const { selectedEditItem, setSelectedEditItem } = useContext(AppContext)
+  const { selectedEditItem, setSelectedEditItem, setShowIconGuide } = useContext(AppContext)
 
   const { t } = useTranslation()
 
   const { resumeStyle } = useResumeStore()
+  const { lang } = useAppStore()
 
   useEffect(() => {
     setLoaded(true)
@@ -191,23 +192,50 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
   }
 
   const generateInput = () => {
+    if (type === 'textarea' || md) {
+      return (
+        <div className="flex flex-col w-full">
+          <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} onFocus={handleInputFocus} />
+          <div className="text-xs text-gray-500 mt-2">({t('textareaTip')})</div>
+        </div>
+      )
+    }
     if (type === 'text') {
-      if (md) {
-        return <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} onFocus={handleInputFocus} />
-      }
       return <Input ref={inputRef} id={label} value={value} onChange={handleTextInputChange} onFocus={handleInputFocus} />
     }
-    if (type === 'textarea') {
-      return <Input.TextArea ref={inputRef} id={label} value={value} onChange={handleTextInputChange} onFocus={handleInputFocus} />
-    }
     return null
+  }
+
+  const generateMdTooltip = () => {
+    const mdGuideHref = lang === 'en_US'
+      ? 'https://www.markdownguide.org/basic-syntax/'
+      : 'https://www.markdownguide.org/basic-syntax/'
+    return (
+      <div className="">
+        {t('markdownTooltip')}
+        <a className="text-gray-400 ml-2" target="_blank" href={mdGuideHref} rel="noreferrer">{t('learnMore')}</a>
+      </div>
+    )
   }
 
   return (
     <div className="border-b-gray-300 border-b-1 border-solid border-t-0 border-l-0 border-r-0 pt-2 pb-4">
       <div className="flex items-center justify-between">
-        <label className="text-gray-400 font-semibold tracking-widest" htmlFor={label}>{label.toUpperCase()}</label>
-        {labelRightEl || null}
+        <label className="text-gray-400 font-semibold tracking-widest" htmlFor={label}>
+          {label.toUpperCase()}
+          {
+            md
+              ? (
+                <Tooltip title={generateMdTooltip()}>
+                  <Tag className="ml-2 text-xs" color={resumeStyle.themeColor.value}>Markdown</Tag>
+                </Tooltip>
+              )
+              : null
+          }
+        </label>
+        <div className="flex items-center">
+          {labelRightEl || null}
+        </div>
       </div>
 
       <div className="flex items-center justify-between mt-2">
@@ -219,10 +247,10 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
         {
           !hideMore
             ? (
-              <HoverChangeColor>
+              <HoverChangeColor className="flex items-center text-gray-400">
                 <Icon
                   fontSize={20}
-                  icon="mingcute:more-3-line"
+                  icon="icon-park-solid:more-app"
                   className="ml-4 cursor-pointer"
                   onClick={() => setShowMore(!showMore)}
                 />
@@ -241,7 +269,16 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
               <div className="mt-4 flex items-center justify-between w-full">
                 <span className="flex-shrink-0">{t('icon')}</span>
                 <Input className="ml-2 w-full" value={icon} onChange={handleIconChange} placeholder="Icon" />
-                <a className="flex-shrink-0 ml-2" target="_blank" href="https://icon-sets.iconify.design/" rel="noreferrer">{t('moreIcon')}</a>
+                <a
+                  onClick={() => setShowIconGuide(true)}
+                  className="flex-shrink-0 ml-2 text-gray-400 underline-current underline"
+                  target="_blank"
+                  href="https://icon-sets.iconify.design/"
+                  rel="noreferrer"
+                >
+                  {t('moreIcon')}
+                  <Icon className="text-sm" icon="iconoir:arrow-tr" />
+                </a>
               </div>
               <div className="flex items-center w-full justify-between">
                 <div className="mt-4 flex items-center">

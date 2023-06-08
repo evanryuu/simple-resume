@@ -18,12 +18,18 @@ export default {
     exportPicturePDF: '导出图片PDF(不推荐)',
     exportPDF: '导出PDF 👍',
     plsChooseTemp: '请选择一个模板',
+    quitPreview: '退出预览',
+    textareaTip: '拖动输入框右下角调整输入框大小',
+    donShowAgain: '不再显示',
+    close: '关闭',
+    shortIconGuide: '一段很简短的图标引导',
     /** E preview button content */
 
     addBlock: '添加块',
     addItem: '添加项',
     name: '姓名',
     avatar: '头像',
+    upload: '上传',
     desc: '描述',
     title: '标题',
     subtitle: '副标题',
@@ -36,6 +42,8 @@ export default {
     iconSize: '图标大小',
     noMoreUp: 'Oops, 上不去了朋友',
     noMoreBottom: '我是真的有底线的！',
+    markdownTooltip: '一种轻量级标记语言。可以点击右边的设置关闭。',
+    learnMore: '了解更多',
 
     /** S resume style */
     themeColor: '主题色',

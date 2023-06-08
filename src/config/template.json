@@ -68,7 +68,7 @@
               "detail": {
                 "value": "所做工作：\n- 父慈子孝\n- 击败“怨恨之鬼”\n- 击败“苇名一心”",
                 "icon": "",
-                "md": true,
+                "md": false,
                 "iconSize": "md"
               }
             }

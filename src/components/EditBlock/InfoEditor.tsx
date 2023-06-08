@@ -73,7 +73,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
           block={resume}
         >
           <div className="mt-4">
-            <Button onClick={() => avatarInputEl.current?.click()}>Upload</Button>
+            <Button onClick={() => avatarInputEl.current?.click()}>{t('upload')}</Button>
             <input
               ref={avatarInputEl}
               className="hidden"

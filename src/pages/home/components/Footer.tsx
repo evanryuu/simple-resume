@@ -15,13 +15,13 @@ const Footer: React.FC = () => {
         !previewMode
           ? (
             <div
-              className="fixed p-2 pr-4 bottom-0 w-full h-4 text-white text-sm flex z-30  items-center"
+              className="fixed justify-end py-2 px-4 bottom-0 left-0 right-0 h-4 text-white text-sm flex z-30  items-center"
               style={{
                 backgroundColor: resumeStyle.themeColor.value,
               }}
             >
               <span className="absolute left-1/2 translate-x--1/2 text-xs">{t('footerTip')}</span>
-              <MyGithub type="tag" className="ml-auto text-white mr-4 hover:text-white text-md" />
+              <MyGithub type="tag" className="text-white hover:text-white text-lg" />
             </div>
           )
           : null

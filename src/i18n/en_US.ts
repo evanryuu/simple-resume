@@ -18,12 +18,18 @@ export default {
     exportPicturePDF: 'Export Picture PDF (Not Recommended)',
     exportPDF: 'Export PDF 👍',
     plsChooseTemp: 'Please choose a template',
+    quitPreview: 'Quit Preview',
+    textareaTip: 'You can drag the bottom right corner of the input box to adjust its size',
+    donShowAgain: 'Don\'t show again',
+    close: 'Close',
+    shortIconGuide: 'A short icon guide',
     /** E preview button content */
 
     addBlock: 'Add Block',
     addItem: 'Add Item',
     name: 'Name',
     avatar: 'Avatar',
+    upload: 'Upload',
     desc: 'Desc',
     title: 'Title',
     subtitle: 'Subtitle',
@@ -31,11 +37,13 @@ export default {
     description: 'Description',
     detail: 'Detail',
     moreIcon: 'More Icon',
-    icon: 'icon',
+    icon: 'Icon',
     iconColor: 'Icon Color',
     iconSize: 'Icon Size',
     noMoreUp: 'Oops, stay where you are',
     noMoreBottom: 'That\'s my bottom line!',
+    markdownTooltip: 'A lightweight markup language for creating formatted text. You can disable this mode by showing more settings on the right.',
+    learnMore: 'Learn More',
 
     /** S resume style */
     themeColor: 'Theme Color',
