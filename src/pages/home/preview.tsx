@@ -44,8 +44,8 @@ const Preview: React.FC = () => {
       <Header />
 
       {/* S Preview */}
-      <TransformWrapper>
-        <TransformComponent wrapperClass="bg-black w-full h-full fixed" contentClass="w-full h-full justify-center">
+      <TransformWrapper minScale={0.1}>
+        <TransformComponent wrapperClass="!bg-black !w-full !h-full !fixed" contentClass="!w-full !h-full !justify-center">
           <div
             ref={previewParent}
             className="preview-container h-full flex justify-center items-center relative mb-16"
