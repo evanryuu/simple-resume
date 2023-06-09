@@ -46,7 +46,7 @@ const InfoTemplate0: React.FC<IResumeInfoSetting> = (props) => {
         {
           avatar
             ? (<img
-              className={classNames('editable', {
+              className={classNames('editable !pointer-events-auto', {
                 editting: selectedEditItem.type === 'avatar',
               })}
               role="presentation"
