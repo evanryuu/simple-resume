@@ -144,7 +144,7 @@ const TextEditor: React.FC<TextEditorProps> = (props) => {
         setTimeout(inputRef.current?.focus, 0)
       }
     }
-  }, [selectedEditItem.type, selectedEditItem.itemId])
+  }, [selectedEditItem])
 
   const handleIconChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIcon(e.target.value)
