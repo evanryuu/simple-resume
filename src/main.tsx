@@ -38,3 +38,5 @@ const Root = () => {
 }
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<Root />)
+
+export default Root

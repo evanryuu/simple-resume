@@ -54,6 +54,7 @@ Many thanks to the following open-source libraries and contributors. They have m
 - [html2pdf.js](https://github.com/eKoopmans/html2pdf.js)
 - [react-to-print](https://github.com/gregnb/react-to-print)
 - [Husky](https://github.com/typicode/husky)
+- [react-zoom-pan-pinch](https://github.com/prc5/react-zoom-pan-pinch)
 
 ## Frequently Asked Questions
 ### 1. Can I copy someone else's resume?

@@ -31,6 +31,9 @@ dependencies:
   react-to-print:
     specifier: ^2.14.12
     version: 2.14.12(react-dom@18.2.0)(react@18.2.0)
+  react-zoom-pan-pinch:
+    specifier: ^3.0.8
+    version: 3.0.8(react-dom@18.2.0)(react@18.2.0)
   zustand:
     specifier: ^4.3.3
     version: registry.npmmirror.com/zustand@4.3.3(react@18.2.0)
@@ -96,6 +99,9 @@ devDependencies:
   eslint-plugin-react-hooks:
     specifier: ^4.3.0
     version: registry.npmmirror.com/eslint-plugin-react-hooks@4.6.0(eslint@8.34.0)
+  eslint-plugin-react-refresh:
+    specifier: ^0.4.1
+    version: 0.4.1(eslint@8.34.0)
   gh-pages:
     specifier: ^5.0.0
     version: 5.0.0
@@ -1008,6 +1014,14 @@ packages:
   /escape-string-regexp@1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
     engines: {node: '>=0.8.0'}
+    dev: true
+
+  /eslint-plugin-react-refresh@0.4.1(eslint@8.34.0):
+    resolution: {integrity: sha512-QgrvtRJkmV+m4w953LS146+6RwEe5waouubFVNLBfOjXJf6MLczjymO8fOcKj9jMS8aKkTCMJqiPu2WEeFI99A==}
+    peerDependencies:
+      eslint: '>=7'
+    dependencies:
+      eslint: registry.npmmirror.com/eslint@8.34.0
     dev: true
 
   /estree-walker@2.0.2:
@@ -2373,6 +2387,17 @@ packages:
       react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
       prop-types: 15.8.1
+      react: registry.npmmirror.com/react@18.2.0
+      react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
+    dev: false
+
+  /react-zoom-pan-pinch@3.0.8(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-z6O5SV5X+XBo/LLO59PgzNE2WT+tp8lw1w3M0y138jCXViwHWKK1MqorICbmSVSOOD5Fa2o6pcg1ppJj9vzqJA==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
       react: registry.npmmirror.com/react@18.2.0
       react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
     dev: false

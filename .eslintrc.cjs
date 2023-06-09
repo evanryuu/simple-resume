@@ -26,6 +26,7 @@ module.exports = {
     'babel',
     '@typescript-eslint',
     'react-hooks',
+    'react-refresh',
     'css-import-order',
   ],
   // https://github.com/typescript-eslint/typescript-eslint/issues/46#issuecomment-470486034
@@ -129,6 +130,7 @@ module.exports = {
     'react/function-component-definition': 0,
     'react/no-unused-class-component-methods': 0,
     'react/no-array-index-key': 0,
+    'react-refresh/only-export-components': 'warn',
     'jsx-a11y/click-events-have-key-events': 0,
     // 并不是所有点击事件都要绑定key事件
 

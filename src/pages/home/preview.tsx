@@ -2,7 +2,8 @@ import React, {
   createContext, useMemo, useRef,
 } from 'react'
 
-import DraggableResizableBackground from '@/components/DraggableResizableBackground'
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
+
 import { usePrint } from '@/hooks'
 import { useAppStore } from '@/store'
 
@@ -21,7 +22,7 @@ export interface IPreviewContext {
 
 export const PreviewContext = createContext<IPreviewContext>({} as IPreviewContext)
 
-const Preview = () => {
+const Preview: React.FC = () => {
   const { previewMode } = useAppStore()
   const {
     resumeStyle,
@@ -43,33 +44,34 @@ const Preview = () => {
       <Header />
 
       {/* S Preview */}
-      <DraggableResizableBackground gridBackground>
-        <div
-          ref={previewParent}
-          className="preview-container h-full flex justify-center items-center relative mb-16"
-        >
-          {/* <Draggable> */}
+      <TransformWrapper>
+        <TransformComponent wrapperClass="bg-black w-full h-full fixed" contentClass="w-full h-full justify-center">
           <div
-            id="preview-target"
-            style={{
-              padding: resumeStyle.pagePadding.value,
-              boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
-            }}
+            ref={previewParent}
+            className="preview-container h-full flex justify-center items-center relative mb-16"
           >
-            <div ref={previewEl} className="bg-white">
-              {
-                resumeData.map((resume, i) => (
-                  <PreviewTemplate
-                    key={i}
-                    {...resume}
-                  />
-                ))
-              }
-            </div>
+            <div
+              id="preview-target"
+              style={{
+                padding: resumeStyle.pagePadding.value,
+                boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
+              }}
+            >
+              <div ref={previewEl} className="bg-white">
+                {
+                  resumeData.map((resume, i) => (
+                    <PreviewTemplate
+                      key={i}
+                      {...resume}
+                    />
+                  ))
+                }
+              </div>
 
+            </div>
           </div>
-        </div>
-      </DraggableResizableBackground>
+        </TransformComponent>
+      </TransformWrapper>
       {/* E Preview */}
 
       <Footer />

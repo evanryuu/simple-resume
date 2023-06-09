@@ -52,6 +52,7 @@
 - [html2pdf.js](https://github.com/eKoopmans/html2pdf.js)
 - [react-to-print](https://github.com/gregnb/react-to-print)
 - [Husky](https://github.com/typicode/husky)
+- [react-zoom-pan-pinch](https://github.com/prc5/react-zoom-pan-pinch)
 
 ## 常见问题
 ### 1. 我能复制别人写好的简历吗？
