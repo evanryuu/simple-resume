@@ -56,10 +56,22 @@ const DraggableResizableBackground: React.FC<DraggableResizableBackgroundProps> 
     setDragging(false)
   }
 
-  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
-    const delta = event.deltaY > 0 ? -0.1 : 0.1
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault() // prevent default scrolling
+    const delta = e.deltaY > 0 ? -0.1 : 0.1
     const newScale = scale + delta
     if (newScale >= 0.1 && newScale <= 3) {
+      const containerRect = containerRef.current?.getBoundingClientRect()!
+      const mouseX = e.clientX - containerRect.left
+      const mouseY = e.clientY - containerRect.top
+
+      const offsetX = mouseX * delta
+      const offsetY = mouseY * delta
+
+      setPosition({
+        x: position.x - offsetX,
+        y: position.y - offsetY,
+      })
       setScale(newScale)
     }
   }
