@@ -44,8 +44,16 @@ const Preview: React.FC = () => {
       <Header />
 
       {/* S Preview */}
-      <TransformWrapper minScale={0.1}>
-        <TransformComponent wrapperClass="!bg-black !w-full !h-full !fixed" contentClass="!w-full !h-full !justify-center">
+      <TransformWrapper
+        centerOnInit
+        minScale={0.2}
+        initialScale={1}
+        limitToBounds={false}
+        centerZoomedOut={false}
+        pinch={{ step: 1 }}
+        wheel={{ step: 0.1 }}
+      >
+        <TransformComponent wrapperClass="!bg-black !w-full !h-full !fixed overflow-visible" contentClass="pt-4">
           <div
             ref={previewParent}
             className="preview-container h-full flex justify-center items-center relative mb-16"
