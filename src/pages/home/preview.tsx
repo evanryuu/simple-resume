@@ -1,5 +1,5 @@
 import React, {
-  createContext, useMemo, useRef,
+  createContext, useMemo, useRef, useState,
 } from 'react'
 
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
@@ -23,14 +23,16 @@ export interface IPreviewContext {
 export const PreviewContext = createContext<IPreviewContext>({} as IPreviewContext)
 
 const Preview: React.FC = () => {
+  const [dragging, setDragging] = useState(false)
+
+  const previewEl = useRef<HTMLDivElement>(null)
+  const previewParent = useRef<HTMLDivElement>(null)
+
   const { previewMode } = useAppStore()
   const {
     resumeStyle,
     resumeData,
   } = useResumeStore()
-
-  const previewEl = useRef<HTMLDivElement>(null)
-  const previewParent = useRef<HTMLDivElement>(null)
 
   const { print } = usePrint(previewEl)
 
@@ -52,8 +54,18 @@ const Preview: React.FC = () => {
         centerZoomedOut={false}
         pinch={{ step: 1 }}
         wheel={{ step: 0.1 }}
+        onPanningStart={() => setDragging(true)}
+        onPanningStop={() => setDragging(false)}
       >
-        <TransformComponent wrapperClass="!bg-black !w-full !h-full !fixed overflow-visible" contentClass="pt-4">
+        <TransformComponent
+          wrapperClass="!w-full !h-full !fixed overflow-visible"
+          wrapperStyle={{
+            backgroundImage: 'linear-gradient(to right, transparent 1px, #000 1px), linear-gradient(transparent 1px, #000 1px)',
+            backgroundSize: '20px 20px',
+            cursor: dragging ? 'grabbing' : 'grab',
+          }}
+          contentClass="pt-4"
+        >
           <div
             ref={previewParent}
             className="preview-container h-full flex justify-center items-center relative mb-16"
