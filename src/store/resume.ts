@@ -155,6 +155,7 @@ interface IResumeState {
   addResumeBlockItem: (blockId: string, item?: IResumeBlockItem) => void
   deleteResumeBlockItem: (blockId: string, itemId: string) => void
   updateResumeBlockItem: (blockId: string, itemId: string, item?: Partial<IResumeBlockItem>) => void
+  moveResumeBlockItem: (blockId: string, itemId: string, moveto: number) => void
 
   addResumeBlock: (template: TemplateType) => void
   deleteResumeBlock: (id: string) => void
@@ -358,6 +359,26 @@ export const useResumeStore = create<IResumeState>()(
         }
 
         return { ...state }
+      }),
+      moveResumeBlockItem: (blockId, itemId, moveto) => set(() => {
+        const state = get()
+
+        const { resumeData } = state
+        const targetBlock = resumeData.find((r) => r.id === blockId)!
+        const targetIndex = targetBlock.data.items.findIndex((i) => i.id === itemId)!
+        const newIndex = targetIndex + moveto
+
+        if (newIndex < 0) {
+          message.info(i18nInstance.t('noMoreUp'))
+          return { ...state }
+        } if (newIndex >= targetBlock.data.items.length) {
+          message.info(i18nInstance.t('noMoreBottom'))
+          return { ...state }
+        }
+        const el = targetBlock.data.items.splice(targetIndex, 1)[0]
+        targetBlock.data.items.splice(newIndex, 0, el as IResumeBlockItem)
+
+        return { resumeData }
       }),
       deleteResumeBlockItem: (blockId, itemId) => set(() => {
         const state = get()

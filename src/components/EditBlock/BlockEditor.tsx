@@ -13,6 +13,8 @@ import TextEditor from './TextEditor'
 import type { IResumeBlockSetting, IResumeBlockItem } from '@/store/resume'
 import type { TextProps } from '@/types'
 
+import HoverChangeColor from '../Hover'
+
 export interface BlockEditorProps extends IResumeBlockSetting { }
 
 const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
@@ -23,7 +25,9 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
 
   const appContext = useContext(AppContext)
   const { showEdit, setShowEdit } = useAppStore()
-  const { addResumeBlockItem, updateResumeBlockItem, deleteResumeBlockItem } = useResumeStore()
+  const {
+    addResumeBlockItem, updateResumeBlockItem, deleteResumeBlockItem, moveResumeBlockItem,
+  } = useResumeStore()
 
   const handleAddItem = () => {
     addResumeBlockItem(resume.id)
@@ -54,10 +58,26 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
       setShowDeleteConfirm(true)
     }
 
+    const handleMoveBlockItem = (e: React.MouseEvent) => {
+      e.stopPropagation()
+      moveResumeBlockItem(resume.id, item.id, -1)
+    }
+
     return (
       <div className="flex items-center justify-between">
         <span>{item.title.value}</span>
-        <span className="text-red"><Icon icon="fluent:delete-28-regular" onClick={handleDeleteIconClick} /></span>
+        <div className="flex items-center">
+          <HoverChangeColor>
+            <span
+              role="presentation"
+              onClick={handleMoveBlockItem}
+              className="flex ml-1 items-center"
+            >
+              <Icon fontSize={16} icon="fluent:arrow-up-16-regular" />
+            </span>
+          </HoverChangeColor>
+          <span className="text-red flex items-center ml-1"><Icon icon="fluent:delete-28-regular" onClick={handleDeleteIconClick} /></span>
+        </div>
       </div>
     )
   }
