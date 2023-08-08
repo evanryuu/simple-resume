@@ -6,6 +6,7 @@ import constant from '@/config/constant'
 import TemplateData from '@/config/template.json'
 import i18nInstance from '@/i18n'
 import { generateRandomId, initTemplateData } from '@/utils'
+import { genBlock } from '@/utils/block'
 
 import type { BaseInputType, Color, TextProps } from '@/types'
 
@@ -302,37 +303,7 @@ export const useResumeStore = create<IResumeState>()(
       addResumeBlock: (template: TemplateType) => set(() => {
         const state = get()
 
-        const id = generateRandomId(8)
-        const newBlock: IResumeBlockSetting = {
-          type: 'block',
-          id,
-          template,
-          data: {
-            blockTitle: {
-              value: `Item-${id}`,
-            },
-            items: [
-              {
-                id: generateRandomId(10),
-                title: {
-                  value: `Experience-${id}`,
-                },
-                subtitle: {
-                  value: `SubTitle-${id}`,
-                },
-                note: {
-                  value: `Note-${id}`,
-                },
-                description: {
-                  value: `description-${id}`,
-                },
-                detail: {
-                  value: `detail-${id}`,
-                },
-              },
-            ],
-          },
-        }
+        const newBlock = genBlock(template || 0)
 
         return {
           ...state,
