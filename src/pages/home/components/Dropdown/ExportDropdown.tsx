@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useResumeStore } from '@/store'
 
-import type { IResumeInfoSetting } from '@/store'
+import type { IResumeInfo } from '@/store'
 import type { MenuProps, DropdownProps } from 'antd'
 
 import { PreviewContext } from '../../preview'
@@ -26,7 +26,7 @@ const ExportDropdown: React.FC<DropdownProps> = (props) => {
         pagebreak: { avoid: 'span ' },
       })
       .from(previewRef.current)
-      .save(`${(resumeData.find((r) => r.type === 'info') as IResumeInfoSetting).data.name}'s Resume.pdf`)
+      .save(`${(resumeData.find((r) => r.type === 'info') as IResumeInfo).data.name}'s Resume.pdf`)
   }
 
   const items: MenuProps['items'] = [

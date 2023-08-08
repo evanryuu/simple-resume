@@ -1,10 +1,10 @@
 import { generateRandomId } from './utils'
 
-import type { IResumeBlockSetting, TemplateType } from '@/store'
+import type { IResumeExperience, TemplateType } from '@/store'
 
 export const genBlock = (template: TemplateType) => {
   const blockId = generateRandomId(8)
-  let newBlock = {} as IResumeBlockSetting
+  let newBlock = {} as IResumeExperience
   if (template === 0) {
     newBlock = {
       type: 'block',

@@ -6,13 +6,13 @@ import { AppContext } from '@/App'
 import { useAppStore, useResumeStore } from '@/store'
 
 import type { SelectedEditItemData } from '@/App'
-import type { IResumeInfoSetting, IResumeInfoData } from '@/store/resume'
+import type { IResumeInfo, IResumeInfoData } from '@/store/resume'
 
 import Text from '../Text/Text'
 
-export type InfoTemplateProps = IResumeInfoSetting
+export type InfoTemplateProps = IResumeInfo
 
-const InfoTemplate0: React.FC<IResumeInfoSetting> = (props) => {
+const InfoTemplate0: React.FC<IResumeInfo> = (props) => {
   const {
     name, avatar, items,
   } = props.data

@@ -10,10 +10,10 @@ import { useResumeStore } from '@/store/resume'
 
 import TextEditor from './TextEditor'
 
-import type { IResumeInfoSetting } from '@/store/resume'
+import type { IResumeInfo } from '@/store/resume'
 import type { TextProps } from '@/types'
 
-export interface InfoEditorProps extends IResumeInfoSetting { }
+export interface InfoEditorProps extends IResumeInfo { }
 
 const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
   const avatarInputEl = useRef<HTMLInputElement>(null)

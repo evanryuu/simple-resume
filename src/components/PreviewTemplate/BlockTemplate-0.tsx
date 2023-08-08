@@ -6,11 +6,11 @@ import { AppContext } from '@/App'
 import { useAppStore, useResumeStore } from '@/store'
 
 import type { SelectedEditItemData } from '@/App'
-import type { IResumeBlockItem, IResumeBlockSetting } from '@/store/resume'
+import type { IResumeBlockItem, IResumeExperience } from '@/store/resume'
 
 import Text from '../Text/Text'
 
-export type BlockTemplateProps = IResumeBlockSetting
+export type BlockTemplateProps = IResumeExperience
 
 const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
   const { id: blockId } = props

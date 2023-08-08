@@ -10,12 +10,12 @@ import { useResumeStore } from '@/store/resume'
 
 import TextEditor from './TextEditor'
 
-import type { IResumeBlockSetting, IResumeBlockItem } from '@/store/resume'
+import type { IResumeExperience, IResumeBlockItem } from '@/store/resume'
 import type { TextProps } from '@/types'
 
 import HoverChangeColor from '../Hover'
 
-export interface BlockEditorProps extends IResumeBlockSetting { }
+export interface BlockEditorProps extends IResumeExperience { }
 
 const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)

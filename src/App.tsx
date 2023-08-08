@@ -14,7 +14,7 @@ import Preview from './pages/home/preview'
 import { useAppStore, useResumeStore } from './store'
 
 import type {
-  IResumeInfoSetting, IResumeBlockItem, IResumeBlockData, IResumeInfoData,
+  IResumeInfo, IResumeBlockItem, IResumeBlockData, IResumeInfoData,
 } from './store'
 
 export type SelectedEditItemData = {
@@ -71,8 +71,8 @@ function App() {
   }), [selectedEditItem, previewScale])
 
   useEffect(() => {
-    document.title = `${(resumeData.find((r) => r.type === 'info') as IResumeInfoSetting).data.name}'s Resume`
-  }, [(resumeData.find((r) => r.type === 'info') as IResumeInfoSetting).data.name])
+    document.title = `${(resumeData.find((r) => r.type === 'info') as IResumeInfo).data.name}'s Resume`
+  }, [(resumeData.find((r) => r.type === 'info') as IResumeInfo).data.name])
 
   useEffect(() => {
     // 当颜色发生变化时，生成新的样式标签

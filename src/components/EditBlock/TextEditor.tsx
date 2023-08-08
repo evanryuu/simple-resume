@@ -13,7 +13,7 @@ import { useAppStore, useResumeStore } from '@/store'
 
 import type { SelectedEditItemData } from '@/App'
 import type {
-  IResumeBlockSetting, IResumeInfoSetting,
+  IResumeExperience, IResumeInfo,
   IResumeBlockItem,
 } from '@/store'
 import type { Color, IconSize, TextProps } from '@/types'
@@ -46,7 +46,7 @@ interface IdWhenItems {
 export type TextEditorProps = TextProps & (IdWhenItems | IdWhenNotItems) & {
   type?: 'text' | 'textarea'
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  block: IResumeInfoSetting | IResumeBlockSetting
+  block: IResumeInfo | IResumeExperience
   label: string
   labelRightEl?: React.ReactNode
   hideMore?: boolean

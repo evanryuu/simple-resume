@@ -10,6 +10,9 @@ import { genBlock } from '@/utils/block'
 
 import type { BaseInputType, Color, TextProps } from '@/types'
 
+export type TemplateType = 0 | 1
+export type ThemePreset = 0 | 1
+
 export interface IResumeBlockItem {
   id: string
   title: TextProps
@@ -35,23 +38,21 @@ export interface IResumeInfoData {
   items: IResumeInfoItem[]
 }
 
-export type TemplateType = 0
-
-export interface IResumeBlockSetting {
+export interface IResumeExperience {
   type: 'block'
   id: string
   template: TemplateType
   data: IResumeBlockData
 }
 
-export interface IResumeInfoSetting {
+export interface IResumeInfo {
   type: 'info'
   id: string
   template: TemplateType
   data: IResumeInfoData
 }
 
-export type IResumeBlock = IResumeBlockSetting | IResumeInfoSetting
+export type IResumeBlock = IResumeExperience | IResumeInfo
 
 export type IResumeData = IResumeBlock[]
 
@@ -252,7 +253,7 @@ export const useResumeStore = create<IResumeState>()(
       updateResumeBlockItem: (blockId, itemId, item) => set(() => {
         const state = get()
 
-        const block = state.resumeData.find((b) => b.id === blockId) as IResumeBlockSetting
+        const block = state.resumeData.find((b) => b.id === blockId) as IResumeExperience
         const targetIndex = block.data.items.findIndex((i) => i.id === itemId)!
 
         if (targetIndex !== -1) {
@@ -270,7 +271,7 @@ export const useResumeStore = create<IResumeState>()(
       addResumeBlockItem: (blockId, specific) => set(() => {
         const state = get()
 
-        const targetBlock = state.resumeData.find((b) => b.id === blockId) as IResumeBlockSetting
+        const targetBlock = state.resumeData.find((b) => b.id === blockId) as IResumeExperience
         const id = generateRandomId(10)
         if (specific) {
           targetBlock.data.items.push({
@@ -317,7 +318,7 @@ export const useResumeStore = create<IResumeState>()(
         const state = get()
 
         const { resumeData } = state
-        const info = resumeData.find((r) => r.type === 'info') as IResumeInfoSetting
+        const info = resumeData.find((r) => r.type === 'info') as IResumeInfo
 
         const targetIndex = info.data.items.findIndex((i) => i.id === itemId)
         const target = info.data.items[targetIndex]
