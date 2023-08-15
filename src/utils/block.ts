@@ -4,7 +4,7 @@ import type {
   IResumeExperience, BlockType, IResumeList, IResumeInfo,
 } from '@/store'
 
-type GenBlockFromType<T extends BlockType> = T extends 'block'
+type GenBlockFromType<T extends BlockType> = T extends 'exp'
   ? IResumeExperience
   : T extends 'list'
     ? IResumeList
@@ -15,7 +15,7 @@ type GenBlockFromType<T extends BlockType> = T extends 'block'
 export const genBlock = <T extends BlockType>(blockType: T): GenBlockFromType<T> => {
   const blockId = generateRandomId(8)
 
-  if (blockType === 'block') {
+  if (blockType === 'exp') {
     return {
       type: blockType,
       id: blockId,

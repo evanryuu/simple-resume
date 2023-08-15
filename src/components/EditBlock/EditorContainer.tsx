@@ -6,8 +6,8 @@ import { AppContext } from '@/App'
 import { useAppStore } from '@/store'
 import { useResumeStore } from '@/store/resume'
 
-import BlockEditor from './BlockEditor'
 import BlockHeader from './EditorHeader'
+import ExpEditor from './ExpEditor'
 import InfoEditor from './InfoEditor'
 
 const BlocksContainer: React.FC = () => {
@@ -40,9 +40,14 @@ const BlocksContainer: React.FC = () => {
               key={resume.id}
             >
               <div>
-                {resume.type === 'block'
-                  ? <BlockEditor {...resume} />
-                  : <InfoEditor {...resume} />}
+                {
+                // eslint-disable-next-line no-nested-ternary
+                resume.type === 'exp'
+                  ? <ExpEditor {...resume} />
+                  : resume.type === 'info'
+                  ? <InfoEditor {...resume} />
+                  : null
+}
               </div>
             </Collapse.Panel>
           ))

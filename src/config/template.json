@@ -38,7 +38,7 @@
         }
       },
       {
-        "type": "block",
+        "type": "exp",
         "id": "16037268",
         "template": 0,
         "data": {
@@ -76,7 +76,7 @@
         }
       },
       {
-        "type": "block",
+        "type": "exp",
         "id": "56085698",
         "template": 0,
         "data": {
@@ -117,7 +117,7 @@
         }
       },
       {
-        "type": "block",
+        "type": "exp",
         "id": "44414245",
         "template": 0,
         "data": {
@@ -187,7 +187,7 @@
         }
       },
       {
-        "type": "block",
+        "type": "exp",
         "id": "47036135",
         "template": 0,
         "data": {

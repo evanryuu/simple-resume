@@ -19,7 +19,7 @@ import type {
 
 export type SelectedEditItemData = {
   type: Omit<keyof IResumeExperienceData | keyof IResumeExperienceItem, 'id'>
-  blockType: 'block'
+  blockType: 'exp'
   ids: string[]
   blockId: string
   itemId?: string

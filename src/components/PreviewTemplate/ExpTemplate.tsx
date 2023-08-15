@@ -33,7 +33,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
     }
     console.log(idArr)
     return {
-      blockType: 'block',
+      blockType: 'exp',
       type,
       itemId,
       blockId,

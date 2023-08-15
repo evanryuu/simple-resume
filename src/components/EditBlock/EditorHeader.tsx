@@ -36,7 +36,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   const handleInputFocus = () => {
     setSelectedEditItem({
       ...selectedEditItem,
-      blockType: 'block',
+      blockType: 'exp',
       blockId: props.id,
       type: 'blockTitle',
     })
@@ -85,26 +85,26 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
         className="flex justify-between items-center cursor-pointer"
       >
         {
-          (showBlockNameInput && props.type === 'block') || selectingBlockTitle
+          (showBlockNameInput && props.type === 'exp') || selectingBlockTitle
             ? <Input
-              ref={blockTitleInputRef}
-              onBlur={handleInputFinished}
-              onPressEnter={handleInputFinished}
-              onClick={(e) => e.stopPropagation()}
-              onFocus={handleInputFocus}
-              value={data.blockTitle.value}
-              onChange={handleBlockNameChange}
+                ref={blockTitleInputRef}
+                onBlur={handleInputFinished}
+                onPressEnter={handleInputFinished}
+                onClick={(e) => e.stopPropagation()}
+                onFocus={handleInputFocus}
+                value={data.blockTitle.value}
+                onChange={handleBlockNameChange}
             />
             : (
               <div>
-                {props.type === 'block' ? data.blockTitle.value : t('personalInfo')}
+                {props.type === 'exp' ? data.blockTitle.value : t('personalInfo')}
               </div>
             )
         }
         <div className="flex items-center">
           <Tag className="tracking-wider ml-4">{props.type.toUpperCase()}</Tag>
           {
-            type === 'block'
+            type === 'exp'
               ? (
                 <>
                   <HoverChangeColor>

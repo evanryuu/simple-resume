@@ -10,9 +10,10 @@ import { genBlock } from '@/utils/block'
 
 import type { BaseInputType, Color, TextProps } from '@/types'
 
-export type TemplateType = 0 | 1
+// TODO remove template
+export type TemplateType = 0
 export type ThemePreset = 0 | 1
-export type BlockType = 'info' | 'block' | 'list'
+export type BlockType = 'info' | 'exp' | 'list'
 
 /** S IResumeExperience */
 export interface IResumeExperienceItem {
@@ -32,7 +33,7 @@ export interface IResumeExperienceData {
 }
 
 export interface IResumeExperience {
-  type: 'block'
+  type: 'exp'
   id: string
   template: TemplateType
   data: IResumeExperienceData
@@ -265,7 +266,7 @@ export const useResumeStore = create<IResumeState>()(
         const state = get()
 
         const targetBlock = state.resumeData.find((r) => r.id === id)
-        if (targetBlock?.type === 'block') {
+        if (targetBlock?.type === 'exp') {
           targetBlock!.data = {
             ...targetBlock!.data,
             ...blockData,

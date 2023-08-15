@@ -17,7 +17,7 @@ import HoverChangeColor from '../Hover'
 
 export interface BlockEditorProps extends IResumeExperience { }
 
-const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
+const ExpEditor: React.FC<BlockEditorProps> = (resume) => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [currentItem, setCurrentItem] = useState<IResumeExperienceItem>({} as IResumeExperienceItem)
 
@@ -159,4 +159,4 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
     </div>
   )
 }
-export default BlockEditor
+export default ExpEditor
