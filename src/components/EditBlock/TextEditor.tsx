@@ -14,7 +14,7 @@ import { useAppStore, useResumeStore } from '@/store'
 import type { SelectedEditItemData } from '@/App'
 import type {
   IResumeExperience, IResumeInfo,
-  IResumeBlockItem,
+  IResumeExperienceItem,
 } from '@/store'
 import type { Color, IconSize, TextProps } from '@/types'
 import type { Color as AntColor } from 'antd/es/color-picker'
@@ -39,7 +39,7 @@ interface IdWhenItems {
    * used to differ `name` and `avatar` to highlight input
    *
    */
-  dataKey: 'items' | Omit<keyof IResumeBlockItem, 'id'>
+  dataKey: 'items' | Omit<keyof IResumeExperienceItem, 'id'>
   id: string
 }
 
@@ -64,7 +64,7 @@ const typeNeedsItemId = [
   'note',
   'description',
   'detail',
-] as Omit<keyof IResumeBlockItem, 'id'>[]
+] as Omit<keyof IResumeExperienceItem, 'id'>[]
 
 const TextEditor: React.FC<TextEditorProps> = (props) => {
   const {

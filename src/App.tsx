@@ -14,11 +14,11 @@ import Preview from './pages/home/preview'
 import { useAppStore, useResumeStore } from './store'
 
 import type {
-  IResumeInfo, IResumeBlockItem, IResumeBlockData, IResumeInfoData,
+  IResumeInfo, IResumeExperienceItem, IResumeExperienceData, IResumeInfoData,
 } from './store'
 
 export type SelectedEditItemData = {
-  type: Omit<keyof IResumeBlockData | keyof IResumeBlockItem, 'id'>
+  type: Omit<keyof IResumeExperienceData | keyof IResumeExperienceItem, 'id'>
   blockType: 'block'
   ids: string[]
   blockId: string

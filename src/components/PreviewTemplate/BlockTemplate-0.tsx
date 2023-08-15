@@ -6,7 +6,7 @@ import { AppContext } from '@/App'
 import { useAppStore, useResumeStore } from '@/store'
 
 import type { SelectedEditItemData } from '@/App'
-import type { IResumeBlockItem, IResumeExperience } from '@/store/resume'
+import type { IResumeExperienceItem, IResumeExperience } from '@/store/resume'
 
 import Text from '../Text/Text'
 
@@ -25,7 +25,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
     [`is-${resumeStyle.titleStyle.value}`]: titleIsNotText,
   })
 
-  const genParam = (type: Omit<keyof IResumeBlockItem, 'id'>, itemId?: string): SelectedEditItemData => {
+  const genParam = (type: Omit<keyof IResumeExperienceItem, 'id'>, itemId?: string): SelectedEditItemData => {
     const idArr = [blockId]
     if (itemId) idArr.push(itemId)
     if (type === 'blockTitle') {

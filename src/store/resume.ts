@@ -12,8 +12,10 @@ import type { BaseInputType, Color, TextProps } from '@/types'
 
 export type TemplateType = 0 | 1
 export type ThemePreset = 0 | 1
+export type BlockType = 'info' | 'block' | 'list'
 
-export interface IResumeBlockItem {
+/** S IResumeExperience */
+export interface IResumeExperienceItem {
   id: string
   title: TextProps
   subtitle?: TextProps
@@ -22,13 +24,22 @@ export interface IResumeBlockItem {
   detail?: TextProps
 }
 
-export interface IResumeBlockData {
+export interface IResumeExperienceData {
   blockTitle: TextProps & {
     value: string
   }
-  items: IResumeBlockItem[]
+  items: IResumeExperienceItem[]
 }
 
+export interface IResumeExperience {
+  type: 'block'
+  id: string
+  template: TemplateType
+  data: IResumeExperienceData
+}
+/** E IResumeExperience */
+
+/** S IResumeInfo */
 export type IResumeInfoItem = (TextProps & { id: string })
 
 export interface IResumeInfoData {
@@ -38,21 +49,33 @@ export interface IResumeInfoData {
   items: IResumeInfoItem[]
 }
 
-export interface IResumeExperience {
-  type: 'block'
-  id: string
-  template: TemplateType
-  data: IResumeBlockData
-}
-
 export interface IResumeInfo {
   type: 'info'
   id: string
   template: TemplateType
   data: IResumeInfoData
 }
+/** E IResumeInfo */
 
-export type IResumeBlock = IResumeExperience | IResumeInfo
+/** S IResumeList */
+export type IResumeListItem = (TextProps & { id: string })
+
+export interface IResumeListData {
+  blockTitle: TextProps & {
+    value: string
+  }
+  column: number
+  items: IResumeListItem[]
+}
+export interface IResumeList {
+  type: 'list'
+  id: string
+  template: TemplateType
+  data: IResumeListData
+}
+/** E IResumeList */
+
+export type IResumeBlock = IResumeExperience | IResumeInfo | IResumeList
 
 export type IResumeData = IResumeBlock[]
 
@@ -152,14 +175,14 @@ interface IResumeState {
 
   setResumeInfoData: (resumeInfo: IResumeInfoData) => void
   updateResumeInfoData: (id: string, resumeInfoData: IResumeInfoData) => void
-  setResumeBlockData: (id: string, blockData: IResumeBlockData) => void
-  updateResumeBlockData: (id: string, blockData: Partial<IResumeBlockData>) => void
-  addResumeBlockItem: (blockId: string, item?: IResumeBlockItem) => void
+  setResumeBlockData: (id: string, blockData: IResumeExperienceData) => void
+  updateResumeBlockData: (id: string, blockData: Partial<IResumeExperienceData>) => void
+  addResumeBlockItem: (blockId: string, item?: IResumeExperienceItem) => void
   deleteResumeBlockItem: (blockId: string, itemId: string) => void
-  updateResumeBlockItem: (blockId: string, itemId: string, item?: Partial<IResumeBlockItem>) => void
+  updateResumeBlockItem: (blockId: string, itemId: string, item?: Partial<IResumeExperienceItem>) => void
   moveResumeBlockItem: (blockId: string, itemId: string, moveto: number) => void
 
-  addResumeBlock: (template: TemplateType) => void
+  addResumeBlock: (blockType: BlockType) => void
   deleteResumeBlock: (id: string) => void
   updateResumeInfoItem: (itemId: string, item?: Partial<IResumeInfoItem>) => void
   addResumeInfoItem: (item: TextProps) => void
@@ -301,10 +324,10 @@ export const useResumeStore = create<IResumeState>()(
 
         return { ...state }
       }),
-      addResumeBlock: (template: TemplateType) => set(() => {
+      addResumeBlock: (blockType: BlockType) => set(() => {
         const state = get()
 
-        const newBlock = genBlock(template || 0)
+        const newBlock = genBlock(blockType)
 
         return {
           ...state,
@@ -348,7 +371,7 @@ export const useResumeStore = create<IResumeState>()(
           return { ...state }
         }
         const el = targetBlock.data.items.splice(targetIndex, 1)[0]
-        targetBlock.data.items.splice(newIndex, 0, el as IResumeBlockItem)
+        targetBlock.data.items.splice(newIndex, 0, el as IResumeExperienceItem)
 
         return { resumeData }
       }),

@@ -10,7 +10,7 @@ import { useResumeStore } from '@/store/resume'
 
 import TextEditor from './TextEditor'
 
-import type { IResumeExperience, IResumeBlockItem } from '@/store/resume'
+import type { IResumeExperience, IResumeExperienceItem } from '@/store/resume'
 import type { TextProps } from '@/types'
 
 import HoverChangeColor from '../Hover'
@@ -19,7 +19,7 @@ export interface BlockEditorProps extends IResumeExperience { }
 
 const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
-  const [currentItem, setCurrentItem] = useState<IResumeBlockItem>({} as IResumeBlockItem)
+  const [currentItem, setCurrentItem] = useState<IResumeExperienceItem>({} as IResumeExperienceItem)
 
   const { t } = useTranslation()
 
@@ -40,8 +40,8 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
 
   const updateItem = (
     newValue: TextProps,
-    type: keyof Omit<IResumeBlockItem, 'id'>,
-    item: IResumeBlockItem,
+    type: keyof Omit<IResumeExperienceItem, 'id'>,
+    item: IResumeExperienceItem,
   ) => {
     updateResumeBlockItem(resume.id, item.id, {
       ...item,
@@ -51,7 +51,7 @@ const BlockEditor: React.FC<BlockEditorProps> = (resume) => {
     })
   }
 
-  const renderHeader = (item: IResumeBlockItem) => {
+  const renderHeader = (item: IResumeExperienceItem) => {
     const handleDeleteIconClick = (e: React.MouseEvent) => {
       e.stopPropagation()
       setCurrentItem(item)
