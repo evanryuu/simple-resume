@@ -75,8 +75,15 @@ export default {
 
     /** choose template */
     chooseTemplate: '选择模板',
+    chooseBlock: '选择模块',
     template: '模板',
     default: '默认',
+
+    /** block type */
+    info: '个人信息',
+    exp: '经历',
+    experience: '经历',
+    list: '列表',
 
     /**  */
     preview: '预览',

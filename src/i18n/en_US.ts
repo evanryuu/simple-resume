@@ -75,8 +75,15 @@ export default {
 
     /** choose template */
     chooseTemplate: 'Choose Template',
+    chooseBlock: 'Choose Block',
     template: 'Template',
     default: 'Default',
+
+    /** block type */
+    info: 'Info',
+    exp: 'Exp',
+    experience: 'Experience',
+    list: 'List',
 
     preview: 'Preview',
     personalInfo: 'Personal Info',

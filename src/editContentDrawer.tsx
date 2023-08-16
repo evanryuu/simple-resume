@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 
 import {
-  Button, Card, Drawer, Modal, message,
+  Button, Card, Drawer, Image, Modal, message,
 } from 'antd'
 import { useTranslation } from 'react-i18next'
+
+import expImg from '@/assets/exp.png'
+import listImg from '@/assets/list.png'
 
 import { useResumeStore } from './store/resume'
 
@@ -25,7 +28,16 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
 
   const { addResumeBlock, resumeStyle } = useResumeStore()
 
-  const BLOCK_TYPES = ['exp', 'list'] as BlockType[]
+  const BLOCK_TYPES = [
+    {
+      type: 'exp',
+      img: expImg,
+    },
+    {
+      type: 'list',
+      img: listImg,
+    },
+  ] as {type: BlockType, img: string}[]
 
   const handleConfirm = () => {
     if (selectedType === undefined) {
@@ -56,25 +68,25 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
         {children}
       </Drawer>
       <Modal
-        title={t('chooseTemplate')}
+        title={t('chooseBlock')}
         open={isModalOpen}
         onOk={handleConfirm}
         onCancel={() => setIsModalOpen(false)}
       >
         {
-          BLOCK_TYPES.map((blockType) => (
+          BLOCK_TYPES.map((block) => (
             <Card
-              key={blockType}
+              key={block.type}
               className="cursor-pointer my-8"
               tabIndex={-1}
-              title={t('default')}
-              onClick={() => setSelectedType(blockType)}
+              title={t(block.type)}
+              onClick={() => setSelectedType(block.type)}
               style={{
               width: 300,
-              borderColor: selectedType === blockType ? resumeStyle.themeColor.value : '#ccc',
+              borderColor: selectedType === block.type ? resumeStyle.themeColor.value : '#ccc',
             }}
             >
-              {t(blockType)}
+              <Image src={block.img} />
             </Card>
           ))
         }
