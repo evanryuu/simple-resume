@@ -26,15 +26,15 @@ const ExpEditor: React.FC<BlockEditorProps> = (resume) => {
   const appContext = useContext(AppContext)
   const { showEdit, setShowEdit } = useAppStore()
   const {
-    addResumeBlockItem, updateResumeBlockItem, deleteResumeBlockItem, moveResumeBlockItem,
+    addResumeExpItem, updateResumeExpItem, deleteResumeExpItem, moveResumeExpItem,
   } = useResumeStore()
 
   const handleAddItem = () => {
-    addResumeBlockItem(resume.id)
+    addResumeExpItem(resume.id)
   }
 
   const handleDelete = () => {
-    deleteResumeBlockItem(resume.id, currentItem.id)
+    deleteResumeExpItem(resume.id, currentItem.id)
     setShowDeleteConfirm(false)
   }
 
@@ -43,7 +43,7 @@ const ExpEditor: React.FC<BlockEditorProps> = (resume) => {
     type: keyof Omit<IResumeExperienceItem, 'id'>,
     item: IResumeExperienceItem,
   ) => {
-    updateResumeBlockItem(resume.id, item.id, {
+    updateResumeExpItem(resume.id, item.id, {
       ...item,
       [type]: {
         ...newValue,
@@ -60,7 +60,7 @@ const ExpEditor: React.FC<BlockEditorProps> = (resume) => {
 
     const handleMoveBlockItem = (e: React.MouseEvent) => {
       e.stopPropagation()
-      moveResumeBlockItem(resume.id, item.id, -1)
+      moveResumeExpItem(resume.id, item.id, -1)
     }
 
     return (

@@ -26,7 +26,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
 
   const blockTitleInputRef = useRef<any>(null)
 
-  const { deleteResumeBlock, updateResumeBlockData, moveResumeBlock } = useResumeStore()
+  const { deleteResumeBlock, updateResumeExpData, moveResumeBlock } = useResumeStore()
 
   const handleInputFinished = () => {
     setShowBlockNameInput(false)
@@ -43,7 +43,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   }
 
   const handleBlockNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateResumeBlockData(props.id, {
+    updateResumeExpData(props.id, {
       blockTitle: {
         value: e.target.value,
       },

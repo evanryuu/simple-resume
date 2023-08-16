@@ -170,24 +170,28 @@ interface IResumeState {
   resumeStyle: IResumeStyle
   setResumeStyle: (style: IResumeStyle) => void
 
+  // date & blocks
   resumeData: IResumeData
   setResumeData: (resumes: IResumeBlock[]) => void
   moveResumeBlock: (id: string, moveto: number) => void
-
-  setResumeInfoData: (resumeInfo: IResumeInfoData) => void
-  updateResumeInfoData: (id: string, resumeInfoData: IResumeInfoData) => void
-  setResumeBlockData: (id: string, blockData: IResumeExperienceData) => void
-  updateResumeBlockData: (id: string, blockData: Partial<IResumeExperienceData>) => void
-  addResumeBlockItem: (blockId: string, item?: IResumeExperienceItem) => void
-  deleteResumeBlockItem: (blockId: string, itemId: string) => void
-  updateResumeBlockItem: (blockId: string, itemId: string, item?: Partial<IResumeExperienceItem>) => void
-  moveResumeBlockItem: (blockId: string, itemId: string, moveto: number) => void
-
   addResumeBlock: (blockType: BlockType) => void
   deleteResumeBlock: (id: string) => void
+
+  // resume info methods
+  setResumeInfoData: (resumeInfo: IResumeInfoData) => void
+  updateResumeInfoData: (id: string, resumeInfoData: IResumeInfoData) => void
   updateResumeInfoItem: (itemId: string, item?: Partial<IResumeInfoItem>) => void
   addResumeInfoItem: (item: TextProps) => void
   deleteResumeInfoItem: (index: string) => void
+
+  // resume exp methods
+  setResumeExpData: (id: string, blockData: IResumeExperienceData) => void
+  updateResumeExpData: (id: string, blockData: Partial<IResumeExperienceData>) => void
+  updateResumeExpItem: (blockId: string, itemId: string, item?: Partial<IResumeExperienceItem>) => void
+  addResumeExpItem: (blockId: string, item?: IResumeExperienceItem) => void
+  deleteResumeExpItem: (blockId: string, itemId: string) => void
+  moveResumeExpItem: (blockId: string, itemId: string, moveto: number) => void
+
 }
 
 export const useResumeStore = create<IResumeState>()(
@@ -253,7 +257,7 @@ export const useResumeStore = create<IResumeState>()(
         }
         return { ...state }
       }),
-      setResumeBlockData: (id, blockData) => set(() => {
+      setResumeExpData: (id, blockData) => set(() => {
         const state = get()
         const targetBlock = state.resumeData.find((r) => r.id === id)
         targetBlock!.data = {
@@ -262,7 +266,7 @@ export const useResumeStore = create<IResumeState>()(
         }
         return { ...state }
       }),
-      updateResumeBlockData: (id, blockData) => set(() => {
+      updateResumeExpData: (id, blockData) => set(() => {
         const state = get()
 
         const targetBlock = state.resumeData.find((r) => r.id === id)
@@ -274,7 +278,7 @@ export const useResumeStore = create<IResumeState>()(
         }
         return { ...state }
       }),
-      updateResumeBlockItem: (blockId, itemId, item) => set(() => {
+      updateResumeExpItem: (blockId, itemId, item) => set(() => {
         const state = get()
 
         const block = state.resumeData.find((b) => b.id === blockId) as IResumeExperience
@@ -292,7 +296,7 @@ export const useResumeStore = create<IResumeState>()(
         }
         return { ...state }
       }),
-      addResumeBlockItem: (blockId, specific) => set(() => {
+      addResumeExpItem: (blockId, specific) => set(() => {
         const state = get()
 
         const targetBlock = state.resumeData.find((b) => b.id === blockId) as IResumeExperience
@@ -356,7 +360,7 @@ export const useResumeStore = create<IResumeState>()(
 
         return { ...state }
       }),
-      moveResumeBlockItem: (blockId, itemId, moveto) => set(() => {
+      moveResumeExpItem: (blockId, itemId, moveto) => set(() => {
         const state = get()
 
         const { resumeData } = state
@@ -376,7 +380,7 @@ export const useResumeStore = create<IResumeState>()(
 
         return { resumeData }
       }),
-      deleteResumeBlockItem: (blockId, itemId) => set(() => {
+      deleteResumeExpItem: (blockId, itemId) => set(() => {
         const state = get()
 
         const { resumeData } = state
