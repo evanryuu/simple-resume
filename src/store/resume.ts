@@ -7,6 +7,7 @@ import TemplateData from '@/config/template.json'
 import i18nInstance from '@/i18n'
 import { generateRandomId, initTemplateData } from '@/utils'
 import { genBlock } from '@/utils/block'
+import { getRandom } from '@/utils/utils'
 
 import type { BaseInputType, Color, TextProps } from '@/types'
 
@@ -192,6 +193,14 @@ interface IResumeState {
   deleteResumeExpItem: (blockId: string, itemId: string) => void
   moveResumeExpItem: (blockId: string, itemId: string, moveto: number) => void
 
+  // resume list methods
+  setResumeListData: (id: string, blockData: IResumeListData) => void
+  updateResumeListData: (id: string, blockData: Partial<IResumeListData>) => void
+  updateResumeListItem: (blockId: string, itemId: string, item?: Partial<IResumeListItem>) => void
+  addResumeListItem: (blockId: string, item?: IResumeListItem) => void
+  deleteResumeListItem: (blockId: string, itemId: string) => void
+  moveResumeListItem: (blockId: string, itemId: string, moveto: number) => void
+
 }
 
 export const useResumeStore = create<IResumeState>()(
@@ -232,6 +241,30 @@ export const useResumeStore = create<IResumeState>()(
 
         return { resumeData }
       }),
+      addResumeBlock: (blockType: BlockType) => set(() => {
+        const state = get()
+
+        const newBlock = genBlock(blockType)
+
+        return {
+          ...state,
+          resumeData: [
+            ...state.resumeData,
+            newBlock,
+          ],
+        }
+      }),
+      deleteResumeBlock: (id) => set(() => {
+        const state = get()
+
+        const targetIndex = state.resumeData.findIndex((block) => block.id === id)
+        if (targetIndex !== -1) {
+          state.resumeData.splice(targetIndex, 1)
+        }
+        return { ...state }
+      }),
+
+      /** S info methods */
       setResumeInfoData: (resume) => set(() => {
         const state = get()
         const infoIndex = state.resumeData.findIndex((r) => r.type === 'info')!
@@ -257,6 +290,49 @@ export const useResumeStore = create<IResumeState>()(
         }
         return { ...state }
       }),
+      updateResumeInfoItem: (itemId, item) => set(() => {
+        const state = get()
+
+        const { resumeData } = state
+        const info = resumeData.find((r) => r.type === 'info') as IResumeInfo
+
+        const targetIndex = info.data.items.findIndex((i) => i.id === itemId)
+        const target = info.data.items[targetIndex]
+
+        if (targetIndex !== -1) {
+          info.data.items.splice(targetIndex, 1, {
+            ...target,
+            ...item,
+          })
+        }
+
+        return { ...state }
+      }),
+      addResumeInfoItem: (item: TextProps) => set(() => {
+        const state = get()
+
+        const info = state.resumeData.find((resume) => resume.type === 'info')!
+        if (info.type === 'info') {
+          info.data.items.push({
+            ...item,
+            id: generateRandomId(9),
+          })
+        }
+        return { ...state }
+      }),
+      deleteResumeInfoItem: (itemId) => set(() => {
+        const state = get()
+
+        const info = state.resumeData.find((resume) => resume.type === 'info')!
+        if (info.type === 'info') {
+          const targetIndex = info.data.items.findIndex((i) => i.id === itemId)
+          info.data.items.splice(targetIndex, 1)
+        }
+        return { ...state }
+      }),
+      /** E info methods */
+
+      /** S exp methods */
       setResumeExpData: (id, blockData) => set(() => {
         const state = get()
         const targetBlock = state.resumeData.find((r) => r.id === id)
@@ -329,37 +405,6 @@ export const useResumeStore = create<IResumeState>()(
 
         return { ...state }
       }),
-      addResumeBlock: (blockType: BlockType) => set(() => {
-        const state = get()
-
-        const newBlock = genBlock(blockType)
-
-        return {
-          ...state,
-          resumeData: [
-            ...state.resumeData,
-            newBlock,
-          ],
-        }
-      }),
-      updateResumeInfoItem: (itemId, item) => set(() => {
-        const state = get()
-
-        const { resumeData } = state
-        const info = resumeData.find((r) => r.type === 'info') as IResumeInfo
-
-        const targetIndex = info.data.items.findIndex((i) => i.id === itemId)
-        const target = info.data.items[targetIndex]
-
-        if (targetIndex !== -1) {
-          info.data.items.splice(targetIndex, 1, {
-            ...target,
-            ...item,
-          })
-        }
-
-        return { ...state }
-      }),
       moveResumeExpItem: (blockId, itemId, moveto) => set(() => {
         const state = get()
 
@@ -389,37 +434,104 @@ export const useResumeStore = create<IResumeState>()(
         block.data.items.splice(targetIndex, 1)
         return { ...state }
       }),
-      deleteResumeBlock: (id) => set(() => {
-        const state = get()
+      /** E exp methods */
 
-        const targetIndex = state.resumeData.findIndex((block) => block.id === id)
-        if (targetIndex !== -1) {
-          state.resumeData.splice(targetIndex, 1)
+      /** S list methods */
+      setResumeListData: (id, blockData) => set(() => {
+        const state = get()
+        const targetBlock = state.resumeData.find((r) => r.id === id)
+        targetBlock!.data = {
+          ...targetBlock!.data,
+          ...blockData,
         }
         return { ...state }
       }),
-      addResumeInfoItem: (item: TextProps) => set(() => {
+      updateResumeListData: (id, blockData) => set(() => {
         const state = get()
 
-        const info = state.resumeData.find((resume) => resume.type === 'info')!
-        if (info.type === 'info') {
-          info.data.items.push({
-            ...item,
-            id: generateRandomId(9),
+        const targetBlock = state.resumeData.find((r) => r.id === id)
+        if (targetBlock?.type === 'list') {
+          targetBlock!.data = {
+            ...targetBlock!.data,
+            ...blockData,
+          }
+        }
+        return { ...state }
+      }),
+      updateResumeListItem: (blockId, itemId, item) => set(() => {
+        const state = get()
+
+        const block = state.resumeData.find((b) => b.id === blockId) as IResumeList
+        const targetIndex = block.data.items.findIndex((i) => i.id === itemId)!
+
+        if (targetIndex !== -1) {
+          if (item === undefined) {
+            block.data.items.splice(targetIndex, 1)
+          } else {
+            block.data.items.splice(targetIndex, 1, {
+              ...block.data.items[targetIndex],
+              ...item,
+            })
+          }
+        }
+        return { ...state }
+      }),
+      addResumeListItem: (blockId, specific) => set(() => {
+        const state = get()
+
+        const targetBlock = state.resumeData.find((b) => b.id === blockId) as IResumeList
+        const id = generateRandomId(10)
+        const lists = [
+          { value: 'Game Player', icon: 'mdi:nintendo-switch' },
+          { value: 'Song Maker', icon: 'mdi:account-music-outline' },
+          { value: 'Writer', icon: 'mdi:book-multiple-outline' },
+          { value: 'Artist', icon: 'mdi:palette-outline' },
+        ]
+        if (specific) {
+          targetBlock.data.items.push({
+            ...specific,
+            id,
+          })
+        } else {
+          targetBlock.data.items.push({
+            id,
+            ...lists[getRandom(0, lists.length - 1)],
           })
         }
+
         return { ...state }
       }),
-      deleteResumeInfoItem: (itemId) => set(() => {
+      moveResumeListItem: (blockId, itemId, moveto) => set(() => {
         const state = get()
 
-        const info = state.resumeData.find((resume) => resume.type === 'info')!
-        if (info.type === 'info') {
-          const targetIndex = info.data.items.findIndex((i) => i.id === itemId)
-          info.data.items.splice(targetIndex, 1)
+        const { resumeData } = state
+        const targetBlock = resumeData.find((r) => r.id === blockId)!
+        const targetIndex = targetBlock.data.items.findIndex((i) => i.id === itemId)!
+        const newIndex = targetIndex + moveto
+
+        if (newIndex < 0) {
+          message.info(i18nInstance.t('noMoreUp'))
+          return { ...state }
+        } if (newIndex >= targetBlock.data.items.length) {
+          message.info(i18nInstance.t('noMoreBottom'))
+          return { ...state }
         }
+        const el = targetBlock.data.items.splice(targetIndex, 1)[0]
+        targetBlock.data.items.splice(newIndex, 0, el as IResumeListItem)
+
+        return { resumeData }
+      }),
+      deleteResumeListItem: (blockId, itemId) => set(() => {
+        const state = get()
+
+        const { resumeData } = state
+        const block = resumeData.find((b) => b.id === blockId)!
+        const targetIndex = block.data.items.findIndex((i) => i.id === itemId)!
+        block.data.items.splice(targetIndex, 1)
         return { ...state }
       }),
+      /** E list methods */
+
     }),
     {
       name: constant.RESUME_SETTING,

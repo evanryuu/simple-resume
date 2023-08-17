@@ -84,6 +84,7 @@ export default {
     exp: '经历',
     experience: '经历',
     list: '列表',
+    column: '列',
 
     /**  */
     preview: '预览',

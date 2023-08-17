@@ -9,6 +9,11 @@ import { useResumeStore } from '@/store/resume'
 import BlockHeader from './EditorHeader'
 import ExpEditor from './ExpEditor'
 import InfoEditor from './InfoEditor'
+import ListEditor from './ListEditor'
+
+import type {
+  IResumeBlock, IResumeExperience, IResumeInfo, IResumeList,
+} from '@/store/resume'
 
 const BlocksContainer: React.FC = () => {
   const { resumeData } = useResumeStore()
@@ -23,6 +28,15 @@ const BlocksContainer: React.FC = () => {
       ...appContext.selectedEditItem,
       ids: keys,
     })
+  }
+
+  const genEditor = (resume: IResumeBlock) => {
+    const map = {
+      exp: <ExpEditor {...resume as IResumeExperience} />,
+      info: <InfoEditor {...resume as IResumeInfo} />,
+      list: <ListEditor {...resume as IResumeList} />,
+    }
+    return map[resume.type]
   }
 
   return (
@@ -40,14 +54,7 @@ const BlocksContainer: React.FC = () => {
               key={resume.id}
             >
               <div>
-                {
-                // eslint-disable-next-line no-nested-ternary
-                resume.type === 'exp'
-                  ? <ExpEditor {...resume} />
-                  : resume.type === 'info'
-                  ? <InfoEditor {...resume} />
-                  : null
-}
+                {genEditor(resume)}
               </div>
             </Collapse.Panel>
           ))

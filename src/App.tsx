@@ -14,7 +14,7 @@ import Preview from './pages/home/preview'
 import { useAppStore, useResumeStore } from './store'
 
 import type {
-  IResumeInfo, IResumeExperienceItem, IResumeExperienceData, IResumeInfoData,
+  IResumeInfo, IResumeExperienceItem, IResumeExperienceData, IResumeInfoData, IResumeListData,
 } from './store'
 
 export type SelectedEditItemData = {
@@ -26,6 +26,12 @@ export type SelectedEditItemData = {
 } | {
   type: Omit<Partial<keyof IResumeInfoData>, 'blockTitle'>
   blockType: 'info'
+  ids: string[]
+  blockId: string
+  itemId?: string
+} | {
+  type: Omit<Partial<keyof IResumeListData>, 'blockTitle'>
+  blockType: 'list'
   ids: string[]
   blockId: string
   itemId?: string

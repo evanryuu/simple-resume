@@ -15,6 +15,7 @@ import type { SelectedEditItemData } from '@/App'
 import type {
   IResumeExperience, IResumeInfo,
   IResumeExperienceItem,
+  IResumeList,
 } from '@/store'
 import type { Color, IconSize, TextProps } from '@/types'
 import type { Color as AntColor } from 'antd/es/color-picker'
@@ -46,7 +47,7 @@ interface IdWhenItems {
 export type TextEditorProps = TextProps & (IdWhenItems | IdWhenNotItems) & {
   type?: 'text' | 'textarea'
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  block: IResumeInfo | IResumeExperience
+  block: IResumeInfo | IResumeExperience | IResumeList
   label: string
   labelRightEl?: React.ReactNode
   hideMore?: boolean

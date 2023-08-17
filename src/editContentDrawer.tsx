@@ -82,8 +82,8 @@ const EditDrawer: React.FC<EditDrawerProps> = (props) => {
               title={t(block.type)}
               onClick={() => setSelectedType(block.type)}
               style={{
-              width: 300,
-              borderColor: selectedType === block.type ? resumeStyle.themeColor.value : '#ccc',
+              borderColor: selectedType === block.type ? resumeStyle.themeColor.value : '#eee',
+              boxShadow: selectedType === block.type ? '0 0 3px rgba(30, 30, 30, .3)' : 'none',
             }}
             >
               <Image src={block.img} />

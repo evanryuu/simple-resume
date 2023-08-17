@@ -15,13 +15,13 @@ const MyGithub: React.FC<MyGithubProps> = (props) => {
   return (
     <a
       target="_blank"
-      href="https://github.com/evankwolf/simple-resume"
+      href="https://github.com/evanryuu/simple-resume"
       className={cname}
       rel="noreferrer"
     >
       {
         type === 'shield'
-          ? <img src="https://img.shields.io/github/stars/evankwolf/simple-resume?style=social" alt="github" />
+          ? <img src="https://img.shields.io/github/stars/evanryuu/simple-resume?style=social" alt="github" />
           : <Icon icon="bytesize:github" />
       }
 

@@ -53,17 +53,15 @@ export const genBlock = <T extends BlockType>(blockType: T): GenBlockFromType<T>
       id: blockId,
       template: 0,
       data: {
-        column: 1,
+        column: 3,
         blockTitle: {
           value: `List-${blockId}`,
         },
         items: [
-          {
-            id: generateRandomId(10),
-            value: 'evanakihito@outlook.com',
-            icon: 'eva:email-outline',
-            iconColor: '#ff1647',
-          },
+          { id: generateRandomId(10), value: 'Game Player', icon: 'mdi:nintendo-switch' },
+          { id: generateRandomId(10), value: 'Song Maker', icon: 'mdi:account-music-outline' },
+          { id: generateRandomId(10), value: 'Writer', icon: 'mdi:book-multiple-outline' },
+          { id: generateRandomId(10), value: 'Artist', icon: 'mdi:palette-outline' },
         ],
       },
     } as IResumeList as GenBlockFromType<T>
@@ -93,7 +91,7 @@ export const genBlock = <T extends BlockType>(blockType: T): GenBlockFromType<T>
         },
         {
           id: '945473855',
-          value: 'github.com/evankwolf',
+          value: 'github.com/evanryuu',
           icon: 'eva:github-outline',
         },
         {

@@ -26,7 +26,9 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
 
   const blockTitleInputRef = useRef<any>(null)
 
-  const { deleteResumeBlock, updateResumeExpData, moveResumeBlock } = useResumeStore()
+  const {
+    deleteResumeBlock, updateResumeExpData, updateResumeListData, moveResumeBlock,
+  } = useResumeStore()
 
   const handleInputFinished = () => {
     setShowBlockNameInput(false)
@@ -43,11 +45,22 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   }
 
   const handleBlockNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateResumeExpData(props.id, {
+    const newData = {
       blockTitle: {
         value: e.target.value,
       },
-    })
+    }
+    switch (type) {
+      case 'exp':
+        updateResumeExpData(props.id, newData)
+        break
+      case 'list':
+        updateResumeListData(props.id, newData)
+        break
+
+      default:
+        break
+    }
   }
 
   const handleEditBlockName = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -84,8 +97,9 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
         role="presentation"
         className="flex justify-between items-center cursor-pointer"
       >
+        {/* S Block Title Section */}
         {
-          (showBlockNameInput && props.type === 'exp') || selectingBlockTitle
+          (showBlockNameInput && props.type !== 'info') || selectingBlockTitle
             ? <Input
                 ref={blockTitleInputRef}
                 onBlur={handleInputFinished}
@@ -97,14 +111,17 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
             />
             : (
               <div>
-                {props.type === 'exp' ? data.blockTitle.value : t('personalInfo')}
+                {props.type !== 'info' ? data.blockTitle.value : t('personalInfo')}
               </div>
             )
         }
+        {/* E Block Title Section */}
+
+        {/* S Button Group Section */}
         <div className="flex items-center">
           <Tag className="tracking-wider ml-4">{props.type.toUpperCase()}</Tag>
           {
-            type === 'exp'
+            type !== 'info'
               ? (
                 <>
                   <HoverChangeColor>
@@ -140,6 +157,8 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
               : null
           }
         </div>
+        {/* E Button Group Section */}
+
       </div>
       <Modal
         title={t('warning')}

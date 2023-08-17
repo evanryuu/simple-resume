@@ -2,9 +2,10 @@ import React from 'react'
 
 import ExpTemplate from './ExpTemplate'
 import InfoTemplate from './InfoTemplate'
+import ListTemplate from './ListTemplate'
 
 import type {
-  IResumeBlock, IResumeExperience, IResumeInfo,
+  IResumeBlock, IResumeExperience, IResumeInfo, IResumeList,
 } from '@/store/resume'
 
 export type DisplayTemplateProps = IResumeBlock
@@ -21,7 +22,7 @@ const PreviewTemplate: React.FC<DisplayTemplateProps> = (props) => {
         return <InfoTemplate {...(props as IResumeInfo)} />
 
       case 'list':
-        return null
+        return <ListTemplate {...(props as IResumeList)} />
 
       default:
         throw new Error('Wrong template type')

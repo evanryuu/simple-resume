@@ -84,6 +84,7 @@ export default {
     exp: 'Exp',
     experience: 'Experience',
     list: 'List',
+    column: 'Column',
 
     preview: 'Preview',
     personalInfo: 'Personal Info',

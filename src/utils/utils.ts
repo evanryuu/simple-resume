@@ -39,3 +39,10 @@ export function moveArrayElement<T>(arr: T[], index: number, step: number): void
   const element = arr.splice(index, 1)[0]
   arr.splice(newIndex, 0, element)
 }
+
+export const getRandom = (from: number, to: number) => {
+  if (to < from) {
+    throw new Error('to must be greater than from')
+  }
+  return Math.floor(Math.random() * (to - from + 1)) + from
+}

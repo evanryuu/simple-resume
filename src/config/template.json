@@ -15,9 +15,11 @@
           "items": [
             {
               "id": "756865294",
-              "value": "evanakihito@outlook.com",
+              "value": "evanryuu@outlook.com",
               "icon": "eva:email-outline",
-              "iconColor": "#ff1647"
+              "iconColor": "#ff1647",
+              "md": false,
+              "iconSize": "md"
             },
             {
               "id": "410277393",
@@ -26,8 +28,10 @@
             },
             {
               "id": "945473855",
-              "value": "github.com/evankwolf",
-              "icon": "eva:github-outline"
+              "value": "github.com/evanryuu",
+              "icon": "eva:github-outline",
+              "md": false,
+              "iconSize": "md"
             },
             {
               "value": "juejin.cn/user/427030498524711",
@@ -187,43 +191,42 @@
         }
       },
       {
-        "type": "exp",
-        "id": "47036135",
+        "type": "list",
+        "id": "31284684",
         "template": 0,
         "data": {
+          "column": 1,
           "blockTitle": {
             "value": "能力证明"
           },
           "items": [
             {
-              "id": "0194047849",
-              "title": {
-                "value": "",
-                "icon": "",
-                "md": false
-              },
-              "subtitle": {
-                "value": "",
-                "icon": "",
-                "md": false
-              },
-              "note": {
-                "value": "",
-                "icon": "",
-                "md": false
-              },
-              "description": {
-                "value": "- GPA 5/4\n- CET6 777\n- 日语 n-1\n- 3202年全星系ACM大赛第一名",
-                "icon": "",
-                "md": true,
-                "iconSize": "lg"
-              },
-              "detail": {
-                "value": "",
-                "icon": "",
-                "md": false,
-                "iconSize": "md"
-              }
+              "id": "6708324892",
+              "value": "GPA 5/4",
+              "icon": "mdi:account-school-outline",
+              "md": false,
+              "iconSize": "lg"
+            },
+            {
+              "id": "6710683915",
+              "value": "CET6 777",
+              "icon": "mdi:ab-testing",
+              "md": false,
+              "iconSize": "lg"
+            },
+            {
+              "id": "6093289487",
+              "value": "日语 n-1",
+              "icon": "mdi:ideogram-cjk-variant",
+              "md": false,
+              "iconSize": "lg"
+            },
+            {
+              "id": "0211663389",
+              "value": "3202年全星系ACM大赛第一名",
+              "icon": "mdi:code-tags",
+              "md": false,
+              "iconSize": "lg"
             }
           ]
         }
