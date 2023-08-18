@@ -14,7 +14,7 @@ type GenBlockFromType<T extends BlockType> = T extends 'exp'
 
 export const genBlock = <T extends BlockType>(blockType: T): GenBlockFromType<T> => {
   const blockId = generateRandomId(8)
-
+  const itemId = generateRandomId(10)
   if (blockType === 'exp') {
     return {
       type: blockType,
@@ -26,21 +26,21 @@ export const genBlock = <T extends BlockType>(blockType: T): GenBlockFromType<T>
         },
         items: [
           {
-            id: generateRandomId(10),
+            id: itemId,
             title: {
-              value: `Experience-${blockId}`,
+              value: `Experience-${itemId}`,
             },
             subtitle: {
-              value: `SubTitle-${blockId}`,
+              value: `SubTitle-${itemId}`,
             },
             note: {
-              value: `Note-${blockId}`,
+              value: `Note-${itemId}`,
             },
             description: {
-              value: `description-${blockId}`,
+              value: `description-${itemId}`,
             },
             detail: {
-              value: `detail-${blockId}`,
+              value: `detail-${itemId}`,
             },
           },
         ],

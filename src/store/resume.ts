@@ -264,6 +264,8 @@ export const useResumeStore = create<IResumeState>()(
         return { ...state }
       }),
 
+      // TODO simplify info/exp/list methods
+
       /** S info methods */
       setResumeInfoData: (resume) => set(() => {
         const state = get()
