@@ -131,7 +131,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
                       onClick={handleEditBlockName}
                       className="flex ml-1 items-center"
                     >
-                      <Icon fontSize={16} icon="mingcute:edit-line" />
+                      <Icon fontSize={16} icon="mdi:square-edit-outline" />
                     </span>
                   </HoverChangeColor>
                   <HoverChangeColor>
@@ -142,7 +142,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
                       onClick={handleMoveBlock}
                       className="flex ml-1 items-center"
                     >
-                      <Icon fontSize={16} icon="fluent:arrow-up-16-regular" />
+                      <Icon fontSize={16} icon="mdi:arrow-up" />
                     </span>
                   </HoverChangeColor>
                   <HoverChangeColor>
@@ -152,7 +152,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
                       onClick={handleDeleteClick}
                       className="text-red flex ml-1 items-center"
                     >
-                      <Icon fontSize={16} icon="fluent:delete-28-regular" />
+                      <Icon fontSize={16} icon="mdi:delete-off-outline" />
                     </span>
                   </HoverChangeColor>
                 </>

@@ -103,7 +103,7 @@ const InfoEditor: React.FC<InfoEditorProps> = (resume) => {
               block={resume}
             >
               <Button danger className="mt-4" onClick={() => deleteResumeInfoItem(item.id)}>
-                <Icon icon="fluent:delete-28-regular" width={20} />
+                <Icon icon="mdi:delete-off-outline" width={20} />
               </Button>
             </TextEditor>
           </div>
