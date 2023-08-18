@@ -72,6 +72,9 @@ export default {
     resetConfigTip: '确定要重置配置吗？',
     success: '成功',
     failed: '失败',
+    editTitle: '编辑标题',
+    moveUp: '往上移动一位',
+    delete: '删除',
 
     /** choose template */
     chooseTemplate: '选择模板',

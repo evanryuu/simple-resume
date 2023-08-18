@@ -127,6 +127,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
                   <HoverChangeColor>
                     <span
                       role="presentation"
+                      title={t('editTitle') as string}
                       onClick={handleEditBlockName}
                       className="flex ml-1 items-center"
                     >
@@ -137,6 +138,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
 
                     <span
                       role="presentation"
+                      title={t('moveUp') as string}
                       onClick={handleMoveBlock}
                       className="flex ml-1 items-center"
                     >
@@ -146,6 +148,7 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
                   <HoverChangeColor>
                     <span
                       role="presentation"
+                      title={t('delete') as string}
                       onClick={handleDeleteClick}
                       className="text-red flex ml-1 items-center"
                     >

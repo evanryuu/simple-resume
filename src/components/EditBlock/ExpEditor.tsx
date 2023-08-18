@@ -70,13 +70,19 @@ const ExpEditor: React.FC<BlockEditorProps> = (resume) => {
           <HoverChangeColor>
             <span
               role="presentation"
+              title={t('moveUp') as string}
               onClick={handleMoveBlockItem}
               className="flex ml-1 items-center"
             >
               <Icon fontSize={16} icon="fluent:arrow-up-16-regular" />
             </span>
           </HoverChangeColor>
-          <span className="text-red flex items-center ml-1"><Icon icon="fluent:delete-28-regular" onClick={handleDeleteIconClick} /></span>
+          <span
+            title={t('delete') as string}
+            className="text-red flex items-center ml-1"
+          >
+            <Icon icon="fluent:delete-28-regular" onClick={handleDeleteIconClick} />
+          </span>
         </div>
       </div>
     )

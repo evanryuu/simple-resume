@@ -72,6 +72,9 @@ export default {
     resetConfigTip: 'Are you sure you want to reset config? It is not undoable.',
     success: 'Success',
     failed: 'Failed',
+    editTitle: 'Edit Title',
+    moveUp: 'Move up',
+    delete: 'Delete',
 
     /** choose template */
     chooseTemplate: 'Choose Template',
