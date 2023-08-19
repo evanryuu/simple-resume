@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
 
 import { Icon } from '@iconify/react'
-import { Button, Collapse, Modal } from 'antd'
+import {
+  Button, Collapse, Modal, message,
+} from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { AppContext } from '@/App'
@@ -27,6 +29,7 @@ const ExpEditor: React.FC<BlockEditorProps> = (resume) => {
   const { showEdit, setShowEdit } = useAppStore()
   const {
     addResumeExpItem, updateResumeExpItem, deleteResumeExpItem, moveResumeExpItem,
+    cloneItem,
   } = useResumeStore()
 
   const handleAddItem = () => {
@@ -63,6 +66,16 @@ const ExpEditor: React.FC<BlockEditorProps> = (resume) => {
       moveResumeExpItem(resume.id, item.id, -1)
     }
 
+    const handleCloneItem = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+      e.stopPropagation()
+      try {
+        cloneItem(resume.id, item.id)
+        message.success(t('cloneSuccess'))
+      } catch (_) {
+        message.error(t('error'))
+      }
+    }
+
     return (
       <div className="flex items-center justify-between">
         <span>{item.title.value}</span>
@@ -75,6 +88,16 @@ const ExpEditor: React.FC<BlockEditorProps> = (resume) => {
               className="flex ml-1 items-center"
             >
               <Icon fontSize={16} icon="mdi:arrow-up" />
+            </span>
+          </HoverChangeColor>
+          <HoverChangeColor>
+            <span
+              role="presentation"
+              title={t('clone') as string}
+              onClick={handleCloneItem}
+              className="flex ml-1 items-center"
+            >
+              <Icon fontSize={16} icon="mdi:content-copy" />
             </span>
           </HoverChangeColor>
           <span

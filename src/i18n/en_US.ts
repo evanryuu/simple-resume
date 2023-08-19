@@ -73,6 +73,8 @@ export default {
     success: 'Success',
     failed: 'Failed',
     editTitle: 'Edit Title',
+    clone: 'Clone',
+    cloneSuccess: 'Clone Success!',
     moveUp: 'Move up',
     delete: 'Delete',
 

@@ -3,7 +3,9 @@ import React, {
 } from 'react'
 
 import { Icon } from '@iconify/react'
-import { Input, Modal, Tag } from 'antd'
+import {
+  Input, Modal, Tag, message,
+} from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { AppContext } from '@/App'
@@ -27,7 +29,11 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
   const blockTitleInputRef = useRef<any>(null)
 
   const {
-    deleteResumeBlock, updateResumeExpData, updateResumeListData, moveResumeBlock,
+    deleteResumeBlock,
+    cloneBlock,
+    updateResumeExpData,
+    updateResumeListData,
+    moveResumeBlock,
   } = useResumeStore()
 
   const handleInputFinished = () => {
@@ -67,6 +73,16 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
     e.stopPropagation()
     setShowBlockNameInput(!showBlockNameInput)
     setSelectedEditItem({} as SelectedEditItemData)
+  }
+
+  const handleCloneBlock = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    e.stopPropagation()
+    try {
+      cloneBlock(props.id)
+      message.success(t('success'))
+    } catch (_) {
+      message.error(t('error'))
+    }
   }
 
   const handleDeleteClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -135,7 +151,16 @@ const BlockHeader: React.FC<BlockEditorHeaderProps> = (props) => {
                     </span>
                   </HoverChangeColor>
                   <HoverChangeColor>
-
+                    <span
+                      role="presentation"
+                      title={t('clone') as string}
+                      onClick={handleCloneBlock}
+                      className="flex ml-1 items-center"
+                    >
+                      <Icon fontSize={16} icon="mdi:content-copy" />
+                    </span>
+                  </HoverChangeColor>
+                  <HoverChangeColor>
                     <span
                       role="presentation"
                       title={t('moveUp') as string}

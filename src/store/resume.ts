@@ -178,6 +178,10 @@ interface IResumeState {
   addResumeBlock: (blockType: BlockType) => void
   deleteResumeBlock: (id: string) => void
 
+  // common use methods
+  cloneBlock: (blockId: string) => void
+  cloneItem: (blockId: string, itemId: string) => void
+
   // resume info methods
   setResumeInfoData: (resumeInfo: IResumeInfoData) => void
   updateResumeInfoData: (id: string, resumeInfoData: IResumeInfoData) => void
@@ -263,6 +267,27 @@ export const useResumeStore = create<IResumeState>()(
         }
         return { ...state }
       }),
+
+      /** S common use methods */
+      cloneBlock: (blockId: string) => set(() => {
+        const state = get()
+        const targetIndex = state.resumeData.findIndex((r) => r.id === blockId)!
+
+        const newBlock = JSON.parse(JSON.stringify((state.resumeData[targetIndex])))
+        newBlock.id = generateRandomId(8)
+        state.resumeData.splice(targetIndex, 0, newBlock)
+        return { ...state }
+      }),
+      cloneItem: (blockId: string, itemId: string) => set(() => {
+        const state = get()
+        const targetBlock = state.resumeData.find((r) => r.id === blockId)!
+        const targetIndex = targetBlock.data.items.findIndex((i) => i.id === itemId)!
+        const targetItem: any = JSON.parse(JSON.stringify(targetBlock.data.items[targetIndex]))
+        targetItem.id = generateRandomId(10)
+        targetBlock.data.items.splice(targetIndex, 0, { ...targetItem })
+        return { ...state }
+      }),
+      /** E common use methods */
 
       // TODO simplify info/exp/list methods
 

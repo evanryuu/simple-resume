@@ -73,6 +73,8 @@ export default {
     success: '成功',
     failed: '失败',
     editTitle: '编辑标题',
+    clone: '克隆',
+    cloneSuccess: '复制成功！',
     moveUp: '往上移动一位',
     delete: '删除',
 
