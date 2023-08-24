@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   antd:
     specifier: ^5.5.2
@@ -32,8 +36,8 @@ dependencies:
     specifier: ^2.14.12
     version: 2.14.12(react-dom@18.2.0)(react@18.2.0)
   react-zoom-pan-pinch:
-    specifier: ^3.0.8
-    version: 3.0.8(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^3.1.0
+    version: 3.1.0(react-dom@18.2.0)(react@18.2.0)
   zustand:
     specifier: ^4.3.3
     version: registry.npmmirror.com/zustand@4.3.3(react@18.2.0)
@@ -599,6 +603,7 @@ packages:
 
   /@types/raf@3.4.0:
     resolution: {integrity: sha512-taW5/WYqo36N7V39oYyHP9Ipfd5pNFvGTIQsNGj86xV88YQ7GnI30/yMfKDF7Zgin0m3e+ikX88FvImnK4RjGw==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -1725,6 +1730,7 @@ packages:
 
   /performance-now@2.1.0:
     resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -1783,6 +1789,7 @@ packages:
 
   /raf@3.4.1:
     resolution: {integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==}
+    requiresBuild: true
     dependencies:
       performance-now: 2.1.0
     dev: false
@@ -2391,8 +2398,8 @@ packages:
       react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
     dev: false
 
-  /react-zoom-pan-pinch@3.0.8(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-z6O5SV5X+XBo/LLO59PgzNE2WT+tp8lw1w3M0y138jCXViwHWKK1MqorICbmSVSOOD5Fa2o6pcg1ppJj9vzqJA==}
+  /react-zoom-pan-pinch@3.1.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-a3LlP8QPgTikvteCNkZ3X6wIWC0lrg1geP5WkUJyx2MXXAhHQek3r17N1nT/esOiWGuPIECnsd9AGoK8jOeGcg==}
     engines: {node: '>=8', npm: '>=5'}
     peerDependencies:
       react: '*'
@@ -2442,6 +2449,7 @@ packages:
   /rgbcolor@1.0.1:
     resolution: {integrity: sha512-9aZLIrhRaD97sgVhtJOW6ckOEh6/GnvQtdVNfdZ6s67+3/XwLS9lBcQYzEEhYVeUowN7pRzMLsyGhK2i/xvWbw==}
     engines: {node: '>= 0.8.15'}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -2501,6 +2509,7 @@ packages:
   /stackblur-canvas@2.5.0:
     resolution: {integrity: sha512-EeNzTVfj+1In7aSLPKDD03F/ly4RxEuF/EX0YcOG0cKoPXs+SLZxDawQbexQDBzwROs4VKLWTOaZQlZkGBFEIQ==}
     engines: {node: '>=0.1.14'}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -2535,6 +2544,7 @@ packages:
   /svg-pathdata@6.0.3:
     resolution: {integrity: sha512-qsjeeq5YjBZ5eMdFuUa4ZosMLxgr5RZ+F+Y1OrDhuOCEInRMA3x74XdBtggJcj9kOeInz0WE+LgCPDkZFlBYJw==}
     engines: {node: '>=12.0.0'}
+    requiresBuild: true
     dev: false
     optional: true
 

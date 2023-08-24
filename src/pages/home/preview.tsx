@@ -47,6 +47,7 @@ const Preview: React.FC = () => {
 
       {/* S Preview */}
       <TransformWrapper
+        smooth
         centerOnInit
         minScale={0.2}
         initialScale={1}
