@@ -3,7 +3,7 @@
   "description": "A pure front-end resume generator.",
   "version": "0.0.0",
   "type": "module",
-  "packageManager": "pnpm@7.8.0",
+  "packageManager": "pnpm@8.7.4",
   "main": "src/main.tsx",
   "scripts": {
     "dev": "vite",
