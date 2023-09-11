@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 
 import classNames from 'classnames'
 
@@ -15,8 +15,9 @@ export type BlockTemplateProps = IResumeExperience
 const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
   const { id: blockId } = props
   const { blockTitle, items } = props.data
+  const singleClick = useRef<any>(null)
   const { resumeStyle } = useResumeStore()
-  const { setShowEdit } = useAppStore()
+  const { setShowEdit, showEditDelay } = useAppStore()
   const { selectedEditItem, setSelectedEditItem } = useContext(AppContext)
 
   const titleIsNotText = resumeStyle.titleStyle.value !== 'text'
@@ -42,8 +43,17 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
   }
 
   const handleItemClick = (value: React.SetStateAction<SelectedEditItemData>) => {
-    setShowEdit(true)
-    setSelectedEditItem(value)
+    singleClick.current = true
+    setTimeout(() => {
+      if (singleClick.current) {
+        setShowEdit(true)
+        setSelectedEditItem(value)
+      }
+    }, showEditDelay)
+  }
+
+  const handleItemDbClick = () => {
+    singleClick.current = false
   }
 
   return (
@@ -77,11 +87,15 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                       onClick={() => handleItemClick(genParam('title', item.id))}
                     >
                       <Text
+                        onDbClick={handleItemDbClick}
                         style={{
                           fontSize: resumeStyle.titleSize.value,
                         }}
                         classes="text-md font-bold"
                         {...item.title}
+                        block={props}
+                        item={item}
+                        itemType="title"
                       />
                     </div>
                   )
@@ -98,6 +112,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                       onClick={() => handleItemClick(genParam('subtitle', item.id))}
                     >
                       <Text
+                        onDbClick={handleItemDbClick}
                         classes="ml-2 text-xs inline-block"
                         style={{
                           fontSize: resumeStyle.subtitleSize.value,
@@ -107,6 +122,9 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                           backgroundColor: resumeStyle.subtitleBackgroundColor.value,
                         }}
                         {...item.subtitle}
+                        block={props}
+                        item={item}
+                        itemType="subtitle"
                       />
                     </div>
                   )
@@ -124,6 +142,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                     onClick={() => handleItemClick(genParam('note', item.id))}
                   >
                     <Text
+                      onDbClick={handleItemDbClick}
                       style={{
                         fontSize: resumeStyle.noteSize.value,
                         color: resumeStyle.noteColor.value,
@@ -133,6 +152,9 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                       }}
                       classes="specific-title-note text-sm inline-block"
                       {...item.note}
+                      block={props}
+                      item={item}
+                      itemType="note"
                     />
                   </div>
                 )
@@ -150,7 +172,14 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                   })}
                   onClick={() => handleItemClick(genParam('description', item.id))}
                 >
-                  <Text classes="text-sm" {...item.description} />
+                  <Text
+                    onDbClick={handleItemDbClick}
+                    classes="text-sm"
+                    {...item.description}
+                    block={props}
+                    item={item}
+                    itemType="description"
+                  />
                 </div>
               )
             }
@@ -164,7 +193,14 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                   })}
                   onClick={() => handleItemClick(genParam('detail', item.id))}
                 >
-                  <Text classes="text-sm" {...item.detail} />
+                  <Text
+                    onDbClick={handleItemDbClick}
+                    classes="text-sm"
+                    {...item.detail}
+                    block={props}
+                    item={item}
+                    itemType="detail"
+                  />
                 </div>
               )}
           </div>

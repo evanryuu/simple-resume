@@ -16,6 +16,7 @@ interface IAppState {
   setPreviewMode: (gotoPreview: boolean) => void
 
   showEdit: boolean
+  showEditDelay: number
   setShowEdit: (showEdit: boolean) => void
 
   showEditStyle: boolean,
@@ -35,6 +36,7 @@ export const useAppStore = create<IAppState>()(
       setPreviewMode: (gotoPreview: boolean) => set(() => ({ previewMode: gotoPreview })),
 
       showEdit: false,
+      showEditDelay: 150,
       setShowEdit: (showEdit: boolean) => set(() => ({ showEdit })),
 
       showEditStyle: false,

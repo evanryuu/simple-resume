@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 
 import classNames from 'classnames'
 
@@ -16,8 +16,9 @@ const InfoTemplate0: React.FC<IResumeInfo> = (props) => {
   const {
     name, avatar, items,
   } = props.data
+  const singleClick = useRef<boolean>(false)
   const { resumeStyle } = useResumeStore()
-  const { setShowEdit } = useAppStore()
+  const { setShowEdit, showEditDelay } = useAppStore()
 
   const { selectedEditItem, setSelectedEditItem } = useContext(AppContext)
 
@@ -35,8 +36,13 @@ const InfoTemplate0: React.FC<IResumeInfo> = (props) => {
   }
 
   const handleItemClick = (value: React.SetStateAction<SelectedEditItemData>) => {
-    setShowEdit(true)
-    setSelectedEditItem(value)
+    singleClick.current = true
+    setTimeout(() => {
+      if (singleClick.current) {
+        setShowEdit(true)
+        setSelectedEditItem(value)
+      }
+    }, showEditDelay)
   }
 
   return (
@@ -46,15 +52,15 @@ const InfoTemplate0: React.FC<IResumeInfo> = (props) => {
         {
           avatar
             ? (<img
-              className={classNames('editable !pointer-events-auto', {
+                className={classNames('editable !pointer-events-auto', {
                 editting: selectedEditItem.type === 'avatar',
               })}
-              role="presentation"
-              src={avatar}
-              alt="Avatar"
-              width={resumeStyle.avatarWidth.value}
-              style={{ borderRadius: resumeStyle.avatarRounded.value ? '50%' : 0 }}
-              onClick={() => handleItemClick(genParam('avatar'))}
+                role="presentation"
+                src={avatar}
+                alt="Avatar"
+                width={resumeStyle.avatarWidth.value}
+                style={{ borderRadius: resumeStyle.avatarRounded.value ? '50%' : 0 }}
+                onClick={() => handleItemClick(genParam('avatar'))}
             />
             )
             : null
@@ -89,7 +95,7 @@ const InfoTemplate0: React.FC<IResumeInfo> = (props) => {
                   onClick={() => handleItemClick(genParam('items', item.id))}
                   role="presentation"
                 >
-                  <Text classes="flex items-center" {...item} />
+                  <Text classes="flex items-center" {...item} block={props} item={item} onDbClick={() => { singleClick.current = false }} />
                 </div>
               ))
             }
