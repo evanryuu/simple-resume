@@ -53,6 +53,7 @@ const Preview: React.FC = () => {
         initialScale={1}
         limitToBounds={false}
         centerZoomedOut={false}
+        doubleClick={{ disabled: true }}
         pinch={{ step: 1 }}
         wheel={{ step: 0.1 }}
         onPanningStart={() => setDragging(true)}

@@ -23,6 +23,7 @@ export default {
     donShowAgain: 'Don\'t show again',
     close: 'Close',
     shortIconGuide: 'A short icon guide',
+    pressEscFinishEdit: 'Press Esc to finish editting',
     /** E preview button content */
 
     addBlock: 'Add Block',

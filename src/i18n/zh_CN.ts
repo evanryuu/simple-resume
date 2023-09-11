@@ -23,6 +23,7 @@ export default {
     donShowAgain: '不再显示',
     close: '关闭',
     shortIconGuide: '一段很简短的图标引导',
+    pressEscFinishEdit: '按下Esc完成编辑',
     /** E preview button content */
 
     addBlock: '添加块',
