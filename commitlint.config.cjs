@@ -17,6 +17,7 @@ module.exports = {
         'chore',
         'revert',
         'build',
+        'ci',
       ],
     ],
     // do not verify case
