@@ -38,7 +38,7 @@ const Text: React.FC<Props> = (props) => {
     iconSize,
     block,
     item = {} as IResumeExperienceItem,
-    itemType = '',
+    itemType = '' as keyof IResumeExperienceItem,
   } = props
 
   const [editting, setEditting] = useState(false)
@@ -99,7 +99,7 @@ const Text: React.FC<Props> = (props) => {
         updateResumeExpItem(block!.id, item.id, {
           ...item,
           [itemType]: {
-            ...item,
+            ...(item as IResumeExperienceItem)[itemType] as object,
             value: newValue,
           },
         })
