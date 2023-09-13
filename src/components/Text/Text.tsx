@@ -143,6 +143,7 @@ const Text: React.FC<Props> = (props) => {
         <Input.TextArea
           ref={inputRef}
           value={value}
+          autoSize
           onChange={handleTextInputChange}
           onKeyDown={handleKeyPress}
           onBlur={() => setEditting(false)}
