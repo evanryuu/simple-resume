@@ -42,8 +42,15 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
     }
   }
 
-  const handleItemClick = (value: React.SetStateAction<SelectedEditItemData>) => {
+  const handleDrag = () => {
+    singleClick.current = false
+  }
+
+  const handleMousedown = () => {
     singleClick.current = true
+  }
+
+  const handleItemClick = (value: React.SetStateAction<SelectedEditItemData>) => {
     setTimeout(() => {
       if (singleClick.current) {
         setShowEdit(true)
@@ -57,7 +64,12 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
   }
 
   return (
-    <div className="mt-4">
+    <div
+      className="mt-4"
+      role="presentation"
+      onMouseMove={() => handleDrag()}
+      onMouseDown={() => handleMousedown()}
+    >
       <div
         role="presentation"
         className={titleClasses}
@@ -67,7 +79,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
           paddingLeft: titleIsNotText ? 8 : 0,
           fontSize: resumeStyle.blockHeaderSize.value,
         }}
-        onClick={() => handleItemClick(genParam('blockTitle'))}
+        onMouseUp={() => handleItemClick(genParam('blockTitle'))}
       >
         {blockTitle.value}
       </div>
@@ -84,7 +96,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                       className={classNames('editable', {
                         editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'title',
                       })}
-                      onClick={() => handleItemClick(genParam('title', item.id))}
+                      onMouseUp={() => handleItemClick(genParam('title', item.id))}
                     >
                       <Text
                         onDbClick={handleItemDbClick}
@@ -109,7 +121,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                       className={classNames('editable flex items-center', {
                         editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'subtitle',
                       })}
-                      onClick={() => handleItemClick(genParam('subtitle', item.id))}
+                      onMouseUp={() => handleItemClick(genParam('subtitle', item.id))}
                     >
                       <Text
                         onDbClick={handleItemDbClick}
@@ -139,7 +151,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                     className={classNames('editable', {
                       editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'note',
                     })}
-                    onClick={() => handleItemClick(genParam('note', item.id))}
+                    onMouseUp={() => handleItemClick(genParam('note', item.id))}
                   >
                     <Text
                       onDbClick={handleItemDbClick}
@@ -170,7 +182,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                     'whitespace-pre-wrap': !item.description.md,
                     editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'description',
                   })}
-                  onClick={() => handleItemClick(genParam('description', item.id))}
+                  onMouseUp={() => handleItemClick(genParam('description', item.id))}
                 >
                   <Text
                     onDbClick={handleItemDbClick}
@@ -191,7 +203,7 @@ const BlockTemplate0: React.FC<BlockTemplateProps> = (props) => {
                     'whitespace-pre-wrap': !item.detail.md,
                     editting: item.id === selectedEditItem.itemId && selectedEditItem.type === 'detail',
                   })}
-                  onClick={() => handleItemClick(genParam('detail', item.id))}
+                  onMouseUp={() => handleItemClick(genParam('detail', item.id))}
                 >
                   <Text
                     onDbClick={handleItemDbClick}
