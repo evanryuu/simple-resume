@@ -162,10 +162,6 @@ const Text: React.FC<Props> = (props) => {
     <div
       className={cname}
       role="presentation"
-      onTouchStart={(e) => e.stopPropagation()}
-      onDrag={(e) => e.stopPropagation()}
-      onDragStart={(e) => e.stopPropagation()}
-      onMouseMove={(e) => e.stopPropagation()}
     >
       <div>
         {render()}
