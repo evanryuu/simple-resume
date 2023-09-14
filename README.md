@@ -1,6 +1,7 @@
 # Simple Resume
-<p align="center">
-  <a href="https://github.com/evanryuu/simple-resume/blob/main/README.md"><img src="https://img.shields.io/badge/lang-zh_CN-green.svg" /></a>
+<p align="left">
+English | 
+  <a href="https://github.com/evanryuu/simple-resume/blob/main/README.md">中文</a>
 </p>
 
 ## Project Introduction
