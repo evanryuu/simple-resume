@@ -1,43 +1,45 @@
 # Simple Resume
-<a href="https://github.com/evanryuu/simple-resume/blob/main/README.en.md"><img src="https://img.shields.io/badge/lang-en-green.svg" /></a>
+<p align="center">
+  <a href="https://github.com/evanryuu/simple-resume/blob/main/README.md"><img src="https://img.shields.io/badge/lang-zh_CN-green.svg" /></a>
+</p>
 
-## 项目介绍
-一个简单的纯前端简历生成器，不会搜集你的任何数据，也没有任何后端请求。所以改动均保存在 `localStorage` 。可以在下面的网址体验
+## Project Introduction
+A simple front-end resume generator that does not collect any of your data and does not make any backend requests. Therefore, all changes are saved in `localStorage`. You can experience it at the following website:
 
-<a style="font-size: 16px;" href="https://evanryuu.github.io/simple-resume/" target="_black">项目地址</a>
+<a style="font-size: 16px;" href="https://evanryuu.github.io/simple-resume/" target="_black">Project Link</a>
 
-## 使用方法
-使用内容和样式编辑器去动态编辑自己的简历，然后点击 `导出PDF` 后，在浏览器弹出的窗口中选择 `保存为PDF/Save as pdf` 即可。
+## Usage
+Use the content and style editor to dynamically edit your resume, then click `Export PDF` button, and in the browser's pop-up window, choose `Save as PDF` to save it.
 
-记得要勾选上 `背景图像/Background graphics`，这样才能保证背景颜色正常生效。
+Remember to check `Background graphics` so that the background color can be applied correctly.
 
 
 <img src="./src/assets/guide-1.png" />
 
-## 感谢
-### 想法来源
-最初是因为自己想要写简历，于是在Github上面找开源的简历生成器，然后发现了两个我觉得非常好用的。
+## Acknowledgements
+### Source of Idea
+Originally, I wanted to write a resume for myself, so I searched for open-source resume generators on GitHub and found two that I found very useful.
 
 1. [Visky/resume](https://github.com/visiky/resume)
 2. [AmruthPillai/Reactive-Resume](https://github.com/AmruthPillai/Reactive-Resume)
 
-这两个项目都很好用，我觉得已经能满足大部分需求了，只是我在使用后者的过程中发现项目描述过长时会使得日期文字被挤压，使用前者时则会希望能够多点自定义选项。所以又开始了无穷无尽地寻找之旅。
+Both of these projects are very useful, and I think they can meet most needs. However, I found that when using the latter, the project description would compress the date text when it is too long, and when using the former, I wished for more customization options. So, I embarked on an endless journey of searching.
 
-在经历了
+After going through
 
-1. 需要注册/登录
-2. 需要纯自己手动排版写md
-3. 需要手动对docs格式的模板排版
+1. Needing registration/login
+2. Needing to manually format and write pure MD
+3. Needing manual formatting for template in docs format
 4. ...
 
-之后，我决定自己写一个（笑）
+I decided to write one generator myself (lol)
 
-因为我喜欢简历排版简单点，所以这个项目也没有什么复杂的排版。
+Since I prefer a simple resume layout, this project doesn't have any complex formatting.
 
 以上です。
 
-### 依赖
-非常感谢下面的这些开源库和贡献者，是他们让我的这次开发体验无比愉快与轻松。
+### Dependencies
+Many thanks to the following open-source libraries and contributors. They have made my development experience incredibly enjoyable and effortless.
 
 - [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
@@ -54,20 +56,22 @@
 - [Husky](https://github.com/typicode/husky)
 - [react-zoom-pan-pinch](https://github.com/prc5/react-zoom-pan-pinch)
 
-## 常见问题
-### 1. 我能复制别人写好的简历吗？
-可以的，让你的朋友先在本地选择 `保存简历` 之后将json文件发给你，你再选择 `导入简历` 就可以了
+## Frequently Asked Questions
+### 1. Can I copy someone else's resume?
+Yes, you can ask your friend to select `Export Resume` locally and send you the JSON file. Then you can select `Import Resume` to use it.
 
-### 2. Icon是在哪里找的？
-可以直接去到 [Iconify Icons](https://icon-sets.iconify.design/)进行搜索，然后复制对应的代码过来就好了。
+### 2. Where can I find more icons?
+You can directly go to [Iconify Icons](https://icon-sets.iconify.design/) to search for icons, and then copy the corresponding code and use it.
 <img src="./src/assets/icon-guide.png" />
 
-## 本地运行
-克隆/下载本项目代码到本地，然后运行下面的指令（强烈建议使用Pnpm）
+## Local Setup
+Clone/download the project code to your local machine, and then run the following commands (it is strongly recommended to use Pnpm).
 
 ### Install dependencies
 ```bash
 pnpm install
+
+
 ```
 
 ### Development
@@ -84,4 +88,3 @@ pnpm build
 ```bash
 pnpm release
 ```
-
