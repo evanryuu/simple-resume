@@ -1,4 +1,8 @@
 # Simple Resume
+<p align="left">
+中文 | 
+  <a href="https://github.com/evanryuu/simple-resume/blob/main/README.md">English</a>
+</p>
 
 ## 项目介绍
 一个简单的纯前端简历生成器，不会搜集你的任何数据，也没有任何后端请求。所以改动均保存在 `localStorage` 。可以在下面的网址体验

@@ -1,7 +1,7 @@
 # Simple Resume
 <p align="left">
 English | 
-  <a href="https://github.com/evanryuu/simple-resume/blob/main/README.md">中文</a>
+  <a href="https://github.com/evanryuu/simple-resume/blob/main/README.zh_CN.md">中文</a>
 </p>
 
 ## Project Introduction
