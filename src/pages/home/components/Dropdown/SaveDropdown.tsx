@@ -3,18 +3,25 @@ import React, { useRef, useState } from 'react'
 import { Dropdown, Modal, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { useResumeStore } from '@/store'
+import { useResumeStore, usePersistStore } from '@/store'
+import { getPersistApi } from '@/plugins/persist/persistPlugin'
 import { downloadJSON } from '@/utils'
 
 import type { IResumeStorage } from '@/utils/initTemplateData'
 import type { DropdownProps } from 'antd'
 import type { ItemType } from 'antd/es/menu/hooks/useItems'
+import type { ResumePersistApi } from '@/plugins/persist/PersistApi'
 
 const SaveDropdown: React.FC<DropdownProps> = (props) => {
   const [showSaveTip, setShowSaveTip] = useState(false)
   const [showResetConfirm, setShowResetConfirm] = useState(false)
 
   const { resetResumeSettings } = useResumeStore()
+  const {
+    showStorageContextForm,
+    setShowStorageContextForm,
+    onlineStorageContext,
+  } = usePersistStore()
 
   const handleResetResumeDate = () => {
     resetResumeSettings()
@@ -40,6 +47,47 @@ const SaveDropdown: React.FC<DropdownProps> = (props) => {
       },
     })
     setShowSaveTip(false)
+  }
+
+  let persistApi: ResumePersistApi | null = null
+
+  const resumerPersistApi = () => {
+    if(persistApi) {
+      return persistApi
+    }
+    if(!onlineStorageContext.token 
+      || !onlineStorageContext.owner
+      || !onlineStorageContext.repo) {
+        message.warning(t('pleaseFillResumeConfig'))
+        throw new Error('' + t('pleaseFillResumeConfig'))
+      }
+     persistApi = getPersistApi('github', onlineStorageContext.token, onlineStorageContext.owner, onlineStorageContext.repo)
+     return persistApi
+  }
+
+  const importOnlineResume = async () => {
+    console.log("importOnlineResume");
+    let resume = await resumerPersistApi().getResume()
+    console.log("resume", JSON.stringify(resume));
+
+    setResumeData((resume as IResumeStorage).state.resumeData)
+    setResumeStyle((resume as IResumeStorage).state.resumeStyle)
+    message.success(t('success'))
+  }
+
+  const saveOnlineResume = async () => {
+
+    console.log("saveOnlineResume");
+
+    let resumeStorage: IResumeStorage = {
+      state: {
+        resumeData,
+        resumeStyle,
+      }
+    }
+
+    await resumerPersistApi().updateResume(resumeStorage)
+    message.success(t('success'))
   }
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,6 +145,42 @@ const SaveDropdown: React.FC<DropdownProps> = (props) => {
         <span className="mt-4 !rounded-none" role="presentation">{t('resetResume')}</span>
       ),
       onClick: () => setShowResetConfirm(true)!,
+    },
+    {
+      key: '4',
+      label: (
+        <span
+          role="presentation"
+          className="mt-4 !rounded-none"
+        >
+          {t('saveOnlineResume')}
+        </span>
+      ),
+      onClick: () => saveOnlineResume(),
+    },
+    {
+      key: '5',
+      label: (
+        <span
+          role="presentation"
+          className="mt-4 !rounded-none"
+        >
+          {t('importOnlineResume')}
+        </span>
+      ),
+      onClick: () => importOnlineResume(),
+    },
+    {
+      key: '6',
+      label: (
+        <span
+          role="presentation"
+          className="mt-4 !rounded-none"
+        >
+          {t('resumePersistConfig')}
+        </span>
+      ),
+      onClick: () => setShowStorageContextForm(true),
     },
   ]
 

@@ -5,4 +5,5 @@ export default {
     EN_US: 'en_US',
     ZH_CN: 'zh_CN',
   },
+  PERSIST_SETTING: 'persist_settings'
 }
