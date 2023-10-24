@@ -4,18 +4,18 @@ import { persist } from 'zustand/middleware'
 import constant from '@/config/constant'
 
 // offline: use local storage
-// online:  use backend service api 
-// example: Github Api, Gitee Api, other third api
-// or custom api 
+// online:  use backend service api
+// example: Github Api, Gitee Api, other third party api
+// or custom api
 export type PersistType = 'online' | 'offline'
 
 // only support github storage medium now
 export type OnlineStorageMedium = 'github' | 'gitee' | 'other'
 
 export type OnlineStorageContext = {
-    token: string;
-    owner: string;
-    repo: string;
+  token: string;
+  owner: string;
+  repo: string;
 }
 
 interface PersistState {
@@ -24,33 +24,33 @@ interface PersistState {
 
   onlineStorageMedium: OnlineStorageMedium,
   setOnlineStorageMedium: (medium: OnlineStorageMedium) => void,
-  
+
   onlineStorageContext: OnlineStorageContext,
   setOnlineStorageContext: (context: OnlineStorageContext) => void,
 
   showStorageContextForm: boolean,
   setShowStorageContextForm: (show: boolean) => void,
 
- }
+}
 
 export const usePersistStore = create<PersistState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       persisType: 'offline',
       setPersisType: (val) => set(() => ({ persisType: val })),
 
       onlineStorageMedium: 'github',
       setOnlineStorageMedium: (val) => set(() => ({ onlineStorageMedium: val })),
-      
-      onlineStorageContext:  { 
+
+      onlineStorageContext: {
         token: '',
         owner: '',
         repo: '',
       },
       setOnlineStorageContext: (val) => set(() => ({ onlineStorageContext: val })),
-    
+
       showStorageContextForm: false,
-      setShowStorageContextForm:  (val) => set(() => ({ showStorageContextForm: val })),
+      setShowStorageContextForm: (val) => set(() => ({ showStorageContextForm: val })),
     }),
     {
       name: constant.PERSIST_SETTING,

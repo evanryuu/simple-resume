@@ -10,8 +10,8 @@ import iconGuideGif from './assets/icon-guide.gif'
 import BlocksContainer from './components/EditBlock/EditorContainer'
 import EditDrawer from './editContentDrawer'
 import EditStyleDrawer from './editStyleDrawer'
-import Preview from './pages/home/preview'
 import PersistFromModal from './pages/home/components/PersistFromModal'
+import Preview from './pages/home/preview'
 import { useAppStore, useResumeStore } from './store'
 
 import type {
