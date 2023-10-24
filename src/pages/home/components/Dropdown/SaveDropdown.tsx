@@ -65,9 +65,7 @@ const SaveDropdown: React.FC<DropdownProps> = (props) => {
   }
 
   const importOnlineResume = async () => {
-    console.log('importOnlineResume')
     const resume = await resumerPersistApi().getResume()
-    console.log('resume', JSON.stringify(resume))
 
     setResumeData((resume as IResumeStorage).state.resumeData)
     setResumeStyle((resume as IResumeStorage).state.resumeStyle)
@@ -75,8 +73,6 @@ const SaveDropdown: React.FC<DropdownProps> = (props) => {
   }
 
   const saveOnlineResume = async () => {
-    console.log('saveOnlineResume')
-
     const resumeStorage: IResumeStorage = {
       state: {
         resumeData,

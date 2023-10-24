@@ -46,7 +46,6 @@ export class GithubPersistPlugin implements ResumePersistApi {
     const data = await this.getRepoContent()
 
     return new Promise<IResumeStorage | null>((resolve) => {
-      console.log('data', data)
       const resumeData: IResumeStorage = JSON.parse(Base64.decode(data.content))
 
       resolve(resumeData)
