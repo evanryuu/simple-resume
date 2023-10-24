@@ -10,6 +10,7 @@ import iconGuideGif from './assets/icon-guide.gif'
 import BlocksContainer from './components/EditBlock/EditorContainer'
 import EditDrawer from './editContentDrawer'
 import EditStyleDrawer from './editStyleDrawer'
+import PersistFromModal from './pages/home/components/PersistFromModal'
 import Preview from './pages/home/preview'
 import { useAppStore, useResumeStore } from './store'
 
@@ -136,6 +137,7 @@ function App() {
           <Image className="max-w-screen-md w-1/3" src={iconGuideGif} alt="Icon guide" />
         </div>
       </Modal>
+      <PersistFromModal />
       <EditDrawer
         open={showEdit}
         onClose={onEditContentDrawerClose}
