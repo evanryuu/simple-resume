@@ -42,8 +42,8 @@ const PersistFromModal: React.FC = () => {
           initialValues={{ ...onlineStorageContext }}
           onFinish={onFinish}
           labelAlign="left"
-          labelWrap
-          wrapperCol={{ flex: 1 }}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
           style={{ maxWidth: 800 }}
         >
           <Form.Item>
