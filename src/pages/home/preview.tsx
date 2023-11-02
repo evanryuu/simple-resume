@@ -5,12 +5,11 @@ import React, {
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 
 import { usePrint } from '@/hooks'
-import { useAppStore } from '@/store'
 
 import Footer from './components/Footer'
 import Header from './components/Header'
+import { ResumePreview } from './components/ResumePreview'
 
-import PreviewTemplate from '../../components/PreviewTemplate/Template'
 import { useResumeStore } from '../../store/resume'
 
 import './preview.css'
@@ -19,6 +18,7 @@ export interface IPreviewContext {
   previewRef: React.RefObject<any>
   printResume: () => void
 }
+const ResumePreviewMemoized = React.memo(ResumePreview)
 
 export const PreviewContext = createContext<IPreviewContext>({} as IPreviewContext)
 
@@ -28,9 +28,7 @@ const Preview: React.FC = () => {
   const previewEl = useRef<HTMLDivElement>(null)
   const previewParent = useRef<HTMLDivElement>(null)
 
-  const { previewMode } = useAppStore()
   const {
-    resumeStyle,
     resumeData,
   } = useResumeStore()
 
@@ -68,30 +66,7 @@ const Preview: React.FC = () => {
           }}
           contentClass="pt-4"
         >
-          <div
-            ref={previewParent}
-            className="preview-container h-full flex justify-center items-center relative mb-16"
-          >
-            <div
-              id="preview-target"
-              style={{
-                padding: resumeStyle.pagePadding.value,
-                boxShadow: previewMode ? 'none' : '0 0 3px rgba(0,0,0,.3)',
-              }}
-            >
-              <div ref={previewEl} className="bg-white">
-                {
-                  resumeData.map((resume, i) => (
-                    <PreviewTemplate
-                      key={i}
-                      {...resume}
-                    />
-                  ))
-                }
-              </div>
-
-            </div>
-          </div>
+          <ResumePreviewMemoized previewEl={previewEl} previewParent={previewParent} />
         </TransformComponent>
       </TransformWrapper>
       {/* E Preview */}
